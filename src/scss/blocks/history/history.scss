@@ -1,0 +1,19 @@
+.history {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.history__item {
+  display: flex;
+}
+
+.history__item_indent-b_8 {
+  margin-bottom: var(--space-8);
+}
+
+@media screen and (max-width: $screen-m) {
+  .history__item {
+    flex-direction: column;
+  }
+}

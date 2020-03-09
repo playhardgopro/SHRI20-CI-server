@@ -1,0 +1,9 @@
+.section_hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section_view_ghost {
+  background-color: var(--color-bg-border);
+}

@@ -1,0 +1,158 @@
+/* Для проверки костыльности верстки */
+
+// * {
+//   background-color: rgba(255, 0, 0, 0.2);
+// }
+// * * {
+//   background-color: rgba(0, 255, 0, 0.2);
+// }
+// * * * {
+//   background-color: rgba(0, 0, 255, 0.2);
+// }
+// * * * * {
+//   background-color: rgba(255, 0, 255, 0.2);
+// }
+// * * * * * {
+//   background-color: rgba(0, 255, 255, 0.2);
+// }
+// * * * * * * {
+//   background-color: rgba(255, 255, 0, 0.2);
+// }
+// * * * * * * * {
+//   background-color: rgba(255, 0, 0, 0.2);
+// }
+// * * * * * * * * {
+//   background-color: rgba(0, 255, 0, 0.2);
+// }
+// * * * * * * * * * {
+//   background-color: rgba(0, 0, 255, 0.2);
+// }
+
+@font-face {
+  font-family: 'YS Text';
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+
+  src: url(https://yastatic.net/s3/home/fonts/ys/1/text-regular.woff2)
+      format('woff2'),
+    url(https://yastatic.net/s3/home/fonts/ys/1/text-regular.woff)
+      format('woff');
+}
+@font-face {
+  font-family: 'YS Text';
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+
+  src: url(https://yastatic.net/s3/home/fonts/ys/1/text-medium.woff2)
+      format('woff2'),
+    url(https://yastatic.net/s3/home/fonts/ys/1/text-medium.woff) format('woff');
+}
+@font-face {
+  font-family: 'YS Text';
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+
+  src: url(https://yastatic.net/s3/home/fonts/ys/1/text-bold.woff2)
+      format('woff2'),
+    url(https://yastatic.net/s3/home/fonts/ys/1/text-bold.woff) format('woff');
+}
+
+// Reset
+
+body {
+  font-family: 'YS Text', 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-feature-settings: 'liga', 'kern';
+  -moz-font-feature-settings: 'liga', 'kern';
+  font-feature-settings: 'liga', 'kern';
+  margin: 0;
+}
+
+input {
+  padding-top: 0;
+  padding-bottom: 0;
+  &:focus {
+    outline: none;
+  }
+}
+
+button {
+  outline: 0;
+}
+
+svg {
+  fill: currentColor;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+// Breakpoint
+
+$screen-m: 768px;
+
+// Colors
+
+:root {
+  --black-500: #000000;
+  --white-500: #ffffff;
+  --green-500: #00b341;
+  --red-500: #ff3333;
+  --red-600: #e00000;
+  --orange-500: #ff9a00;
+  --yellow-500: #ffcc00;
+  --blue-grey-600: #434445;
+  --blue-grey-500: #7f8285;
+  --blue-grey-50: #f0f2f3;
+  --blue-grey-100: #f2f2f2;
+  --blue-grey-150: #d9d9d9;
+  --blue-grey-250: #cccccc;
+  --blue-grey-450: #e6e6e6;
+  --icon-new-black: #111111;
+}
+
+.decorator {
+  display: flex;
+}
+
+@media screen and (max-width: $screen-m) {
+  .decorator.hide_mobile {
+    display: none;
+  }
+}
+
+.page {
+  height: 100vh;
+}
+
+.pre {
+  margin: 0;
+  padding: var(--space-8) var(--space-12);
+  font-size: var(--text-size-10);
+  line-height: var(--text-line-height-20);
+}
+
+@import './blocks/theme/theme.scss';
+@import './blocks/layout/layout.scss';
+@import './blocks/grid/grid.scss';
+@import './blocks/header/header.scss';
+@import './blocks/history/history.scss';
+@import './blocks/icon-box/icon-box.scss';
+@import './blocks/list/list.scss';
+@import './blocks/log/log.scss';
+@import './blocks/rep-connection/rep-connection.scss';
+@import './blocks/meta/meta.scss';
+@import './blocks/section/section.scss';
+@import './blocks/text/text.scss';
+@import './blocks/button/button.scss';
+@import './blocks/card/card.scss';
+@import './blocks/form/form.scss';
+@import './blocks/footer/footer.scss';
+@import './blocks/input/input.scss';
+// Костыльно, что импортировать иконки нужно после импорта buttons,
+// чтобы позиционировать рядом с иконкой
+@import './blocks/icon/icon.scss';

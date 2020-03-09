@@ -1,0 +1,30 @@
+.header {
+  flex-shrink: 0;
+}
+
+.header__content {
+  padding: var(--space-10) var(--padding);
+  display: flex;
+  margin: 0 auto;
+}
+
+.header__content_distribute_betwen {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__title {
+  display: flex;
+  align-items: center;
+}
+
+.header__controls {
+  display: flex;
+  align-self: center;
+}
+
+@media screen and (max-width: $screen-m) {
+  .header__controls {
+    align-self: flex-start;
+  }
+}

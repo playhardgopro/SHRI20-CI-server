@@ -1,0 +1,19 @@
+.log {
+  border-radius: 6px;
+  background-color: var(--color-bg-control);
+}
+
+.log__pre_scroll {
+  overflow-x: scroll;
+}
+
+.log__pre_scroll::-webkit-scrollbar {
+  width: 70px;
+  height: 4px;
+  -webkit-appearance: none;
+}
+.log__pre_scroll::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}

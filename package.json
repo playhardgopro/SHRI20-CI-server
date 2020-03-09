@@ -1,0 +1,28 @@
+{
+  "name": "dz-1-verstka",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/playhardgopro/dz-1-verstka.git"
+  },
+  "author": "Daniil Egortsev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/playhardgopro/dz-1-verstka/issues"
+  },
+  "homepage": "https://github.com/playhardgopro/dz-1-verstka#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-pug": "^4.0.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5"
+  }
+}

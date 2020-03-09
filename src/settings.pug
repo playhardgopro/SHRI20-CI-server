@@ -1,0 +1,75 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet', href='./style.css')
+  title Settings
+body.page.theme.theme_color_project-default.theme_size_default.theme_space_default.theme_gap_small
+  .layout.layout_v-ratio_1-full-1
+    .header
+      .header__content.header__content_distribute_betwen
+        .header__title
+          .text.text_type_h1.text_size_xl.text_view_ghost
+            | School CI Server
+    .layout__container.layout__container_size_s.layout__container_align_center
+      .grid.grid_m-columns_12.grid_col-gap_full.grid_s-columns_12
+        .grid__fraction.grid__fraction_m-col_7
+          form.form
+            .form__title
+              .form__header.text.text_type_h2.text_size_m
+                | Settings
+              .form__subheader.text.text_type_h3.text_size_s.text_view_ghost
+                | Configure repository connection and synchronization settings.
+            .form__items
+              .form__item.form__item_indent-t_xl
+                .input__group.input__group_vertical
+                  label.input__label.input__label_required.text.text_size_s.text_type_h2(for='repository') Github repository
+                  .input__controls
+                    input#repository.input.input_size_m.input_width_full.text.text_size_13_15(type='text', placeholder='username/repo-name')
+              .form__item.form__item_indent-t_xl
+                .input__group.input__group_vertical
+                  label.input__label.text.text_size_s.text_type_h2(for='cmd') Build command
+                  .input__controls
+                    input#cmd.input.input_size_m.input_width_full.text.text_size_13_15(type='text', value='npm ci && npm run build')
+                    .input__controls-append
+                      button.button.button_size_m.button_distribute_center.button_view_control
+                        .icon.icon_size_m
+                          svg(width='16', height='16', viewbox='0 0 16 16', xmlns='http://www.w3.org/2000/svg')
+                            path(d='M8 16C3.6 16 0 12.4 0 8C0 3.6 3.6 0 8 0C12.4 0 16 3.6 16 8C16 12.4 12.4 16 8 16ZM12 5.12L10.88 4L8 6.88L5.12 4L4 5.12L6.88 8L4 10.88L5.12 12L8 9.12L10.88 12L12 10.88L9.12 8L12 5.12Z')
+              .form__item.form__item_indent-t_xl
+                .input__group.input__group_vertical
+                  label.input__label.text.text_size_s.text_type_h2(for='branch') Main branch
+                  .input__controls
+                    input#branch.input.input_size_m.input_width_full.text.text_size_13_15(type='text', value='master')
+                    .input__controls-append
+                      button.button.button_size_m.button_distribute_center.button_view_control
+                        .icon.icon_size_m
+                          svg(width='16', height='16', viewbox='0 0 16 16', fill='none', xmlns='http://www.w3.org/2000/svg')
+                            path(d='M8 16C3.6 16 0 12.4 0 8C0 3.6 3.6 0 8 0C12.4 0 16 3.6 16 8C16 12.4 12.4 16 8 16ZM12 5.12L10.88 4L8 6.88L5.12 4L4 5.12L6.88 8L4 10.88L5.12 12L8 9.12L10.88 12L12 10.88L9.12 8L12 5.12Z', fill='#CCCCCC')
+              .form__item.form__item_indent-t_xl
+                .input__group
+                  label.input__label.text.text_size_s.text_type_h2(for='sync')
+                    | Synchronize every
+                  .input__controls
+                    input#sync.input.input_size_m.input_width_52.text.text_size_13_15.text_right(value='10')
+                    .input__controls-append
+                      span.text.text_size_s minutes
+            .form__controls
+              button.button.button_size_m.button_view_action
+                .button__text
+                  | Save
+              button.button.button_size_m.button_view_control
+                .button__text
+                  | Cancel
+    .footer
+      .footer__content
+        .footer__links
+          a(href='#')
+            .text.text_view_ghost.text_size_s.text_type_link
+              | Support
+          a(href='#')
+            .text.text_view_ghost.text_size_s.text_type_link
+              | Learning
+        .footer__copyright
+          .text.text.text_size_s.text_view_ghost
+            | &copy; 2020 Your Name
