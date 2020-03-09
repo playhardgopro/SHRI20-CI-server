@@ -635,8 +635,9 @@ ul {
   border-radius: 4px; }
   .input:focus {
     border: 2px solid var(--color-bg-border-focused); }
-    .input:focus .button::after {
-      border: 2px solid var(--color-bg-border-focused); }
+
+.input:focus ~ .input__controls-append .button::after {
+  border-color: var(--color-bg-border-focused); }
 
 .input ~ .input__group-append .icon {
   color: var(--blue-grey-250); }
