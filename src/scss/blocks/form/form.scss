@@ -4,16 +4,9 @@
   padding-top: var(--space-8);
 }
 
-@media screen and (max-width: $screen-m) {
-  .form {
-    padding-top: var(--space-14);
-  }
-}
-
 .form__title {
   display: flex;
   flex-direction: column;
-  // margin-bottom: var(--space-22);
 }
 
 .form__header {
@@ -39,6 +32,9 @@
 }
 
 @media screen and (max-width: $screen-m) {
+  .form {
+    padding-top: var(--space-14);
+  }
   .form__controls {
     flex-direction: column;
     margin-top: var(--space-20);

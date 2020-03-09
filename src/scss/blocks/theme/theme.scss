@@ -34,12 +34,12 @@
   --text-line-height-30: 30px;
   --text-line-height-36: 36px;
   --text-line-height-38: 38px;
-  --text-size-16: 16px;
-  --text-size-15: 15px;
-  --text-size-24: 24px;
-  --text-size-18: 18px;
   --text-size-10: 10px;
   --text-size-13: 13px;
+  --text-size-15: 15px;
+  --text-size-16: 16px;
+  --text-size-18: 18px;
+  --text-size-24: 24px;
 }
 
 .theme_space_default {
@@ -54,7 +54,6 @@
   --space-16: 16px;
   --space-18: 18px;
   --space-20: 20px;
-  --space-22: 22px;
   --space-24: 24px;
   --space-32: 32px;
 }
@@ -66,7 +65,6 @@
 
 @media screen and (max-width: $screen-m) {
   .theme_space_default {
-    --space-22: 18px;
     --padding: 16px;
     --gap: 13px;
   }

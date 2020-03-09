@@ -2,9 +2,9 @@
   border: 2px solid var(--color-bg-border);
   border-radius: 4px;
   &:focus {
-    border: 2px solid #b3b3b3;
+    border: 2px solid var(--color-bg-border-focused);
     .button::after {
-      border: 2px solid #b3b3b3;
+      border: 2px solid var(--color-bg-border-focused);
     }
   }
 }
@@ -95,7 +95,7 @@
   border-bottom-left-radius: 0;
 }
 .input:focus.input__controls-append .button::after {
-  border: 2px solid #b3b3b3;
+  border: 2px solid var(--color-bg-border-focused);
 }
 
 
