@@ -39,68 +39,57 @@
   margin-left: 0;
 }
 
-.text_size_s {
+.text_size_13-18 {
   font-size: var(--text-size-13);
   line-height: var(--text-line-height-18);
 }
-
-.text_size_s.text_type_link {
+.text_size_15-20 {
+  font-size: var(--text-line-height-15);
+  line-height: var(--text-line-height-20);
+}
+.text_size_13-18.text_type_link {
   font-size: var(--text-size-13);
   line-height: var(--text-size-16);
 }
 
-.text_size_m {
-  font-size: var(--text-size-15);
-  line-height: var(--text-line-height-20);
-}
-.text_size_m.text_type_h2 {
+.text_size_15-20.text_type_h2 {
   margin-bottom: var(--space-8);
 }
 
-.text_size_xl {
+.text_size_24-28 {
   font-size: var(--text-size-24);
   line-height: var(--text-line-height-28);
 }
 
-@media screen and (max-width: $screen-m) {
-  .text_size_xl.text_type_h1 {
-    font-size: var(--text-size-18);
-    line-height: var(--text-line-height-22);
-  }
-  .text_size_24_38.text_type_h1 {
-    font-size: var(--text-size-18);
-    line-height: var(--text-line-height-22);
-  }
-}
-
-.text_size_xxl {
-  font-size: var(--text-size-24);
-  line-height: var(--text-line-height-30);
-}
-
-.text_size_18_20 {
+.text_size_18-20 {
   font-size: var(--text-size-18);
   line-height: var(--text-line-height-20);
 }
 
-.text_size_15_20 {
-  font-size: var(--text-line-height-15);
-  line-height: var(--text-line-height-20);
-}
-
-.text_size_13_16 {
+.text_size_13-16 {
   font-size: var(--text-size-13);
   line-height: var(--text-line-height-16);
 }
-.text_size_13_15 {
+.text_size_13-15 {
   font-size: var(--text-size-13);
   line-height: var(--text-line-height-15);
 }
-.text_size_24_38 {
+.text_size_24-38 {
   font-size: var(--text-size-24);
   line-height: var(--text-line-height-38);
 }
 
 .text_center {
   text-align: center;
+}
+
+@media screen and (max-width: $screen-m) {
+  .text_size_24-28.text_type_h1 {
+    font-size: var(--text-size-18);
+    line-height: var(--text-line-height-22);
+  }
+  .text_size_24-38.text_type_h1 {
+    font-size: var(--text-size-18);
+    line-height: var(--text-line-height-22);
+  }
 }

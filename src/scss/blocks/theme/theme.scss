@@ -65,7 +65,7 @@
 
 @media screen and (max-width: $screen-m) {
   .theme_space_default {
-    --padding: 16px;
-    --gap: 13px;
+    --padding: var(--space-16);
+    --gap: var(--space-13);
   }
 }
