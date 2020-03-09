@@ -25,20 +25,6 @@
   margin-bottom: var(--space-12);
 }
 
-.layout__container_space-v_xxxxl {
-  padding-top: var(--space-xxxxl);
-  padding-bottom: var(--space-xxxxl);
-}
-
-.layout__container_space-v_xxxxxl {
-  padding-top: var(--space-xxxxxl);
-  padding-bottom: var(--space-xxxxxl);
-}
-
-.layout__container_indent-b_xxxxl {
-  margin-bottom: var(--space-xxxxl);
-}
-
 .layout__container_align_center {
   margin: 0 auto;
 }
@@ -53,7 +39,7 @@
     padding-left: 0;
     background-color: var(--blue-grey-50);
   }
-  .layout__container_m-indent-b_16 {
+  .layout__container_indent-b_20 {
     margin-bottom: var(--space-16);
   }
 }

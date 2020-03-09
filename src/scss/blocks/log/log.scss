@@ -1,6 +1,10 @@
 .log {
   border-radius: 6px;
   background-color: var(--color-bg-control);
+  margin-top: var(--space-12);
+}
+
+.log__pre {
 }
 
 .log__pre_scroll {

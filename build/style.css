@@ -72,7 +72,6 @@ ul {
   height: 100vh; }
 
 .pre {
-  margin: 0;
   padding: var(--space-8) var(--space-12);
   font-size: var(--text-size-10);
   line-height: var(--text-line-height-20); }
@@ -165,17 +164,6 @@ ul {
 .layout__container_indent-b_12 {
   margin-bottom: var(--space-12); }
 
-.layout__container_space-v_xxxxl {
-  padding-top: var(--space-xxxxl);
-  padding-bottom: var(--space-xxxxl); }
-
-.layout__container_space-v_xxxxxl {
-  padding-top: var(--space-xxxxxl);
-  padding-bottom: var(--space-xxxxxl); }
-
-.layout__container_indent-b_xxxxl {
-  margin-bottom: var(--space-xxxxl); }
-
 .layout__container_align_center {
   margin: 0 auto; }
 
@@ -187,7 +175,7 @@ ul {
     padding-right: 0;
     padding-left: 0;
     background-color: var(--blue-grey-50); }
-  .layout__container_m-indent-b_16 {
+  .layout__container_indent-b_20 {
     margin-bottom: var(--space-16); } }
 
 .grid {
@@ -294,7 +282,8 @@ ul {
 
 .log {
   border-radius: 6px;
-  background-color: var(--color-bg-control); }
+  background-color: var(--color-bg-control);
+  margin-top: var(--space-12); }
 
 .log__pre_scroll {
   overflow-x: scroll; }
