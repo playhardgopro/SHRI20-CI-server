@@ -1,0 +1,6 @@
+{
+  "repoName": "repositoryExample",
+  "buildCommand": "npm run build",
+  "mainBranch": "mainBranchExample",
+  "period": 0
+}

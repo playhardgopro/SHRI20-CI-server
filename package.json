@@ -19,10 +19,18 @@
   "homepage": "https://github.com/playhardgopro/dz-1-verstka#readme",
   "devDependencies": {
     "browser-sync": "^2.26.7",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
+    "gulp-nodemon": "^2.5.0",
     "gulp-pug": "^4.0.1",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1"
   }
 }
