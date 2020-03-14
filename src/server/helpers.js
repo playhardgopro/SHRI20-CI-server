@@ -1,9 +1,9 @@
 const util = require('util');
 const fs = require('fs');
-const axios = require('axios');
+// const axios = require('axios');
 
 const exec = util.promisify(require('child_process').exec);
-const spawn = util.promisify(require('child_process').spawn);
+// const spawn = util.promisify(require('child_process').spawn);
 
 async function clear(settings) {
   const [userName, repo] = settings.repoName.split('/');
@@ -26,17 +26,17 @@ async function gitClone(settings) {
   return settings;
 }
 
-async function getCommitHash(settings) {
-  const [userName, repo] = settings.repoName.split('/');
+// async function getCommitHash(settings) {
+//   const [userName, repo] = settings.repoName.split('/');
 
-  const { stdout, stderr } = await exec('git rev-parse HEAD', {
-    cwd: `./localStorage/${userName}/${repo}`
-  });
-  console.log('get commit stdout:', stdout);
-  // console.log('stderr:', stderr);
-  const commitHash = stdout;
-  return commitHash;
-}
+//   const { stdout, stderr } = await exec('git rev-parse HEAD', {
+//     cwd: `./localStorage/${userName}/${repo}`
+//   });
+//   console.log('get commit stdout:', stdout);
+//   // console.log('stderr:', stderr);
+//   const commitHash = stdout;
+//   return commitHash;
+// }
 
 async function getCommitInfo(commitHash, settings) {
   const [userName, repo] = settings.repoName.split('/');
@@ -49,7 +49,7 @@ async function getCommitInfo(commitHash, settings) {
       cwd: `./localStorage/${userName}/${repo}`
     }
   );
-  const branchName = branch.stdout.replace('* ', '');
+  const branchName = branch.stdout.replace('*', '').trim();
   const [authorName, commitMessage] = commitInfo.stdout.split('|');
   console.log('get commit branch ', branchName);
   console.log('get commit author ', authorName);
@@ -62,10 +62,14 @@ async function getCommitInfo(commitHash, settings) {
     commitMessage
   };
 }
+async function buildStart(commitHash) {
+  console.log(commitHash);
+}
 
 module.exports = {
-  getCommitHash,
+  // getCommitHash,
   gitClone,
   clear,
-  getCommitInfo
+  getCommitInfo,
+  buildStart
 };

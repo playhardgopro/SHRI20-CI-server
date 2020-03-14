@@ -43,7 +43,6 @@ app.post('/api/settings', (req, res) => {
   helpers
     .clear(settings)
     .then(() => helpers.gitClone(settings))
-    .then(() => helpers.getCommitHash(settings))
     .catch(e => console.error(e, 'error'));
 
   api
@@ -52,6 +51,14 @@ app.post('/api/settings', (req, res) => {
     .catch(e => console.error(e.code));
 
   res.end('POSTED');
+});
+//NOTE: удаляем настройки
+app.delete('/api/settings', (req, res) => {
+  api.delete('/conf').then(response => {
+    if (response.status === 200) {
+      res.send('settings deleted');
+    }
+  });
 });
 //NOTE: получаем очередь
 app.get('/api/builds', (req, res) => {
@@ -76,12 +83,15 @@ app.post('/api/builds/:commitHash', (req, res) => {
     .then(response => {
       if (response.status === 200) {
         settings = response.data.data;
+        return new Promise(resolve => resolve(settings));
       }
-      return new Promise(resolve => resolve(settings));
+      return res.send(response.status);
     })
     .then(resolve => helpers.getCommitInfo(commitHash, resolve))
     .then(commitInfo => api.post('/build/request', commitInfo))
-    .catch(e => console.error(e.code, 'error'));
+    .catch(e => {
+      console.error(e.code, 'error');
+    });
 
   // console.log(commitHash);
   res.send(commitHash);
