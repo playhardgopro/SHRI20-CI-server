@@ -1,14 +1,13 @@
+const dotenv = require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const axios = require('axios');
 const https = require('https');
-const util = require('util');
+// const fs = require('fs');
+// const util = require('util');
+const helpers = require('./helpers');
 
-const exec = util.promisify(require('child_process').exec);
-const spawn = util.promisify(require('child_process').spawn);
-
-const AUTH_TOKEN = require('../../token.json').token;
-const settingsMock = require('./settingsMock.json');
+const { AUTH_TOKEN } = process.env;
 
 const api = axios.create({
   baseURL: 'https://hw.shri.yandex/api',
@@ -26,7 +25,7 @@ const app = express();
 app.use(express.json());
 
 app.use(express.static(path.resolve(__dirname, 'static')));
-
+//NOTE: получение настроек
 app.get('/api/settings', (req, res) => {
   api.get('/conf').then(response => {
     let settings = {};
@@ -40,35 +39,12 @@ app.get('/api/settings', (req, res) => {
 app.post('/api/settings', (req, res) => {
   const settings = req.body;
   console.log(settings.repoName);
-  console.log(settings.buildCommand);
-  console.log(settings.mainBranch);
-  console.log(settings.period);
 
-  // const cloneRepo = spawn('git', ['clone', settings.repoName]).then(
-  //   console.log
-  // );
-
-  async function gitClone() {
-    try {
-      // const { stdout, stderr } = await spawn('git', [
-      //   'clone',
-      //   `https://github.com/playhardgopro/${settings.repoName}.git`
-      // ]);
-      const cloneRepo = await spawn(
-        'git',
-        [
-          'clone',
-          `https://github.com/playhardgopro/${settings.repoName}.git`,
-          '--progress'
-        ],
-        { cwd: './localStorage' }
-      );
-      cloneRepo.then(() => console.log(cloneRepo.stdout));
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  gitClone();
+  helpers
+    .clear(settings)
+    .then(() => helpers.gitClone(settings))
+    .then(() => helpers.getCommitHash(settings))
+    .catch(e => console.error(e, 'error'));
 
   api
     .post('/conf', settings)
@@ -77,7 +53,7 @@ app.post('/api/settings', (req, res) => {
 
   res.end('POSTED');
 });
-
+//NOTE: получаем очередь
 app.get('/api/builds', (req, res) => {
   api
     .get('/build/list')
@@ -91,28 +67,25 @@ app.get('/api/builds', (req, res) => {
     .catch(e => console.error(e.code, 'error'));
   // res.end('GOT LIST');
 });
-
+//NOTE: получаем коммитхэш, идем в локальное хранилище, получаем информацию и формируем JSON для /build/request
 app.post('/api/builds/:commitHash', (req, res) => {
-  console.log(req.params.commitHash);
-  res.send('POST');
-});
-//NOTE: start here
-// app.get('/api/builds/:buildId', (req, res) => {
-//   const { buildId } = req.params;
+  const { commitHash } = req.params;
+  let settings = {};
+  api
+    .get('/conf')
+    .then(response => {
+      if (response.status === 200) {
+        settings = response.data.data;
+      }
+      return new Promise(resolve => resolve(settings));
+    })
+    .then(resolve => helpers.getCommitInfo(commitHash, resolve))
+    .then(commitInfo => api.post('/build/request', commitInfo))
+    .catch(e => console.error(e.code, 'error'));
 
-//   api
-//     .get('/build/list')
-//     .then(response => {
-//       let buildById = [];
-//       if (response.status === 200) {
-//         const list = response.data.data;
-//         buildById = list.filter(el => el.id === buildId);
-//         // console.log(buildId, buildById);
-//       }
-//       res.send(buildById[0]);
-//     })
-//     .catch(e => console.error(e.code, 'error'));
-// });
+  // console.log(commitHash);
+  res.send(commitHash);
+});
 
 app.get('/api/builds/:buildId', (req, res) => {
   const { buildId } = req.params;
@@ -129,11 +102,5 @@ app.get('/api/builds/:buildId', (req, res) => {
     })
     .catch(e => console.error(e.code, 'error'));
 });
-
-// app.get('/api/builds/:buildId/logs', (req, res) => {
-//   counter += 1;
-
-//   res.end(String(counter));
-// });
 
 app.listen(3000);
