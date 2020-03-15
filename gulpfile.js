@@ -1,19 +1,13 @@
 const gulp = require('gulp');
-// const rename = require ('gulp-rename');
-// const htmlhint = require("gulp-htmlhint");
-// const concat = require('gulp-concat');
 const nodemon = require('gulp-nodemon');
 const sass = require('gulp-sass');
 const pug = require('gulp-pug');
 const clean = require('gulp-clean');
-// const uncss = require('gulp-uncss');
-// const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync').create();
 
 gulp.task('scss', done => {
   gulp
     .src('./src/scss/style.scss')
-    // .pipe(sourcemaps.init())
     .pipe(
       sass({
         errorLogToConsole: true
@@ -21,12 +15,7 @@ gulp.task('scss', done => {
       })
     )
     .on('error', console.error.bind(console))
-    // .pipe(sourcemaps.write('./'))
-    // .pipe(concat('style.css'))
-    //   .pipe(uncss({
-    //     html: ['./build/*.html']
-    // }))
-    .pipe(gulp.dest('./build'))
+    .pipe(gulp.dest('./static'))
     .pipe(browserSync.stream());
 
   done();
@@ -40,14 +29,14 @@ gulp.task('html', done => {
         pretty: true
       })
     )
-    .pipe(gulp.dest('./build'));
+    .pipe(gulp.dest('./static'));
   done();
 });
 
 gulp.task('sync', done => {
   browserSync.init({
     server: {
-      baseDir: './build'
+      baseDir: './static'
     },
     port: 3030
   });
@@ -60,13 +49,13 @@ gulp.task('reload', done => {
 });
 
 gulp.task('clean', () => {
-  return gulp.src(['build/*'], { read: false }).pipe(clean());
+  return gulp.src(['static/*'], { read: false }).pipe(clean());
 });
 
 gulp.task('server', () => {
   nodemon({
-    script: './src/server/server.js',
-    watch: ['./src/server/*.js'],
+    script: './server/server.js',
+    watch: ['./server/**/*.js'],
     ext: 'js'
   });
 });
