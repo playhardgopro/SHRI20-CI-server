@@ -28,16 +28,44 @@ router.get('/', (req, res) => {
 router.post('/', validate({ body: schemas.settings }), (req, res) => {
   // NOTE: сохранение настроек и скачивание репозитория
   const settings = req.body;
-  helpers
+  const downloadRepo = helpers
     .clear(settings)
     .then(resolvedSettings => helpers.gitClone(resolvedSettings))
-    .catch(e => console.error(e, 'error'));
+    .then(() => helpers.getCommitHash(settings))
+    .then(commitHash => helpers.getCommitInfo(commitHash, settings))
+    .then(commitInfo => {
+      axios.post('/build/request', commitInfo);
+      console.log('settings have been saved');
+    })
+    .catch(e => console.error(e, 'can not start build'));
+  const saveSettings = axios.post('/conf', settings);
 
-  axios
-    .post('/conf', settings)
-    .catch(e => console.error(e.code, 'post settings error'));
+  Promise.all([downloadRepo, saveSettings])
+    .then(() => {
+      let list = [];
 
-  res.end('POSTed settings');
+      axios
+        .get('/build/list')
+        .then(response => {
+          if (response.status === 200) {
+            list = response.data.data;
+            return new Promise(resolve => resolve(list));
+          }
+          return res.send(list);
+        })
+        .then(buildsList => {
+          helpers
+            .buildStart(buildsList.filter(el => el.status === 'Waiting')[0])
+            .then(buildObject => {
+              helpers.buildFinish(buildObject);
+            })
+            .catch(e => console.error(e));
+        });
+    })
+    .then(() => res.send('settings have been saved'))
+    .catch(e => console.error(e, 'post settings error'));
+
+  // res.send('settings have been saved');
 });
 router.delete('/', (req, res) => {
   // NOTE: удаляем настройки

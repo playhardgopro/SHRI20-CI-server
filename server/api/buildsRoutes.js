@@ -1,6 +1,8 @@
 const express = require('express');
 const axios = require('axios');
+const NodeCache = require('node-cache');
 
+const myCache = new NodeCache();
 const helpers = require('../helpers');
 
 const router = express.Router();
@@ -58,36 +60,32 @@ router.get('/:buildId', (req, res) => {
 // NOTE: получение логов билда (сплошной текст)
 router.get('/:buildId/logs', (req, res) => {
   const { buildId } = req.params;
+  console.warn(buildId);
 
-  axios
-    .get(`/build/log?buildId=${buildId}`)
-    .then(response => {
-      if (response.status === 200) {
-        const buildlog = response.data.data;
-        res.send(buildlog);
-      }
-    })
-    .catch(e => console.error(e.code));
+  const cachedLog = myCache.get(buildId);
+
+  if (cachedLog === undefined) {
+    axios
+      .get('/build/log', {
+        params: {
+          buildId
+        },
+        responseType: 'text',
+        headers: {
+          'Content-Type': 'text/plain'
+        }
+      })
+      .then(response => {
+        if (response.status === 200) {
+          const buildLog = response.data;
+          myCache.set(buildId, buildLog);
+          res.send(buildLog);
+        }
+      })
+      .catch(e => console.error(e.code));
+  } else res.send(myCache.get(buildId));
+  // NOTE: Раскомменть, чтобы посмотреть статистику кеша
+  console.log(myCache.getStats(), 'cached data');
 });
-// // NOTE: получаем список и запускаем билд для первого ожидающего
-// router.get('/', (req, res) => {
-//   let list = [];
-
-//   axios
-//     .get('/build/list')
-//     .then(response => {
-//       if (response.status === 200) {
-//         list = response.data.data;
-//         return new Promise(resolve => resolve(list));
-//       }
-//       return res.send(list);
-//     })
-//     .then(buildsList => {
-//       helpers.buildStart(buildsList.filter(el => el.status === 'Waiting')[0]);
-//       res.send(list);
-//     })
-//     .then(buildObject => helpers.buildFinish(buildObject))
-//     .catch(e => console.error(e, 'get start build'));
-// });
 
 module.exports = router;

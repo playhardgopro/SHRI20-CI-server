@@ -47,7 +47,6 @@ app.get('/api/startBuild', (req, res) => {
 
       res.send(list);
     })
-    // .then(buildObject => helpers.buildFinish(buildObject))
     .catch(e => console.error(e, 'get start build'));
 });
 

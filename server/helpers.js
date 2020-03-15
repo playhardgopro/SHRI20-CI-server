@@ -3,7 +3,8 @@ const fs = require('fs');
 const axios = require('axios');
 
 const exec = util.promisify(require('child_process').exec);
-// const spawn = util.promisify(require('child_process').spawn);
+
+const sleep = util.promisify(setTimeout);
 
 async function clear(settings) {
   const [userName, repo] = settings.repoName.split('/');
@@ -59,6 +60,15 @@ async function getCommitInfo(commitHash, settings) {
     commitMessage
   };
 }
+
+async function getCommitHash(settings) {
+  const [userName, repo] = settings.repoName.split('/');
+  const commitHash = await exec('git rev-parse HEAD', {
+    cwd: `./localStorage/${userName}/${repo}`
+  });
+  return commitHash.stdout.trim();
+}
+
 async function buildStart(buildObject) {
   const { id } = buildObject;
   const startBuild = { buildId: id, dateTime: new Date() };
@@ -77,24 +87,21 @@ async function buildCancel(buildObject) {
 }
 
 async function buildFinish(buildObject) {
-  const randomDuration = Math.random() * 5000;
+  const randomDuration = Math.round(Math.random() * 10000);
   console.log('Starting build for', buildObject.id);
-  const buildProcess = new Promise(resolve => {
-    // let finishLog = {};
-    setTimeout(() => {
-      const finishLog = {
-        buildId: buildObject.id,
-        duration: randomDuration,
-        success: !!Math.round(Math.random()),
-        buildLog:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-      };
-      return resolve(finishLog);
-    }, randomDuration);
-  });
 
-  buildProcess
-    .then(finishLog => axios.post('/build/finish', finishLog))
+  const finishLog = {
+    buildId: buildObject.id,
+    duration: randomDuration,
+    success: !!Math.round(Math.random()),
+    buildLog:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+  };
+  // console.log(finishLog);
+  await sleep(randomDuration);
+  await console.log('Build has been finished');
+  await axios
+    .post('/build/finish', finishLog)
     .then(() => console.log('Build logs have been posted'))
     .catch(e => console.error(e, 'build finish'));
   return buildObject;
@@ -106,5 +113,6 @@ module.exports = {
   getCommitInfo,
   buildStart,
   buildCancel,
-  buildFinish
+  buildFinish,
+  getCommitHash
 };
