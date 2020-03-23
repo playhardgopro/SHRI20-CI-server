@@ -1,4 +1,5 @@
 import React from 'react'
+import Text from './Text'
 // import './scss/Layout.scss'
 
 export default function Layout() {
@@ -17,9 +18,9 @@ export default function Layout() {
               </svg>
             </div>
             <div className="rep-connection__message">
-              <div className="text text_size_13-16 text_center">
+              <Text className={{ size: '13-16', center: true }}>
                 Configure repository connection and synchronization settings
-              </div>
+              </Text>
             </div>
             <div className="rep-connection__controls">
               <form action="./settings.html">

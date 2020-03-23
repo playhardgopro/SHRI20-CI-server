@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import Button from './Button'
 import Icon from './Icon'
+import Text from './Text'
+
 // import './scss/Header.scss'
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
@@ -13,7 +15,7 @@ const Header = ({ children, className }) => {
     <div className="header">
       <div className={classes}>
         <div className="header__title">
-          <div className="text text_type_h1 text_size_24-28 text_view_ghost">School CI Server</div>
+          <Text className={{ type: 'h1', size: '24-28', view: 'ghost' }}>School CI Server</Text>
         </div>
         <div className="header__controls">
           <Button className={{ size: 's', distribute: 'center', view_control: true }}>
@@ -29,7 +31,6 @@ const Header = ({ children, className }) => {
       </div>
     </div>
   )
-  // "header__content header__content_distribute_between"
 }
 
 Header.propTypes = {
