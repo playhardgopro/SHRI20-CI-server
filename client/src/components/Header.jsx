@@ -24,11 +24,21 @@ const Header = ({ children, className }) => {
             </Icon>
             <div className="button__text decorator hide_mobile">Settings</div>
           </Button>
+          {children}
         </div>
       </div>
     </div>
   )
   // "header__content header__content_distribute_between"
+}
+
+Header.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+}
+Header.defaultProps = {
+  children: '',
+  className: '',
 }
 
 export default Header
