@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@bem-react/classname": "^1.5.8",
     "@reduxjs/toolkit": "^1.2.5",
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^10.0.1",
     "@testing-library/user-event": "^10.0.0",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
