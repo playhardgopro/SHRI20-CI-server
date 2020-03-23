@@ -11,7 +11,7 @@ import Layout from './components/Layout'
 function App() {
   return (
     <div className="layout layout_v-ratio_1-full-1">
-      <Header />
+      <Header className={{ distribute: 'between' }} />
       <Layout />
       <Footer />
     </div>

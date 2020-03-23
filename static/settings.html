@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./style.css" />
   <title>Settings</title>
 </head>
 <body class="page theme theme_color_project-default theme_size_default theme_space_default theme_gap_small">
   <div class="layout layout_v-ratio_1-full-1">
     <div class="header">
-      <div class="header__content header__content_distribute_betwen">
+      <div class="header__content header__content_distribute_between">
         <div class="header__title">
           <div class="text text_type_h1 text_size_24-28 text_view_ghost">School CI Server</div>
         </div>
@@ -20,14 +20,23 @@
           <form class="form">
             <div class="form__title">
               <div class="form__header text text_type_h2 text_size_15-20">Settings</div>
-              <div class="form__subheader text text_type_h3 text_size_13-18 text_view_ghost">Configure repository connection and synchronization settings.</div>
+              <div class="form__subheader text text_type_h3 text_size_13-18 text_view_ghost">
+                Configure repository connection and synchronization settings.
+              </div>
             </div>
             <div class="form__items">
               <div class="form__item form__item_indent-t_xl">
                 <div class="input__group input__group_vertical">
-                  <label class="input__label input__label_required text text_size_13-18 text_type_h2" for="repository">Github repository</label>
+                  <label class="input__label input__label_required text text_size_13-18 text_type_h2" for="repository"
+                    >Github repository</label
+                  >
                   <div class="input__controls">
-                    <input class="input input_size_m input_width_full text text_size_13-15" id="repository" type="text" placeholder="username/repo-name">
+                    <input
+                      class="input input_size_m input_width_full text text_size_13-15"
+                      id="repository"
+                      type="text"
+                      placeholder="username/repo-name"
+                    />
                   </div>
                 </div>
               </div>
@@ -35,12 +44,19 @@
                 <div class="input__group input__group_vertical">
                   <label class="input__label text text_size_13-18 text_type_h2" for="cmd">Build command</label>
                   <div class="input__controls">
-                    <input class="input input_size_m input_width_full text text_size_13-15" id="cmd" type="text" value="npm ci &amp;&amp; npm run build">
+                    <input
+                      class="input input_size_m input_width_full text text_size_13-15"
+                      id="cmd"
+                      type="text"
+                      value="npm ci &amp;&amp; npm run build"
+                    />
                     <div class="input__controls-append">
                       <button class="button button_size_m button_distribute_center button_view_control">
                         <div class="icon icon_size_m">
                           <svg width="16" height="16" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 16C3.6 16 0 12.4 0 8C0 3.6 3.6 0 8 0C12.4 0 16 3.6 16 8C16 12.4 12.4 16 8 16ZM12 5.12L10.88 4L8 6.88L5.12 4L4 5.12L6.88 8L4 10.88L5.12 12L8 9.12L10.88 12L12 10.88L9.12 8L12 5.12Z"></path>
+                            <path
+                              d="M8 16C3.6 16 0 12.4 0 8C0 3.6 3.6 0 8 0C12.4 0 16 3.6 16 8C16 12.4 12.4 16 8 16ZM12 5.12L10.88 4L8 6.88L5.12 4L4 5.12L6.88 8L4 10.88L5.12 12L8 9.12L10.88 12L12 10.88L9.12 8L12 5.12Z"
+                            ></path>
                           </svg>
                         </div>
                       </button>
@@ -52,12 +68,19 @@
                 <div class="input__group input__group_vertical">
                   <label class="input__label text text_size_13-18 text_type_h2" for="branch">Main branch</label>
                   <div class="input__controls">
-                    <input class="input input_size_m input_width_full text text_size_13-15" id="branch" type="text" value="master">
+                    <input
+                      class="input input_size_m input_width_full text text_size_13-15"
+                      id="branch"
+                      type="text"
+                      value="master"
+                    />
                     <div class="input__controls-append">
                       <button class="button button_size_m button_distribute_center button_view_control">
                         <div class="icon icon_size_m">
                           <svg width="16" height="16" viewbox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 16C3.6 16 0 12.4 0 8C0 3.6 3.6 0 8 0C12.4 0 16 3.6 16 8C16 12.4 12.4 16 8 16ZM12 5.12L10.88 4L8 6.88L5.12 4L4 5.12L6.88 8L4 10.88L5.12 12L8 9.12L10.88 12L12 10.88L9.12 8L12 5.12Z"></path>
+                            <path
+                              d="M8 16C3.6 16 0 12.4 0 8C0 3.6 3.6 0 8 0C12.4 0 16 3.6 16 8C16 12.4 12.4 16 8 16ZM12 5.12L10.88 4L8 6.88L5.12 4L4 5.12L6.88 8L4 10.88L5.12 12L8 9.12L10.88 12L12 10.88L9.12 8L12 5.12Z"
+                            ></path>
                           </svg>
                         </div>
                       </button>
@@ -69,7 +92,11 @@
                 <div class="input__group">
                   <label class="input__label text text_size_13-18 text_type_h2" for="sync">Synchronize every</label>
                   <div class="input__controls">
-                    <input class="input input_size_m input_width_52 text text_size_13-15 text_right" id="sync" value="10">
+                    <input
+                      class="input input_size_m input_width_52 text text_size_13-15 text_right"
+                      id="sync"
+                      value="10"
+                    />
                     <div class="input__controls-append"><span class="text text_size_13-18">minutes</span></div>
                   </div>
                 </div>
@@ -89,9 +116,10 @@
     </div>
     <div class="footer">
       <div class="footer__content">
-        <div class="footer__links"><a href="#">
-            <div class="text text_view_ghost text_size_13-18 text_type_link">Support</div></a><a href="#">
-            <div class="text text_view_ghost text_size_13-18 text_type_link">Learning</div></a></div>
+        <div class="footer__links">
+          <a href="#"> <div class="text text_view_ghost text_size_13-18 text_type_link">Support</div></a
+          ><a href="#"> <div class="text text_view_ghost text_size_13-18 text_type_link">Learning</div></a>
+        </div>
         <div class="footer__copyright">
           <div class="text text text_size_13-18 text_view_ghost">&copy; 2020 Your Name</div>
         </div>

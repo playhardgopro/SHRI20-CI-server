@@ -1,12 +1,17 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { withNaming } from '@bem-react/classname'
 import Button from './Button'
 import Icon from './Icon'
 // import './scss/Header.scss'
+const cn = withNaming({ n: '', e: '__', m: '_' })
 
-export default function Header() {
+const Header = ({ children, className }) => {
+  const classes = cn('header', 'content')(className)
+
   return (
     <div className="header">
-      <div className="header__content header__content_distribute_betwen">
+      <div className={classes}>
         <div className="header__title">
           <div className="text text_type_h1 text_size_24-28 text_view_ghost">School CI Server</div>
         </div>
@@ -23,4 +28,7 @@ export default function Header() {
       </div>
     </div>
   )
+  // "header__content header__content_distribute_between"
 }
+
+export default Header
