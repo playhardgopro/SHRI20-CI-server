@@ -1,0 +1,107 @@
+.button_view_action {
+  background-color: var(--color-bg-accent);
+}
+
+.button_view_action:hover {
+  background-color: var(--color-bg-action-hovered);
+}
+.button_view_action:focus:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  content: '';
+
+  border: 2px solid var(--color-bg-border-action-focused);
+  border-radius: 4px;
+}
+.button_view_action:focus:disabled:after {
+  border: 2px solid var(--color-bg-border-focused);
+}
+
+.button_view_action:disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--color-bg-disabled);
+}
+
+.button_view_control {
+  background-color: var(--color-bg-control);
+}
+
+.button_view_control:hover {
+  background-color: var(--color-bg-control-hovered);
+}
+
+.button_view_control:focus:after {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  content: '';
+
+  border: 2px solid var(--color-bg-border-focused);
+  border-radius: 4px;
+}
+.button_view_control:focus:disabled:after {
+  border: 2px solid var(--color-bg-border-focused);
+}
+
+.button_view_control:disabled {
+  color: var(--color-text-disabled);
+  background-color: var(--color-bg-disabled);
+}
+
+.button {
+  position: relative;
+
+  display: flex;
+
+  margin-right: var(--space-8);
+  padding: 0;
+
+  white-space: nowrap;
+
+  border: 0;
+  border-radius: 4px;
+}
+
+.button:last-child {
+  margin-right: 0;
+}
+
+.button_distribute_center {
+  display: flex;
+  justify-content: center;
+}
+
+.button_size_s {
+  min-width: var(--text-line-height-28);
+
+  font-size: var(--text-size-13);
+  line-height: var(--text-line-height-28);
+}
+.button_size_m {
+  min-width: var(--text-line-height-36);
+
+  font-size: var(--text-size-13);
+  line-height: var(--text-line-height-36);
+}
+
+.button__text {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
+}
+
+.button_size_s .button__text {
+  margin: 0 var(--space-13);
+}
+.button_size_m .button__text {
+  margin: 0 var(--space-20);
+}
