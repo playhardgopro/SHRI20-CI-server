@@ -1,89 +1,86 @@
-const express = require('express');
-const {
-  Validator,
-  ValidationError
-} = require('express-json-validator-middleware');
-const axios = require('axios');
-const schemas = require('../schemas');
-const helpers = require('../helpers');
+const express = require('express')
+const { Validator, ValidationError } = require('express-json-validator-middleware')
+const axios = require('axios')
+const schemas = require('../schemas')
+const helpers = require('../helpers')
 
-const app = express();
+const app = express()
 
-const { validate } = new Validator({ allErrors: true });
-const router = express.Router();
+const { validate } = new Validator({ allErrors: true })
+const router = express.Router()
 
 router.get('/', (req, res) => {
   // NOTE: получение настроек
   axios
     .get('/conf')
-    .then(response => {
-      let settings = {};
+    .then((response) => {
+      let settings = {}
       if (response.status === 200) {
-        settings = response.data.data;
+        settings = response.data.data
       }
-      res.send(settings);
+      res.send(settings)
     })
-    .catch(e => e.code, 'get settings error');
-});
+    .catch((e) => e.code, 'get settings error')
+})
 router.post('/', validate({ body: schemas.settings }), (req, res) => {
   // NOTE: сохранение настроек и скачивание репозитория
-  const settings = req.body;
+  const settings = req.body
   const downloadRepo = helpers
     .clear(settings)
-    .then(resolvedSettings => helpers.gitClone(resolvedSettings))
+    .then((resolvedSettings) => helpers.gitClone(resolvedSettings))
     .then(() => helpers.getCommitHash(settings))
-    .then(commitHash => helpers.getCommitInfo(commitHash, settings))
-    .then(commitInfo => {
-      axios.post('/build/request', commitInfo);
-      console.log('settings have been saved');
+    .then((commitHash) => helpers.getCommitInfo(commitHash, settings))
+    .then((commitInfo) => {
+      axios.post('/build/request', commitInfo)
+      console.log('settings have been saved')
     })
-    .catch(e => console.error(e, 'can not start build'));
-  const saveSettings = axios.post('/conf', settings);
+    .catch((e) => console.error(e, 'can not start build'))
+  const saveSettings = axios.post('/conf', settings)
 
   Promise.all([downloadRepo, saveSettings])
     .then(() => {
-      let list = [];
+      let list = []
 
       axios
         .get('/build/list')
-        .then(response => {
+        .then((response) => {
           if (response.status === 200) {
-            list = response.data.data;
-            return new Promise(resolve => resolve(list));
+            list = response.data.data
+            return new Promise((resolve) => resolve(list))
           }
-          return res.send(list);
+          return res.send(list)
         })
-        .then(buildsList => {
+        .then((buildsList) => {
           helpers
-            .buildStart(buildsList.filter(el => el.status === 'Waiting')[0])
-            .then(buildObject => {
-              helpers.buildFinish(buildObject);
+            .buildStart(buildsList.filter((el) => el.status === 'Waiting')[0])
+            .then((buildObject) => {
+              helpers.buildFinish(buildObject)
             })
-            .catch(e => console.error(e));
-        });
+            .catch((e) => console.error(e))
+        })
     })
     .then(() => res.send('settings have been saved'))
-    .catch(e => console.error(e, 'post settings error'));
+    .catch((e) => console.error(e, 'post settings error'))
 
   // res.send('settings have been saved');
-});
+})
 router.delete('/', (req, res) => {
   // NOTE: удаляем настройки
   axios
     .delete('/conf')
-    .then(response => {
+    .then((response) => {
       if (response.status === 200) {
-        res.send('settings deleted');
+        res.send('settings deleted')
       }
     })
-    .catch(e => e.code, 'delete settings error');
-});
+    .catch((e) => e.code, 'delete settings error')
+})
 
 app.use((err, req, res, next) => {
   if (err instanceof ValidationError) {
-    res.status(400).send('JSON is invalid');
-    next();
-  } else next(err);
-});
+    res.status(400).send('JSON is invalid')
+    next()
+  } else next(err)
+})
 
-module.exports = router;
+module.exports = router

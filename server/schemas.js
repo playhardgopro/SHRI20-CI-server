@@ -3,20 +3,20 @@ const settings = {
   type: 'object',
   properties: {
     repoName: {
-      type: 'string'
+      type: 'string',
     },
     buildCommand: {
-      type: 'string'
+      type: 'string',
     },
     mainBranch: {
-      type: 'string'
+      type: 'string',
     },
     period: {
-      type: 'number'
-    }
+      type: 'number',
+    },
   },
-  additionalProperties: false
-};
+  additionalProperties: false,
+}
 module.exports = {
-  settings
-};
+  settings,
+}
