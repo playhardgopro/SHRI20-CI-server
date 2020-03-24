@@ -13,7 +13,7 @@ const Text = ({ children, className }) => {
 
 Text.propTypes = {
   children: PropTypes.node || PropTypes.string,
-  className: PropTypes.objectOf([PropTypes.string, PropTypes.bool]),
+  className: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])),
 }
 Text.defaultProps = {
   children: '',

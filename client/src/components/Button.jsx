@@ -26,7 +26,7 @@ const Button = ({ children, onClick, className, disabled, active }) => {
 Button.propTypes = {
   children: PropTypes.node,
   onClick: PropTypes.func,
-  className: PropTypes.objectOf([PropTypes.string, PropTypes.bool]),
+  className: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])),
   disabled: PropTypes.bool,
   active: PropTypes.bool,
 }

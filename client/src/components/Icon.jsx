@@ -13,7 +13,7 @@ const Icon = ({ children, className }) => {
 
 Icon.propTypes = {
   children: PropTypes.node,
-  className: PropTypes.objectOf([PropTypes.string, PropTypes.bool]),
+  className: PropTypes.objectOf(PropTypes.string || PropTypes.bool),
 }
 Icon.defaultProps = {
   children: '',

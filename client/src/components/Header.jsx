@@ -33,7 +33,7 @@ const Header = ({ children, className }) => {
 
 Header.propTypes = {
   children: PropTypes.node,
-  className: PropTypes.objectOf([PropTypes.string, PropTypes.bool]),
+  className: PropTypes.objectOf(PropTypes.string || PropTypes.bool),
 }
 Header.defaultProps = {
   children: '',
