@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+import createBrowserHistory from 'history/createBrowserHistory'
 import App from './App'
 import store from './app/store'
 
+const history = createBrowserHistory()
+
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter history={history}>
       <App />
     </BrowserRouter>
   </Provider>,

@@ -8,13 +8,9 @@ function App() {
   return (
     <div className="layout layout_v-ratio_1-full-1">
       <Switch>
-        <Route path="/" component={Home} />
+        <Route exact path="/" component={Home} />
         <Route path="/settings" component={Settings} />
-        {/* <Route path="/schedule" component={Schedule} /> */}
       </Switch>
-      {/* <Header className={{ distribute: 'between' }} />
-      <Layout className={{ hero: true, align: 'center' }} />
-      <Footer /> */}
     </div>
   )
 }
