@@ -1,0 +1,18 @@
+.rep-connection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rep-connection__logo {
+  margin: 0 auto;
+  margin-bottom: var(--space-32);
+}
+
+.rep-connection__message {
+  margin-bottom: var(--space-24);
+}
+
+.rep-connection__controls {
+  margin: 0 auto;
+}
