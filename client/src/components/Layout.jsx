@@ -41,11 +41,11 @@ const Layout = ({ children, className }) => {
 
 Layout.propTypes = {
   children: PropTypes.node || PropTypes.string,
-  className: PropTypes.string,
+  className: PropTypes.objectOf([PropTypes.string, PropTypes.bool]),
 }
 Layout.defaultProps = {
   children: '',
-  className: '',
+  className: {},
 }
 
 export default Layout

@@ -1,14 +1,20 @@
 import React from 'react'
-import { Footer, Header, Layout } from './components'
+import { Switch, Route } from 'react-router-dom'
+import { Home, Settings } from './components'
 
-import './components/scss/Layout.scss'
+// import './components/scss/Layout.scss'
 
 function App() {
   return (
     <div className="layout layout_v-ratio_1-full-1">
-      <Header className={{ distribute: 'between' }} />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/settings" component={Settings} />
+        {/* <Route path="/schedule" component={Schedule} /> */}
+      </Switch>
+      {/* <Header className={{ distribute: 'between' }} />
       <Layout className={{ hero: true, align: 'center' }} />
-      <Footer />
+      <Footer /> */}
     </div>
   )
 }

@@ -27,11 +27,11 @@ const Footer = ({ children, className }) => {
 
 Footer.propTypes = {
   children: PropTypes.node,
-  className: PropTypes.string,
+  className: PropTypes.objectOf([PropTypes.string, PropTypes.bool]),
 }
 Footer.defaultProps = {
   children: '',
-  className: '',
+  className: {},
 }
 
 export default Footer

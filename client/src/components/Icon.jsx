@@ -13,11 +13,11 @@ const Icon = ({ children, className }) => {
 
 Icon.propTypes = {
   children: PropTypes.node,
-  className: PropTypes.string,
+  className: PropTypes.objectOf([PropTypes.string, PropTypes.bool]),
 }
 Icon.defaultProps = {
   children: '',
-  className: '',
+  className: {},
 }
 
 export default Icon

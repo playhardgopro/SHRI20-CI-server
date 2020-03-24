@@ -13,11 +13,11 @@ const Text = ({ children, className }) => {
 
 Text.propTypes = {
   children: PropTypes.node || PropTypes.string,
-  className: PropTypes.string,
+  className: PropTypes.objectOf([PropTypes.string, PropTypes.bool]),
 }
 Text.defaultProps = {
   children: '',
-  className: '',
+  className: {},
 }
 
 export default Text
