@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-// import './scss/Header.scss'
+import './scss/Text.scss'
+
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
 const Text = ({ children, className }) => {

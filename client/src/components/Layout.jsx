@@ -1,14 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { Text } from '.'
+import { Text, Button } from '.'
+import './scss/Layout.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
-// import './scss/Layout.scss'
 
 const Layout = ({ children, className }) => {
+  const classes = cn('layout', 'container')(className)
   return (
-    <div className="layout__container layout__container_hero layout__container_size_s layout__container_align_center">
+    <div className={classes}>
       <div className="grid grid_m-columns_12 grid_col-gap_full grid grid_s-columns_4">
         <div className="grid__fraction grid__fraction_m-col_4 grid__fraction_s-col_4 grid__fraction_m-offset_4">
           <div className="rep-connection">
@@ -27,11 +28,9 @@ const Layout = ({ children, className }) => {
               </Text>
             </div>
             <div className="rep-connection__controls">
-              <form action="./settings.html">
-                <button type="button" className="button button_size_m button_view_action">
-                  <div className="button__text">Open Settings</div>
-                </button>
-              </form>
+              <Button className={{ size: 'm', view: 'action' }}>
+                <div className="button__text">Open Settings</div>
+              </Button>
             </div>
           </div>
         </div>

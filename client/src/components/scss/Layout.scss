@@ -1,3 +1,4 @@
+$screen-m: 768px;
 .layout {
   display: flex;
   flex-direction: column;
@@ -43,3 +44,5 @@
     margin-bottom: var(--space-16);
   }
 }
+
+

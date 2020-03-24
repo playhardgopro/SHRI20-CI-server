@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { Button, Icon, Text } from '.'
+import './scss/Header.scss'
 
-// import './scss/Header.scss'
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
 const Header = ({ children, className }) => {
