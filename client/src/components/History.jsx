@@ -1,6 +1,7 @@
 import React from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import { Footer, Header, Layout, RepConnection, Grid } from '.'
+import { Form, Footer, Header, Layout, Grid } from '.'
+
+// import './scss/Layout.scss'
 
 const grid = {
   block: {
@@ -14,13 +15,13 @@ const grid = {
   },
 }
 
-const Home = () => {
+const History = () => {
   return (
     <div className="layout layout_v-ratio_1-full-1">
       <Header className={{ distribute: 'between' }} />
-      <Layout className={{ hero: true, align: 'center' }}>
+      <Layout className={{ align: 'center', size: 's' }}>
         <Grid className={grid}>
-          <RepConnection />
+          <Form />
         </Grid>
       </Layout>
       <Footer />
@@ -28,4 +29,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default History

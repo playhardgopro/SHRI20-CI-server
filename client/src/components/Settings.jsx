@@ -1,14 +1,24 @@
 import React from 'react'
-import { Form, Footer, Header, Layout } from '.'
+import { Form, Footer, Header, Layout, Grid } from '.'
 
-// import './scss/Layout.scss'
+const grid = {
+  block: {
+    'm-columns': '12',
+    'col-gap': 'full',
+  },
+  elem: {
+    'm-col': '7',
+  },
+}
 
 const Settings = () => {
   return (
     <div className="layout layout_v-ratio_1-full-1">
       <Header className={{ distribute: 'between' }} />
       <Layout className={{ align: 'center', size: 's' }}>
-        <Form />
+        <Grid className={grid}>
+          <Form />
+        </Grid>
       </Layout>
       <Footer />
     </div>
