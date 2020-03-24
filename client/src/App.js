@@ -6,12 +6,10 @@ import { Home, Settings } from './components'
 
 function App() {
   return (
-    <div className="layout layout_v-ratio_1-full-1">
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/settings" component={Settings} />
-      </Switch>
-    </div>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path="/settings" component={Settings} />
+    </Switch>
   )
 }
 

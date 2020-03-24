@@ -7,10 +7,10 @@ const Settings = () => {
   return (
     <div className="layout layout_v-ratio_1-full-1">
       <Header className={{ distribute: 'between' }} />
-      <Layout className={{ hero: true, align: 'center' }}>
+      <Layout className={{ align: 'center', size: 's' }}>
         <Form />
       </Layout>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }

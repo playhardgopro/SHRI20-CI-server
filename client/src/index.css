@@ -213,7 +213,7 @@ ul {
   }
 } */
 
-.grid {
+/* .grid {
   display: grid;
   width: 100%;
 }
@@ -253,7 +253,7 @@ ul {
   .grid__fraction_s-col_4 {
     grid-column: span 4;
   }
-}
+} */
 
 /* .header {
   flex-shrink: 0;
