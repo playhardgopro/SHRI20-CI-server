@@ -1,4 +1,5 @@
-$screen-m: 768px;
+@import './var.scss';
+
 .layout {
   display: flex;
   flex-direction: column;
@@ -44,5 +45,3 @@ $screen-m: 768px;
     margin-bottom: var(--space-16);
   }
 }
-
-
