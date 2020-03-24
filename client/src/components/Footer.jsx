@@ -1,7 +1,11 @@
 import React from 'react'
-// import './scss/Footer.scss'
+import PropTypes from 'prop-types'
+import { withNaming } from '@bem-react/classname'
 
-export default function Footer() {
+// import './scss/Footer.scss'
+const cn = withNaming({ n: '', e: '__', m: '_' })
+
+const Footer = ({ children, className }) => {
   return (
     <div className="footer">
       <div className="footer__content">
@@ -20,3 +24,14 @@ export default function Footer() {
     </div>
   )
 }
+
+Footer.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+}
+Footer.defaultProps = {
+  children: '',
+  className: '',
+}
+
+export default Footer

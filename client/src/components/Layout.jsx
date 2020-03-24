@@ -1,8 +1,12 @@
 import React from 'react'
-import Text from './Text'
+import PropTypes from 'prop-types'
+import { withNaming } from '@bem-react/classname'
+import { Text } from '.'
+
+const cn = withNaming({ n: '', e: '__', m: '_' })
 // import './scss/Layout.scss'
 
-export default function Layout() {
+const Layout = ({ children, className }) => {
   return (
     <div className="layout__container layout__container_hero layout__container_size_s layout__container_align_center">
       <div className="grid grid_m-columns_12 grid_col-gap_full grid grid_s-columns_4">
@@ -35,3 +39,14 @@ export default function Layout() {
     </div>
   )
 }
+
+Layout.propTypes = {
+  children: PropTypes.node || PropTypes.string,
+  className: PropTypes.string,
+}
+Layout.defaultProps = {
+  children: '',
+  className: '',
+}
+
+export default Layout

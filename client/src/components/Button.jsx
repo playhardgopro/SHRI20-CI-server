@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { cn, withNaming } from '@bem-react/classname'
+import { withNaming } from '@bem-react/classname'
 // import './scss/Button.scss'
+const cn = withNaming({ n: '', e: '__', m: '_' })
 
 const Button = ({ children, onClick, className, disabled, active }) => {
   const classes = cn('button')(className)

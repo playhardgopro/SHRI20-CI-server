@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import Button from './Button'
-import Icon from './Icon'
-import Text from './Text'
+import { Button, Icon, Text } from '.'
 
 // import './scss/Header.scss'
 const cn = withNaming({ n: '', e: '__', m: '_' })
