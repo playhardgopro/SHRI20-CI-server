@@ -9,7 +9,7 @@ const cn = withNaming({ n: '', e: '__', m: '_' })
 const Icon = ({ children, className, name }) => {
   const classes = cn('icon')(className)
 
-  return <span className={classes}>{icons[name]()}</span>
+  return <span className={classes}>{icons[name].render()}</span>
 }
 
 Icon.propTypes = {

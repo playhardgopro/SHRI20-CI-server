@@ -8,7 +8,7 @@ import { ReactComponent as rebuild } from './rebuild.svg'
 import { ReactComponent as success } from './success.svg'
 import { ReactComponent as user } from './user.svg'
 import { ReactComponent as warning } from './warning.svg'
-import { ReactComponent as inputclose } from './close.svg'
+import { ReactComponent as close } from './close.svg'
 
 export const icons = {
   settings,
@@ -21,5 +21,5 @@ export const icons = {
   success,
   user,
   warning,
-  inputclose,
+  close,
 }
