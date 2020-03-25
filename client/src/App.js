@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { Home, Settings, History } from './components'
+import { Home, Settings, History, Details } from './components'
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
       <Route exact path="/" component={Home} />
       <Route exact path="/settings" component={Settings} />
       <Route exact path="/history" component={History} />
+      <Route exact path="/details" component={Details} />
     </Switch>
   )
 }
