@@ -1,0 +1,25 @@
+@import './var.scss';
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.list__item:not(:first-child) {
+  margin-top: var(--space-8);
+}
+
+.list__controls {
+  display: flex;
+  padding-top: var(--space-8);
+}
+
+@media screen and (max-width: $screen-m) {
+  .list__controls {
+    flex-direction: column;
+  }
+
+  .list__controls .button {
+    margin-right: 0;
+    margin-bottom: var(--space-12);
+  }
+}

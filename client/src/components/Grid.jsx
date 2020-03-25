@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { Text, Button } from '.'
 import './scss/Grid.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
@@ -19,7 +18,7 @@ const Grid = ({ children, className }) => {
 
 Grid.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  className: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])),
+  className: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.object])),
 }
 Grid.defaultProps = {
   children: '',

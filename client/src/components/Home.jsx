@@ -6,7 +6,6 @@ const grid = {
   block: {
     'm-columns': '12',
     'col-gap': 'full',
-    's-columns': '4',
   },
   elem: {
     'm-col': '4',
