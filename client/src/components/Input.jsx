@@ -5,9 +5,7 @@ import { Text, Icon, Button } from '.'
 import './scss/Input.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
-
 const cnInput = cn('input')
-
 const textStyle = { size: '13-18', type: 'h2' }
 
 const LilInput = ({ id, placeholder, isShort }) => {
@@ -29,6 +27,7 @@ const ControlsAppend = ({ text }) => {
 
 const Input = ({ children, className, options }) => {
   const { placeholder, label, isRequired, id, vertical, text } = options
+
   return (
     <div className={cnInput('group', { vertical })}>
       <label className={cnInput('label', { required: isRequired })} htmlFor="repository">
@@ -45,11 +44,31 @@ const Input = ({ children, className, options }) => {
 Input.propTypes = {
   children: PropTypes.node,
   className: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])),
+  options: PropTypes.objectOf(PropTypes.oneOfType(PropTypes.string, PropTypes.bool)),
 }
+
 Input.defaultProps = {
   children: '',
   className: {},
-  options: { label: '', placeholder: '' },
+  isShort: false,
+  options: {
+    label: '',
+    placeholder: '',
+    id: '',
+    isRequired: false,
+    vertical: false,
+    text: false,
+  },
+}
+LilInput.propTypes = {
+  isShort: PropTypes.bool,
+  placeholder: PropTypes.string,
+  id: PropTypes.string,
+}
+LilInput.defaultProps = {
+  isShort: false,
+  placeholder: '',
+  id: '',
 }
 
 export default Input
