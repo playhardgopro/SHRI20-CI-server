@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { Input } from '.'
+import { Input, Button } from '.'
 import './scss/Form.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
@@ -42,13 +42,18 @@ const options = [
 const FormControls = () => {
   return (
     <div className="form__controls">
-      <button type="submit" className="button button_size_m button_view_action">
-        <div className="button__text">Save</div>
-      </button>
-      <button type="button" className="button button_size_m button_view_control">
-        <div className="button__text">Cancel</div>
-      </button>
+      <Button className={{ size: 'm', view: 'action' }}>Save</Button>
+      <Button className={{ size: 'm', view: 'control' }}>Cancel</Button>
     </div>
+
+    // <div className="form__controls">
+    //   <button type="button" className="button button_size_m button_view_action">
+    //     <div className="button__text">Save</div>
+    //   </button>
+    //   <button type="button" className="button button_size_m button_view_control">
+    //     <div className="button__text">Cancel</div>
+    //   </button>
+    // </div>
   )
 }
 

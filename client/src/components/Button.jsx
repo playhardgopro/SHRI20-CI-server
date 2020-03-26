@@ -1,16 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
+import { Icon } from '.'
 import './scss/Button.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Button = ({ children, onClick, className, disabled, active, url }) => {
-  const classes = cn('button')(className)
+const Button = ({ children, onClick, className, disabled, active, url, icon }) => {
+  const cnButton = cn('button')
+  const cnIcon = cn('icon')
 
   return (
-    <button type="button" className={classes} disabled={disabled} onClick={onClick}>
-      {children}
+    <button type="button" className={cnButton(className)} disabled={disabled} onClick={onClick}>
+      {icon && <Icon name={icon.name} className={{ size: icon.size }} />}
+      <div className={cnButton('text')}>{children}</div>
     </button>
   )
 }
