@@ -13,7 +13,6 @@ const options = [
     placeholder: 'username/repo-name',
     id: 'repository',
     isRequired: true,
-    hideClear: false,
     vertical: true,
   },
   {
@@ -21,7 +20,6 @@ const options = [
     placeholder: 'npm run build',
     id: 'cmd',
     isRequired: false,
-    hideClear: false,
     vertical: true,
   },
   {
@@ -29,7 +27,6 @@ const options = [
     placeholder: 'master',
     id: 'branch',
     isRequired: false,
-    hideClear: false,
     vertical: true,
   },
   {
@@ -37,7 +34,6 @@ const options = [
     placeholder: '10',
     id: 'sync',
     isRequired: false,
-    hideClear: true,
     vertical: false,
     text: true,
   },
@@ -56,6 +52,14 @@ const FormControls = () => {
   )
 }
 
+const Inputs = () => {
+  return options.map((el) => (
+    <div className={cnForm('item', { 'indent-t': 'xl' })}>
+      <Input options={el} />
+    </div>
+  ))
+}
+
 const Form = ({ children, className }) => {
   return (
     <form className={cnForm()}>
@@ -65,20 +69,7 @@ const Form = ({ children, className }) => {
           Configure repository connection and synchronization settings.
         </div>
       </div>
-      <div className={cnForm('items')}>
-        <div className={cnForm('item', { 'indent-t': 'xl' })}>
-          <Input options={options[0]} />
-        </div>
-        <div className={cnForm('item', { 'indent-t': 'xl' })}>
-          <Input options={options[1]} />
-        </div>
-        <div className={cnForm('item', { 'indent-t': 'xl' })}>
-          <Input options={options[2]} />
-        </div>
-        <div className={cnForm('item', { 'indent-t': 'xl' })}>
-          <Input options={options[3]} />
-        </div>
-      </div>
+      <div className={cnForm('items')}>{Inputs()}</div>
       {FormControls()}
     </form>
   )

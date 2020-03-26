@@ -17,18 +17,18 @@ const LilInput = ({ id, placeholder, isShort }) => {
   )
 }
 
-const ControlsAppend = ({ text, hideClear }) => {
+const ControlsAppend = ({ text }) => {
   return text ? (
     <Text className={{ size: '13-18' }}>minutes</Text>
   ) : (
     <button type="button" className="button button_size_m button_distribute_center button_view_control">
-      <Icon name="close" className={{ size: 'm', hide: hideClear }} />
+      <Icon name="close" className={{ size: 'm' }} />
     </button>
   )
 }
 
 const Input = ({ children, className, options }) => {
-  const { placeholder, label, isRequired, id, hideClear, vertical, text } = options
+  const { placeholder, label, isRequired, id, vertical, text } = options
   return (
     <div className={cnInput('group', { vertical })}>
       <label className={cnInput('label', { required: isRequired })} htmlFor="repository">
@@ -36,7 +36,7 @@ const Input = ({ children, className, options }) => {
       </label>
       <div className={cnInput('controls')}>
         <LilInput id={id} placeholder={placeholder} isShort={text} />
-        <div className={cnInput('controls-append')}>{ControlsAppend({ hideClear, text })}</div>
+        <div className={cnInput('controls-append')}>{ControlsAppend({ text })}</div>
       </div>
     </div>
   )
