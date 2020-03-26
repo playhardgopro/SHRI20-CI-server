@@ -6,19 +6,19 @@ import './scss/Icon.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Icon = ({ children, className, name }) => {
-  const classes = cn('icon')(className)
+const Icon = ({ className, name }) => {
+  const cnIcon = cn('icon')
 
-  return <span className={classes}>{icons[name].render()}</span>
+  return <span className={cnIcon(className)}>{icons[name].render()}</span>
 }
 
 Icon.propTypes = {
-  children: PropTypes.node,
+  // children: PropTypes.node,
   className: PropTypes.objectOf(PropTypes.string || PropTypes.bool),
   name: PropTypes.string.isRequired,
 }
 Icon.defaultProps = {
-  children: '',
+  // children: '',
   className: {},
 }
 

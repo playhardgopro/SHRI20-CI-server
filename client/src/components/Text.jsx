@@ -6,9 +6,9 @@ import './scss/Text.scss'
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
 const Text = ({ children, className }) => {
-  const classes = cn('text')(className)
+  const cnText = cn('text')
 
-  return <div className={classes}>{children}</div>
+  return <span className={cnText(className)}>{children}</span>
 }
 
 Text.propTypes = {

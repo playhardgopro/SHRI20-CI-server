@@ -19,6 +19,10 @@
   line-height: var(--text-line-height-36);
 }
 
+.icon_hide {
+  display: none;
+}
+
 @media screen and (max-width: $screen-m) {
   .icon {
     position: relative;

@@ -7,8 +7,8 @@ function App({ history }) {
     <Switch>
       <Route history={history} exact path="/" component={Home} />
       <Route history={history} exact path="/settings" component={Settings} />
-      <Route history={history} exact path="/history" component={History} />
-      <Route history={history} exact path="/details" component={Details} />
+      {/* <Route history={history} exact path="/history" component={History} /> */}
+      {/* <Route history={history} exact path="/details" component={Details} /> */}
     </Switch>
   )
 }

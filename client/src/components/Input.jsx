@@ -1,23 +1,42 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
+import { Text, Icon } from '.'
 import './scss/Input.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Input = ({ children, className }) => {
+const cnInput = cn('input')
+
+const textStyle = { size: '13-18', type: 'h2' }
+
+const LilInput = ({ id, placeholder, isShort }) => {
+  const inputClass = { size: 'm', width: isShort ? 52 : 'full' }
   return (
-    <div className="input__group input__group_vertical">
-      <label className="input__label input__label_required text text_size_13-18 text_type_h2" htmlFor="repository">
-        Github repository
+    <input className={cnInput(inputClass, ['text', { size: '13-15' }])} id={id} type="text" placeholder={placeholder} />
+  )
+}
+
+const ControlsAppend = ({ text, hideClear }) => {
+  return text ? (
+    <Text className={{ size: '13-18' }}>minutes</Text>
+  ) : (
+    <button type="button" className="button button_size_m button_distribute_center button_view_control">
+      <Icon name="close" className={{ size: 'm', hide: hideClear }} />
+    </button>
+  )
+}
+
+const Input = ({ children, className, options }) => {
+  const { placeholder, label, isRequired, id, hideClear, vertical, text } = options
+  return (
+    <div className={cnInput('group', { vertical })}>
+      <label className={cnInput('label', { required: isRequired })} htmlFor="repository">
+        <Text className={textStyle}>{label}</Text>
       </label>
-      <div className="input__controls">
-        <input
-          className="input input_size_m input_width_full text text_size_13-15"
-          id="repository"
-          type="text"
-          placeholder="username/repo-name"
-        />
+      <div className={cnInput('controls')}>
+        <LilInput id={id} placeholder={placeholder} isShort={text} />
+        <div className={cnInput('controls-append')}>{ControlsAppend({ hideClear, text })}</div>
       </div>
     </div>
   )
@@ -30,6 +49,7 @@ Input.propTypes = {
 Input.defaultProps = {
   children: '',
   className: {},
+  options: { label: '', placeholder: '' },
 }
 
 export default Input
