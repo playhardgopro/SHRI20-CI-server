@@ -18,9 +18,12 @@ const Header = ({ children, className }) => {
           <Text className={{ type: 'h1', size: '24-28', view: 'ghost' }}>School CI Server</Text>
         </div>
         <div className={cnHeader('controls')}>
-          <LinkButton to="./settings" className={{ size: 's', distribute: 'center', view_control: true }}>
-            <Icon name="settings" className={{ size: 's' }} />
-            <div className="button__text decorator hide_mobile">Settings</div>
+          <LinkButton
+            icon={{ name: 'settings', size: 's' }}
+            to="./settings"
+            className={{ size: 's', distribute: 'center', view_control: true }}
+          >
+            Settings
           </LinkButton>
           {children}
         </div>

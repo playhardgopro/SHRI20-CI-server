@@ -6,14 +6,16 @@ import './scss/Button.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Button = ({ children, onClick, className, disabled, active, url, icon }) => {
+const Button = ({ children, onClick, className, disabled, active, url, icon, hide }) => {
   const cnButton = cn('button')
   const cnIcon = cn('icon')
+  const cnHide = [cnButton('text'), 'decorator', 'hide-mobile'].join(' ')
 
   return (
     <button type="button" className={cnButton(className)} disabled={disabled} onClick={onClick}>
       {icon && <Icon name={icon.name} className={{ size: icon.size }} />}
-      <div className={cnButton('text')}>{children}</div>
+      {!hide && <div className={cnButton('text')}>{children}</div>}
+      {hide && <div className={cnHide}>{children}</div>}
     </button>
   )
 }

@@ -2,20 +2,24 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { useHistory } from 'react-router-dom'
+import { Button } from '.'
 import './scss/Button.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const LinkButton = ({ children, className, to, disabled }) => {
-  const classes = cn('button')(className)
+const LinkButton = ({ children, className, to, disabled, icon }) => {
   const history = useHistory()
   function handleClick() {
     history.push(to)
   }
   return (
-    <button type="button" className={classes} onClick={handleClick} disabled={disabled}>
+    <Button type="button" hide="true" icon={icon} className={className} onClick={handleClick} disabled={disabled}>
       {children}
-    </button>
+    </Button>
+
+    // <button type="button" className={classes} onClick={handleClick} disabled={disabled}>
+    //   {children}
+    // </button>
   )
 }
 

@@ -101,6 +101,6 @@
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-.input:not(:placeholder-shown) + .input__controls-append .button {
+.input:placeholder-shown + .input__controls-append .button {
   display: none;
 }
