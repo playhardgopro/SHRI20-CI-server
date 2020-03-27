@@ -1,4 +1,5 @@
-import React from 'react'
+// import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { Input, Button } from '.'
@@ -11,28 +12,28 @@ const options = [
   {
     label: 'Github repository',
     placeholder: 'username/repo-name',
-    id: 'repository',
+    id: 'repoName',
     isRequired: true,
     vertical: true,
   },
   {
     label: 'Build command',
     placeholder: 'npm run build',
-    id: 'cmd',
+    id: 'buildCommand',
     isRequired: false,
     vertical: true,
   },
   {
     label: 'Main branch',
     placeholder: 'master',
-    id: 'branch',
+    id: 'mainBranch',
     isRequired: false,
     vertical: true,
   },
   {
     label: 'Synchronize every',
     placeholder: '10',
-    id: 'sync',
+    id: 'period',
     isRequired: false,
     vertical: false,
     text: true,
@@ -57,15 +58,19 @@ const FormControls = () => {
   )
 }
 
-const Inputs = () => {
-  return options.map((el) => (
-    <div className={cnForm('item', { 'indent-t': 'xl' })}>
-      <Input options={el} />
-    </div>
-  ))
-}
-
 const Form = ({ children, className }) => {
+  const [value, setValue] = useState({})
+
+  function handleChange(e) {
+    setValue({ ...{ [e.target.id]: e.target.value }, ...value })
+  }
+  const Inputs = (e) => {
+    return options.map((el) => (
+      <div key={el.id} className={cnForm('item', { 'indent-t': 'xl' })}>
+        <Input options={el} change={handleChange} />
+      </div>
+    ))
+  }
   return (
     <form className={cnForm()}>
       <div className={cnForm('title')}>

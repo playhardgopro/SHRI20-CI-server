@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
+import { connect } from 'react-redux'
 import { Text, Icon, Button } from '.'
 import './scss/Input.scss'
 
@@ -9,10 +10,16 @@ const cnInput = cn('input')
 const textStyle = { size: '13-18', type: 'h2' }
 const cnText = cn('text')
 
-const LilInput = ({ id, placeholder, isShort }) => {
+const LilInput = ({ id, placeholder, isShort, change }) => {
   const inputClass = { size: 'm', width: isShort ? 52 : 'full' }
   return (
-    <input className={cnInput(inputClass, [cnText({ size: '13-15' })])} id={id} type="text" placeholder={placeholder} />
+    <input
+      onChange={change}
+      className={cnInput(inputClass, [cnText({ size: '13-15' })])}
+      id={id}
+      type="text"
+      placeholder={placeholder}
+    />
   )
 }
 
@@ -26,7 +33,7 @@ const ControlsAppend = ({ text }) => {
   )
 }
 
-const Input = ({ children, className, options }) => {
+const Input = ({ children, className, options, change }) => {
   const { placeholder, label, isRequired, id, vertical, text } = options
 
   return (
@@ -35,7 +42,7 @@ const Input = ({ children, className, options }) => {
         <Text className={textStyle}>{label}</Text>
       </label>
       <div className={cnInput('controls')}>
-        <LilInput id={id} placeholder={placeholder} isShort={text} />
+        <LilInput id={id} placeholder={placeholder} isShort={text} change={change} />
         <div className={cnInput('controls-append')}>{ControlsAppend({ text })}</div>
       </div>
     </div>
@@ -72,4 +79,4 @@ LilInput.defaultProps = {
   id: '',
 }
 
-export default Input
+export default connect(/* mapStateToProps, mapDispatchToProps */)(Input)
