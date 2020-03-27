@@ -45,32 +45,25 @@ const FormControls = () => {
     <div className="form__controls">
       <Button className={{ size: 'm', view: 'action' }}>Save</Button>
       <Button className={{ size: 'm', view: 'control' }}>Cancel</Button>
-    </div>
-
-    // <div className="form__controls">
-    //   <button type="button" className="button button_size_m button_view_action">
-    //     <div className="button__text">Save</div>
-    //   </button>
-    //   <button type="button" className="button button_size_m button_view_control">
-    //     <div className="button__text">Cancel</div>
-    //   </button>
-    // </div>
-  )
+    </div>)
 }
 
-const Form = ({ children, className }) => {
-  const [value, setValue] = useState({})
+const Inputs = (ctx) => {
+  return options.map((el) => (
+    <div key={el.id} className={cnForm('item', { 'indent-t': 'xl' })}>
+      <Input options={el} change={ctx.handleChange} />
+    </div>
+  ))
+}
 
-  function handleChange(e) {
-    setValue({ ...{ [e.target.id]: e.target.value }, ...value })
+
+class Form extends React.Component {
+ 
+  handleChange = (e) => {
+    this.setState({ [e.target.id]: e.target.value })
   }
-  const Inputs = (e) => {
-    return options.map((el) => (
-      <div key={el.id} className={cnForm('item', { 'indent-t': 'xl' })}>
-        <Input options={el} change={handleChange} />
-      </div>
-    ))
-  }
+
+  render () {
   return (
     <form className={cnForm()}>
       <div className={cnForm('title')}>
@@ -79,10 +72,10 @@ const Form = ({ children, className }) => {
           Configure repository connection and synchronization settings.
         </div>
       </div>
-      <div className={cnForm('items')}>{Inputs()}</div>
-      {FormControls()}
+      <div className={cnForm('items')}>{Inputs(this)}</div>
+      <FormControls/>
     </form>
-  )
+  )}
 }
 
 Form.propTypes = {

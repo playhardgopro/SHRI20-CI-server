@@ -10,10 +10,11 @@ const cnInput = cn('input')
 const textStyle = { size: '13-18', type: 'h2' }
 const cnText = cn('text')
 
-const LilInput = ({ id, placeholder, isShort, change }) => {
+const LilInput = ({ id, placeholder, isShort, change, inputValue }) => {
   const inputClass = { size: 'm', width: isShort ? 52 : 'full' }
   return (
     <input
+      value={inputValue}
       onChange={change}
       className={cnInput(inputClass, [cnText({ size: '13-15' })])}
       id={id}
@@ -33,7 +34,7 @@ const ControlsAppend = ({ text }) => {
   )
 }
 
-const Input = ({ children, className, options, change }) => {
+const Input = ({ children, className, options, change, inputValue }) => {
   const { placeholder, label, isRequired, id, vertical, text } = options
 
   return (
@@ -42,7 +43,7 @@ const Input = ({ children, className, options, change }) => {
         <Text className={textStyle}>{label}</Text>
       </label>
       <div className={cnInput('controls')}>
-        <LilInput id={id} placeholder={placeholder} isShort={text} change={change} />
+        <LilInput id={id} placeholder={placeholder} isShort={text} change={change} inputValue={inputValue} />
         <div className={cnInput('controls-append')}>{ControlsAppend({ text })}</div>
       </div>
     </div>
