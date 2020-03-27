@@ -7,11 +7,12 @@ import './scss/Input.scss'
 const cn = withNaming({ n: '', e: '__', m: '_' })
 const cnInput = cn('input')
 const textStyle = { size: '13-18', type: 'h2' }
+const cnText = cn('text')
 
 const LilInput = ({ id, placeholder, isShort }) => {
   const inputClass = { size: 'm', width: isShort ? 52 : 'full' }
   return (
-    <input className={cnInput(inputClass, ['text', { size: '13-15' }])} id={id} type="text" placeholder={placeholder} />
+    <input className={cnInput(inputClass, [cnText({ size: '13-15' })])} id={id} type="text" placeholder={placeholder} />
   )
 }
 
