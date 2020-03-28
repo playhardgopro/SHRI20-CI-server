@@ -25,6 +25,9 @@ router.get('/', (req, res) => {
 router.post('/', validate({ body: schemas.settings }), (req, res) => {
   // NOTE: сохранение настроек и скачивание репозитория
   const settings = req.body
+  // period must be a Number
+  settings.period = +settings.period
+  console.log(settings, 'received settings')
   const downloadRepo = helpers
     .clear(settings)
     .then((resolvedSettings) => helpers.gitClone(resolvedSettings))
@@ -35,7 +38,7 @@ router.post('/', validate({ body: schemas.settings }), (req, res) => {
       console.log('settings have been saved')
     })
     .catch((e) => console.error(e, 'can not start build'))
-  const saveSettings = axios.post('/conf', settings)
+  const saveSettings = axios.post('/conf', settings).catch((e) => console.log(e, 'can not post settings'))
 
   Promise.all([downloadRepo, saveSettings])
     .then(() => {
@@ -60,9 +63,9 @@ router.post('/', validate({ body: schemas.settings }), (req, res) => {
         })
     })
     .then(() => res.send('settings have been saved'))
-    .catch((e) => console.error(e, 'post settings error'))
+    .catch((e) => console.error(e.code, 'post settings error'))
 
-  // res.send('settings have been saved');
+  // res.send('build done')
 })
 router.delete('/', (req, res) => {
   // NOTE: удаляем настройки

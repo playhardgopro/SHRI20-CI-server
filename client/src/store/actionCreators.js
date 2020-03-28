@@ -1,4 +1,3 @@
-import fetch from 'cross-fetch'
 import axios from 'axios'
 
 export function saveSettings(payload) {
@@ -6,6 +5,19 @@ export function saveSettings(payload) {
   return {
     type: 'SAVE_SETTINGS',
     payload,
+  }
+}
+
+export function postSettings(settings) {
+  console.log(settings, 'settings')
+  return function (dispatch) {
+    return (
+      axios
+        .post('http://localhost:3001/api/settings', settings)
+
+        // .then((json) => dispatch(saveSettings(json.data)))
+        .catch((e) => console.error(e))
+    )
   }
 }
 

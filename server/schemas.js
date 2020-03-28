@@ -12,7 +12,7 @@ const settings = {
       type: 'string',
     },
     period: {
-      type: 'number',
+      type: 'string',
     },
   },
   additionalProperties: false,
