@@ -3,6 +3,7 @@ const path = require('path')
 const express = require('express')
 const axios = require('axios')
 const https = require('https')
+const cors = require('cors')
 
 const { AUTH_TOKEN } = process.env
 
@@ -19,6 +20,7 @@ axios.defaults.httpsAgent = new https.Agent({
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 app.use('/api/builds', buildsRoutes)
 app.use('/api/settings', settingsRoutes)
 
