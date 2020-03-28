@@ -50,4 +50,4 @@ app.get('/api/startBuild', (req, res) => {
     .catch((e) => console.error(e, 'get start build'))
 })
 
-app.listen(3000)
+app.listen(3001)
