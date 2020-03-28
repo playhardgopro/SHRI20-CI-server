@@ -62,7 +62,7 @@ router.post('/', validate({ body: schemas.settings }), (req, res) => {
             .catch((e) => console.error(e))
         })
     })
-    .then(() => res.send('settings have been saved'))
+    .then(() => res.send({ saveSettings: 'done', build: 'done' }))
     .catch((e) => console.error(e.code, 'post settings error'))
 
   // res.send('build done')

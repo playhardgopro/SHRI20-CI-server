@@ -2,10 +2,13 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { saveSettings, getSettings, postSettings } from '../store/actionCreators'
+import { saveSettings, getSettings, postSettings ,isLoading} from '../store/actionCreators'
+import { useHistory } from 'react-router-dom'
 
-import { Input, Button } from '.'
+
+import { Input, Button, LinkButton } from '.'
 import './scss/Form.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
@@ -45,19 +48,23 @@ const options = [
 
 
 const FormControls = (ctx) => {
+  // const history = useHistory()
+  // const [loading, setLoading] = useState(false)
 
   const handleSave = () => {
+    ctx.props.isLoading(true)
     ctx.props.saveSettings({...ctx.state})
     ctx.props.postSettings({...ctx.state})
+
+    // history.push('/')
+    // return <Redirect to="/" />
   }
-  // const handleGet = () => {
-  //   ctx.props.getSettings({...ctx.state})
-  // }
+
   return (
     <div className="form__controls">
-      <Button className={{ size: 'm', view: 'action' }} onClick={handleSave}>Save</Button>
-      <Button className={{ size: 'm', view: 'control' }}>Cancel</Button>
-      {/* <Button className={{ size: 'm', view: 'action' }} onClick={handleGet}>Get</Button> */}
+      <Button className={{ size: 'm', view: 'action' }} onClick={handleSave} disabled={ctx.props.settings.isLoading}>Save</Button>
+      <Button className={{ size: 'm', view: 'control' }} disabled={ctx.props.settings.isLoading}>Cancel</Button>
+      {/* <LinkButton to="/" className={{ size: 'm', view: 'action' }}>Get</LinkButton> */}
     </div>
   )
 }
@@ -73,8 +80,9 @@ const Inputs = (ctx) => {
 class Form extends React.Component {
   state = {...this.props.settings}
 
+
   handleChange = (id, val) => {
-    this.setState({[id]:val})
+    this.setState({[id]:val })
     // console.log(this.state)
   }
 
@@ -96,7 +104,7 @@ class Form extends React.Component {
 
 
 const mapDispatchToProps = {
-  saveSettings, getSettings, postSettings
+  saveSettings, getSettings, postSettings, isLoading
 }
 function mapStateToProps(state) {
   return {

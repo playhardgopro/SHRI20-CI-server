@@ -12,10 +12,10 @@ const settings = {
       type: 'string',
     },
     period: {
-      type: 'string',
+      type: 'number',
     },
   },
-  additionalProperties: false,
+  additionalProperties: true,
 }
 module.exports = {
   settings,

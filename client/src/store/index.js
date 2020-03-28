@@ -2,17 +2,18 @@ import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 
 const initialState = {
-  // repoName: 'username',
-  // buildCommand: 'build',
-  // mainBranch: 'm',
-  // period: 10,
+  // isLoading: false,
 }
 
 // сюда приходят actions и возвращают state в зависимости от switch
 function settingsReducer(state = initialState, action) {
   switch (action.type) {
     case 'SAVE_SETTINGS':
-      return action.payload
+      return { ...state, ...action.payload }
+    case 'SERVER_RESPONSE':
+      return { ...state, ...action.status }
+    case 'IS_LOADING':
+      return { ...state, isLoading: action.payload }
     default:
       return state
   }

@@ -8,13 +8,40 @@ export function saveSettings(payload) {
   }
 }
 
+export function isLoading(payload) {
+  console.log(payload, 'loading')
+  return {
+    type: 'IS_LOADING',
+    payload,
+  }
+}
+
+export function serverResponse(payload) {
+  console.log(payload, 'serverResponse')
+  if (payload.saveSettings === 'done' && payload.build === 'done') {
+    return {
+      type: 'IS_LOADING',
+      status: false,
+    }
+  }
+  return {
+    type: 'IS_LOADING',
+    status: true,
+  }
+}
+
 export function postSettings(settings) {
   console.log(settings, 'settings')
   return function (dispatch) {
     return (
       axios
         .post('http://localhost:3001/api/settings', settings)
-
+        .then((response) => {
+          if (response.status === 200 && response.data.saveSettings === 'done') {
+            dispatch(isLoading(false))
+            // console.log(response, 'response')
+          }
+        })
         // .then((json) => dispatch(saveSettings(json.data)))
         .catch((e) => console.error(e))
     )
