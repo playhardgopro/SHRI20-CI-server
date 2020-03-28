@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { connect } from 'react-redux'
-import {saveSettings} from '../store/actionCreators'
+import { saveSettings, getSettings } from '../store/actionCreators'
 
 import { Input, Button } from '.'
 import './scss/Form.scss'
@@ -49,10 +49,14 @@ const FormControls = (ctx) => {
   const handleSave = () => {
     ctx.props.saveSettings({...ctx.state})
   }
+  const handleGet = () => {
+    ctx.props.getSettings({...ctx.state})
+  }
   return (
     <div className="form__controls">
       <Button className={{ size: 'm', view: 'action' }} onClick={handleSave}>Save</Button>
       <Button className={{ size: 'm', view: 'control' }}>Cancel</Button>
+      <Button className={{ size: 'm', view: 'action' }} onClick={handleGet}>Get</Button>
     </div>
   )
 }
@@ -91,7 +95,7 @@ class Form extends React.Component {
 
 
 const mapDispatchToProps = {
-  saveSettings
+  saveSettings, getSettings
 }
 function mapStateToProps(state) {
   return {

@@ -1,5 +1,5 @@
-import { combineReducers, createStore, applyMiddleware } from 'redux'
-import { storeLogger, thunk } from './middleware'
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk'
 
 const initialState = {
   // repoName: 'username',
@@ -19,11 +19,8 @@ function settingsReducer(state = initialState, action) {
 }
 
 const reducers = combineReducers({ settings: settingsReducer })
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const store = createStore(
-  reducers,
-  applyMiddleware(thunk, storeLogger),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
 
 export default store
