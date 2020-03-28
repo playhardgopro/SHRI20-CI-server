@@ -49,14 +49,14 @@ const FormControls = (ctx) => {
   const handleSave = () => {
     ctx.props.saveSettings({...ctx.state})
   }
-  const handleGet = () => {
-    ctx.props.getSettings({...ctx.state})
-  }
+  // const handleGet = () => {
+  //   ctx.props.getSettings({...ctx.state})
+  // }
   return (
     <div className="form__controls">
       <Button className={{ size: 'm', view: 'action' }} onClick={handleSave}>Save</Button>
       <Button className={{ size: 'm', view: 'control' }}>Cancel</Button>
-      <Button className={{ size: 'm', view: 'action' }} onClick={handleGet}>Get</Button>
+      {/* <Button className={{ size: 'm', view: 'action' }} onClick={handleGet}>Get</Button> */}
     </div>
   )
 }
