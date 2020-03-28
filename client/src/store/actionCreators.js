@@ -26,23 +26,25 @@ export function getSettings(settings) {
     // In this case, we return a promise to wait for.
     // This is not required by thunk middleware, but it is convenient for us.
 
-    return axios
-      .get('http://localhost:3001/api/settings ')
-      .then(
-        (response) => response.json(),
-        // Do not use catch, because that will also catch
-        // any errors in the dispatch and resulting render,
-        // causing a loop of 'Unexpected batch number' errors.
-        // https://github.com/facebook/react/issues/6895
-        (error) => console.log('An error occurred.', error)
-      )
-      .then((json) =>
-        // We can dispatch many times!
-        // Here, we update the app state with the results of the API call.
+    return (
+      axios
+        .get('http://localhost:3001/api/settings ')
+        // .then(
+        //   (response) => response.json(),
+        //   // Do not use catch, because that will also catch
+        //   // any errors in the dispatch and resulting render,
+        //   // causing a loop of 'Unexpected batch number' errors.
+        //   // https://github.com/facebook/react/issues/6895
+        //   (error) => console.log('An error occurred.', error)
+        // )
+        .then((json) =>
+          // We can dispatch many times!
+          // Here, we update the app state with the results of the API call.
 
-        dispatch(saveSettings(json))
-      )
-      .catch((e) => console.error(e))
+          dispatch(saveSettings(json.data))
+        )
+        .catch((e) => console.error(e))
+    )
   }
 }
 
