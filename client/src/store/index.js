@@ -1,20 +1,23 @@
 import { combineReducers, createStore } from 'redux'
 
 const initialState = {
-  name: 'foo',
-  attrs: 'bar',
+  repoName: 'username',
+  buildCommand: 'build',
+  mainBranch: 'm',
+  period: 10,
 }
 
-function test(state = initialState, action) {
+// сюда приходят actions и возвращают state в зависимости от switch
+function settingsReducer(state = initialState, action) {
   switch (action.type) {
-    case 'SET_TEST':
-      return { ...state, name: action.name }
+    case 'SAVE_SETTINGS':
+      return action.payload
     default:
       return state
   }
 }
 
-const reducers = combineReducers({ test })
+const reducers = combineReducers({ settings: settingsReducer })
 
 const store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 

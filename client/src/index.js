@@ -7,18 +7,10 @@ import store from './store'
 
 import App from './App'
 
-function d() {
-  store.dispatch({
-    type: 'SET_TEST',
-    name: 'test',
-  })
-}
-
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <App />
-      {d()}
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')

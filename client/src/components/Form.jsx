@@ -2,6 +2,9 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
+import { connect } from 'react-redux'
+import {saveSettings} from '../store/actionCreators'
+
 import { Input, Button } from '.'
 import './scss/Form.scss'
 
@@ -40,12 +43,18 @@ const options = [
   },
 ]
 
-const FormControls = () => {
+
+const FormControls = (ctx) => {
+
+  const handleSave = () => {
+    ctx.props.saveSettings({...ctx.state})
+  }
   return (
     <div className="form__controls">
-      <Button className={{ size: 'm', view: 'action' }}>Save</Button>
+      <Button className={{ size: 'm', view: 'action' }} onClick={handleSave}>Save</Button>
       <Button className={{ size: 'm', view: 'control' }}>Cancel</Button>
-    </div>)
+    </div>
+  )
 }
 
 const Inputs = (ctx) => {
@@ -56,26 +65,35 @@ const Inputs = (ctx) => {
   ))
 }
 
-
 class Form extends React.Component {
- 
   handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value })
   }
 
-  render () {
-  return (
-    <form className={cnForm()}>
-      <div className={cnForm('title')}>
-        <div className="form__header text text_type_h2 text_size_15-20">Settings</div>
-        <div className="form__subheader text text_type_h3 text_size_13-18 text_view_ghost">
-          Configure repository connection and synchronization settings.
+  render() {
+    return (
+      <form className={cnForm()}>
+        <div className={cnForm('title')}>
+          <div className="form__header text text_type_h2 text_size_15-20">Settings</div>
+          <div className="form__subheader text text_type_h3 text_size_13-18 text_view_ghost">
+            Configure repository connection and synchronization settings.
+          </div>
         </div>
-      </div>
-      <div className={cnForm('items')}>{Inputs(this)}</div>
-      <FormControls/>
-    </form>
-  )}
+        <div className={cnForm('items')}>{Inputs(this)}</div>
+        {FormControls(this)}
+      </form>
+    )
+  }
+}
+
+
+const mapDispatchToProps = {
+  saveSettings
+}
+function mapStateToProps(state) {
+  return {
+    settings: state.settings
+  }
 }
 
 Form.propTypes = {
@@ -87,4 +105,4 @@ Form.defaultProps = {
   className: {},
 }
 
-export default Form
+export default connect(mapStateToProps, mapDispatchToProps)(Form)

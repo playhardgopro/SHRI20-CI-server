@@ -10,7 +10,7 @@ const cnInput = cn('input')
 const textStyle = { size: '13-18', type: 'h2' }
 const cnText = cn('text')
 
-const LilInput = ({ id, placeholder, isShort, change, inputValue }) => {
+const LilInput = ({ id, placeholder, isShort, change, inputValue, defaultValue }) => {
   const inputClass = { size: 'm', width: isShort ? 52 : 'full' }
   return (
     <input
@@ -34,16 +34,23 @@ const ControlsAppend = ({ text }) => {
   )
 }
 
-const Input = ({ children, className, options, change, inputValue }) => {
+const Input = ({ children, className, options, change, inputValue, settings }) => {
   const { placeholder, label, isRequired, id, vertical, text } = options
-
+  const defaultValue = settings
   return (
     <div className={cnInput('group', { vertical })}>
       <label className={cnInput('label', { required: isRequired })} htmlFor="repository">
         <Text className={textStyle}>{label}</Text>
       </label>
       <div className={cnInput('controls')}>
-        <LilInput id={id} placeholder={placeholder} isShort={text} change={change} inputValue={inputValue} />
+        <LilInput
+          id={id}
+          placeholder={placeholder}
+          isShort={text}
+          change={change}
+          inputValue={inputValue}
+          defaultValue={defaultValue}
+        />
         <div className={cnInput('controls-append')}>{ControlsAppend({ text })}</div>
       </div>
     </div>
@@ -79,5 +86,10 @@ LilInput.defaultProps = {
   placeholder: '',
   id: '',
 }
+function mapStateToProps(state) {
+  return {
+    settings: state.settings,
+  }
+}
 
-export default connect(/* mapStateToProps, mapDispatchToProps */)(Input)
+export default connect(mapStateToProps /* , mapDispatchToProps */)(Input)
