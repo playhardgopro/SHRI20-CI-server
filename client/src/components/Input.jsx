@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { connect } from 'react-redux'
@@ -35,7 +35,7 @@ const Input = ({ children, className, options, change, settings }) => {
         <input
           value={value}
           onChange={(e) => {
-            change({ [id]: e.target.value })
+            change(id, e.target.value)
             setValue(e.target.value)
           }}
           className={cnInput(inputClass, [cnText({ size: '13-15' })])}
