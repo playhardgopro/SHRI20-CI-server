@@ -25,8 +25,8 @@ const RepConnection = ({ children, className }) => {
         </Text>
       </div>
       <div className="rep-connection__controls">
-        <LinkButton to="/settings" className={{ size: 'm', view: 'action' }}>
-          <div className="button__text">Open Settings</div>
+        <LinkButton to="./settings" className={{ size: 'm', view: 'action' }}>
+          Open Settings
         </LinkButton>
       </div>
     </div>
