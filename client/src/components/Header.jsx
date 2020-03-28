@@ -25,6 +25,13 @@ const Header = ({ children, className }) => {
           >
             Settings
           </LinkButton>
+          <LinkButton
+            icon={{ name: 'settings', size: 's' }}
+            to="/"
+            className={{ size: 's', distribute: 'center', view_control: true }}
+          >
+            Home
+          </LinkButton>
           {children}
         </div>
       </div>

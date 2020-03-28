@@ -66,8 +66,11 @@ const Inputs = (ctx) => {
 }
 
 class Form extends React.Component {
-  handleChange = (e) => {
-    this.setState({ [e.target.id]: e.target.value })
+  state = {...this.props.settings}
+
+  handleChange = (val) => {
+    this.setState(val)
+    console.log(this.state)
   }
 
   render() {

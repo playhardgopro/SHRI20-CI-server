@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { connect } from 'react-redux'
+import { saveSettings } from '../store/actionCreators'
 import { Text, Icon, Button } from '.'
 import './scss/Input.scss'
 
@@ -9,20 +10,6 @@ const cn = withNaming({ n: '', e: '__', m: '_' })
 const cnInput = cn('input')
 const textStyle = { size: '13-18', type: 'h2' }
 const cnText = cn('text')
-
-const LilInput = ({ id, placeholder, isShort, change, inputValue, defaultValue }) => {
-  const inputClass = { size: 'm', width: isShort ? 52 : 'full' }
-  return (
-    <input
-      value={inputValue}
-      onChange={change}
-      className={cnInput(inputClass, [cnText({ size: '13-15' })])}
-      id={id}
-      type="text"
-      placeholder={placeholder}
-    />
-  )
-}
 
 const ControlsAppend = ({ text }) => {
   return text ? (
@@ -34,22 +21,27 @@ const ControlsAppend = ({ text }) => {
   )
 }
 
-const Input = ({ children, className, options, change, inputValue, settings }) => {
+const Input = ({ children, className, options, change, settings }) => {
   const { placeholder, label, isRequired, id, vertical, text } = options
-  const defaultValue = settings
+  const [value, setValue] = useState(settings[id])
+  const inputClass = { size: 'm', width: text ? 52 : 'full' }
+
   return (
     <div className={cnInput('group', { vertical })}>
       <label className={cnInput('label', { required: isRequired })} htmlFor="repository">
         <Text className={textStyle}>{label}</Text>
       </label>
       <div className={cnInput('controls')}>
-        <LilInput
+        <input
+          value={value}
+          onChange={(e) => {
+            change({ [id]: e.target.value })
+            setValue(e.target.value)
+          }}
+          className={cnInput(inputClass, [cnText({ size: '13-15' })])}
           id={id}
+          type="text"
           placeholder={placeholder}
-          isShort={text}
-          change={change}
-          inputValue={inputValue}
-          defaultValue={defaultValue}
         />
         <div className={cnInput('controls-append')}>{ControlsAppend({ text })}</div>
       </div>
@@ -76,20 +68,22 @@ Input.defaultProps = {
     text: false,
   },
 }
-LilInput.propTypes = {
-  isShort: PropTypes.bool,
-  placeholder: PropTypes.string,
-  id: PropTypes.string,
-}
-LilInput.defaultProps = {
-  isShort: false,
-  placeholder: '',
-  id: '',
-}
+// LilInput.propTypes = {
+//   isShort: PropTypes.bool,
+//   placeholder: PropTypes.string,
+//   id: PropTypes.string,
+// }
+// LilInput.defaultProps = {
+//   isShort: false,
+//   placeholder: '',
+//   id: '',
+// }
 function mapStateToProps(state) {
   return {
     settings: state.settings,
   }
 }
-
-export default connect(mapStateToProps /* , mapDispatchToProps */)(Input)
+const mapDispatchToProps = {
+  saveSettings,
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Input)

@@ -1,10 +1,10 @@
 import { combineReducers, createStore } from 'redux'
 
 const initialState = {
-  repoName: 'username',
-  buildCommand: 'build',
-  mainBranch: 'm',
-  period: 10,
+  // repoName: 'username',
+  // buildCommand: 'build',
+  // mainBranch: 'm',
+  // period: 10,
 }
 
 // сюда приходят actions и возвращают state в зависимости от switch
