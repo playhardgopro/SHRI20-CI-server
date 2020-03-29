@@ -62,7 +62,7 @@ const FormControls = (ctx) => {
 
   return (
     <div className="form__controls">
-      <Button className={{ size: 'm', view: 'action' }} onClick={handleSave} disabled={ctx.props.settings.isLoading}>Save</Button>
+      <Button className={{ size: 'm', view: 'action' }} onClick={handleSave} disabled={ctx.props.settings.isLoading === true}>Save</Button>
       <Button className={{ size: 'm', view: 'control' }} disabled={ctx.props.settings.isLoading}>Cancel</Button>
       {/* <LinkButton to="/" className={{ size: 'm', view: 'action' }}>Get</LinkButton> */}
     </div>
@@ -86,7 +86,7 @@ class Form extends React.Component {
     // console.log(this.state)
   }
 
-  render() {
+    render() {
     return (
       <form className={cnForm()}>
         <div className={cnForm('title')}>

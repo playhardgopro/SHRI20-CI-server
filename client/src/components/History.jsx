@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { getBuildList } from '../store/actionCreators'
 import { List, Footer, Header, Layout, Grid, Card } from '.'
 
 // import './scss/Layout.scss'
@@ -13,15 +15,17 @@ const grid = {
   },
 }
 
-const History = () => {
+const History = ({ getBuildList }) => {
+  // useEffect(() => {
+  //   getBuildList()
+  // }, [])
+
   return (
     <div className="layout layout_v-ratio_1-full-1">
       <Header className={{ distribute: 'between' }} />
       <Layout className={{ align: 'center', size: 's' }}>
         <Grid className={grid}>
-          <List>
-            <Card />
-          </List>
+          <List />
         </Grid>
       </Layout>
       <Footer />
@@ -29,4 +33,14 @@ const History = () => {
   )
 }
 
-export default History
+function mapStateToProps(state) {
+  return {
+    historyPage: state.history,
+  }
+}
+
+const mapDispatchToProps = {
+  getBuildList,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(History)

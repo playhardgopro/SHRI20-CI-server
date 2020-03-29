@@ -9,17 +9,34 @@ const initialState = {
 function settingsReducer(state = initialState, action) {
   switch (action.type) {
     case 'SAVE_SETTINGS':
-      return { ...state, ...action.payload }
+      return { ...state, ...action.settings }
     case 'SERVER_RESPONSE':
       return { ...state, ...action.status }
     case 'IS_LOADING':
       return { ...state, isLoading: action.payload }
+    case 'IS_CACHED':
+      return { ...state, isCached: action.payload }
     default:
       return state
   }
 }
 
-const reducers = combineReducers({ settings: settingsReducer })
+function historyReducer(state = initialState, action) {
+  switch (action.type) {
+    case 'SAVE_BUILD_LIST':
+      return { buildList: [...action.list] }
+    // case 'SERVER_RESPONSE':
+    //   return { ...state, ...action.status }
+    // case 'IS_LOADING':
+    //   return { ...state, isLoading: action.payload }
+    // case 'IS_CACHED':
+    //   return { ...state, isCached: action.payload }
+    default:
+      return state
+  }
+}
+
+const reducers = combineReducers({ settings: settingsReducer, history: historyReducer })
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))

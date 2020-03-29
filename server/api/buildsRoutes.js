@@ -85,7 +85,7 @@ router.get('/:buildId/logs', (req, res) => {
       .catch((e) => console.error(e.code))
   } else res.send(myCache.get(buildId))
   // NOTE: Раскомменть, чтобы посмотреть статистику кеша
-  console.log(myCache.getStats(), 'cached data')
+  // console.log(myCache.getStats(), 'cached data')
 })
 
 module.exports = router

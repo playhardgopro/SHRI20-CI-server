@@ -5,12 +5,14 @@ import './scss/IconBox.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const IconBox = ({ children, className }) => {
-  const classes = cn('icon-box')(className)
+const IconBox = ({ children, className, textStyle }) => {
+  const cnIconBox = cn('icon-box')
+  const cnText = cn('text')
 
   return (
-    <div className="icon-box">
-      <div className="icon-box__icon text text_view_success">{children}</div>
+    <div className={cnIconBox()}>
+      <div className={`${cnIconBox('icon')} ${cnText(textStyle)}`}>{children}</div>
+      {/* <div className="icon-box__icon text text_view_success">{children}</div> */}
     </div>
   )
 }

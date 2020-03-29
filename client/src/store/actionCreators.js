@@ -1,10 +1,24 @@
 import axios from 'axios'
 
 export function saveSettings(payload) {
-  console.log(payload, 'payload')
+  // console.log(payload, 'payload')
+  const settings = {
+    repoName: payload.repoName,
+    buildCommand: payload.buildCommand,
+    mainBranch: payload.mainBranch,
+    period: +payload.period,
+  }
   return {
     type: 'SAVE_SETTINGS',
-    payload,
+    settings,
+  }
+}
+
+export function saveBuildList(list) {
+  console.log(list, 'build list')
+  return {
+    type: 'SAVE_BUILD_LIST',
+    list,
   }
 }
 
@@ -15,23 +29,16 @@ export function isLoading(payload) {
     payload,
   }
 }
-
-export function serverResponse(payload) {
-  console.log(payload, 'serverResponse')
-  if (payload.saveSettings === 'done' && payload.build === 'done') {
-    return {
-      type: 'IS_LOADING',
-      status: false,
-    }
-  }
+export function isCached(payload) {
+  // console.log(payload, 'caching')
   return {
-    type: 'IS_LOADING',
-    status: true,
+    type: 'IS_CACHED',
+    payload,
   }
 }
 
 export function postSettings(settings) {
-  console.log(settings, 'settings')
+  // console.log(settings, 'settings')
   return function (dispatch) {
     return (
       axios
@@ -43,7 +50,31 @@ export function postSettings(settings) {
           }
         })
         // .then((json) => dispatch(saveSettings(json.data)))
-        .catch((e) => console.error(e))
+        .catch((e) => {
+          console.error(e)
+          dispatch(isCached(false))
+        })
+    )
+  }
+}
+
+export function getBuildList() {
+  // console.log(settings, 'settings')
+  return function (dispatch) {
+    return (
+      axios
+        .get('http://localhost:3001/api/builds')
+        .then((response) => {
+          if (response.status === 200) {
+            dispatch(saveBuildList(response.data))
+            // console.log(response.data, 'response')
+          }
+        })
+        // .then((json) => dispatch(saveSettings(json.data)))
+        .catch((e) => {
+          console.error(e)
+          // dispatch(isCached(false))
+        })
     )
   }
 }
@@ -76,13 +107,12 @@ export function getSettings(settings) {
         //   // https://github.com/facebook/react/issues/6895
         //   (error) => console.log('An error occurred.', error)
         // )
-        .then((json) =>
-          // We can dispatch many times!
-          // Here, we update the app state with the results of the API call.
-
-          dispatch(saveSettings(json.data))
-        )
-        .catch((e) => console.error(e))
+        .then((json) => dispatch(saveSettings(json.data)))
+        .then(() => dispatch(isCached(true)))
+        .catch((e) => {
+          console.error(e)
+          dispatch(isCached(false))
+        })
     )
   }
 }

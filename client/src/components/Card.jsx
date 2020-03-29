@@ -1,34 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
+import Moment from 'react-moment'
+import 'moment/locale/ru'
 import { IconBox, Icon } from '.'
 import './scss/Card.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Card = ({ children, className }) => {
-  const card = cn('card')(className)
+const Card = ({ children, className, options }) => {
+  const { buildNumber, commitMessage, commitHash, branchName, authorName, status, start, duration } = options
+  // console.log(status, 'status')
+  // const startDate = parseJSON(start) // local TZ
+  // const durationFormatted = format(duration, 'h:m')
+  // console.log(startDate)
+  const cnCard = cn('card')(className)
+  const cnText = cn('text')
   return (
     <div className="card">
       <div className="card__token">
-        <IconBox>
-          <Icon>
-            <svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M21.6562 11C21.6562 16.8853 16.8853 21.6562 11 21.6562C5.1147 21.6562 0.34375 16.8853 0.34375 11C0.34375 5.1147 5.1147 0.34375 11 0.34375C16.8853 0.34375 21.6562 5.1147 21.6562 11ZM9.7674 16.6424L17.6736 8.73615C17.9421 8.46768 17.9421 8.03236 17.6736 7.76389L16.7014 6.79164C16.4329 6.52313 15.9976 6.52313 15.7291 6.79164L9.28125 13.2394L6.2709 10.2291C6.00243 9.96063 5.56712 9.96063 5.29861 10.2291L4.32635 11.2014C4.05788 11.4698 4.05788 11.9051 4.32635 12.1736L8.7951 16.6424C9.06361 16.9109 9.49889 16.9109 9.7674 16.6424Z"
-                fill="#00B341"
-              />
-            </svg>
-          </Icon>
+        <IconBox textStyle={{ view: status.toLowerCase() }}>
+          <Icon name={status.toLowerCase()} />
         </IconBox>
       </div>
       <div className="card__content">
         <div className="card__history list">
           <div className="card__status list__item">
-            <div className="card__number text text_size_18-20 text_view_success">#1368</div>
-            <div className="card__message text text_size_15-20 text_view_truncate">
-              add documentation for postgres scaler
+            <div className={`card__number ${cnText({ size: '18-20', view: status.toLowerCase() })}`}>
+              {`#${buildNumber}`}
             </div>
+            <div className="card__message text text_size_15-20 text_view_truncate">{commitMessage}</div>
           </div>
           <div className="list__item meta meta_m-distribute_vertical">
             <div className="meta__item">
@@ -41,7 +42,8 @@ const Card = ({ children, className }) => {
                   </div>
                 </div>
                 <div className=" text text_size_13-16">
-                  master <a className="text text_view_ghost">9c9f0b9</a>
+                  {branchName}
+                  <a className="text text_view_ghost">{commitHash.slice(0, 7)}</a>
                 </div>
               </div>
             </div>
@@ -54,7 +56,7 @@ const Card = ({ children, className }) => {
                     </svg>
                   </div>
                 </div>
-                <div className="text text_size_13-16">Philip Kirkorov</div>
+                <div className="text text_size_13-16">{authorName}</div>
               </div>
             </div>
           </div>
@@ -69,20 +71,28 @@ const Card = ({ children, className }) => {
                   </svg>
                 </div>
               </div>
-              <div className="">21 янв, 03:06</div>
+              <div className="">
+                <Moment format="D MMM, HH:mm" locale="ru" local>
+                  {start}
+                </Moment>
+              </div>
             </div>
           </div>
           <div className="meta__item meta__item_indent-b_8">
-            <div className="icon-box">
-              <div className="icon-box__icon icon-box__icon_size_m icon-box__icon_indent-r_4">
-                <div className="icon">
-                  <svg width="14" height="16" viewBox="0 0 14 16" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.2788 5.75L12.9833 5.04375C13.1299 4.89687 13.1299 4.65937 12.9833 4.5125L12.4534 3.98125C12.3069 3.83438 12.07 3.83438 11.9235 3.98125L11.2782 4.62813C10.3087 3.76875 9.08365 3.19375 7.73076 3.04063V1.5H8.60359C8.80933 1.5 8.97766 1.33125 8.97766 1.125V0.375C8.97766 0.16875 8.80933 0 8.60359 0H5.36164C5.1559 0 4.98757 0.16875 4.98757 0.375V1.125C4.98757 1.33125 5.1559 1.5 5.36164 1.5H6.23447V3.04375C3.00499 3.41563 0.498718 6.1625 0.498718 9.5C0.498718 13.0906 3.40089 16 6.98262 16C10.5643 16 13.4665 13.0906 13.4665 9.5C13.4665 8.10312 13.027 6.80937 12.2788 5.75ZM6.98262 14.5C4.22696 14.5 1.995 12.2625 1.995 9.5C1.995 6.7375 4.22696 4.5 6.98262 4.5C9.73827 4.5 11.9702 6.7375 11.9702 9.5C11.9702 12.2625 9.73827 14.5 6.98262 14.5ZM7.35669 11H6.60855C6.40281 11 6.23447 10.8313 6.23447 10.625V6.375C6.23447 6.16875 6.40281 6 6.60855 6H7.35669C7.56243 6 7.73076 6.16875 7.73076 6.375V10.625C7.73076 10.8313 7.56243 11 7.35669 11Z" />
-                  </svg>
+            {duration && (
+              <div className="icon-box">
+                <div className="icon-box__icon icon-box__icon_size_m icon-box__icon_indent-r_4">
+                  <div className="icon">
+                    <svg width="14" height="16" viewBox="0 0 14 16" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.2788 5.75L12.9833 5.04375C13.1299 4.89687 13.1299 4.65937 12.9833 4.5125L12.4534 3.98125C12.3069 3.83438 12.07 3.83438 11.9235 3.98125L11.2782 4.62813C10.3087 3.76875 9.08365 3.19375 7.73076 3.04063V1.5H8.60359C8.80933 1.5 8.97766 1.33125 8.97766 1.125V0.375C8.97766 0.16875 8.80933 0 8.60359 0H5.36164C5.1559 0 4.98757 0.16875 4.98757 0.375V1.125C4.98757 1.33125 5.1559 1.5 5.36164 1.5H6.23447V3.04375C3.00499 3.41563 0.498718 6.1625 0.498718 9.5C0.498718 13.0906 3.40089 16 6.98262 16C10.5643 16 13.4665 13.0906 13.4665 9.5C13.4665 8.10312 13.027 6.80937 12.2788 5.75ZM6.98262 14.5C4.22696 14.5 1.995 12.2625 1.995 9.5C1.995 6.7375 4.22696 4.5 6.98262 4.5C9.73827 4.5 11.9702 6.7375 11.9702 9.5C11.9702 12.2625 9.73827 14.5 6.98262 14.5ZM7.35669 11H6.60855C6.40281 11 6.23447 10.8313 6.23447 10.625V6.375C6.23447 6.16875 6.40281 6 6.60855 6H7.35669C7.56243 6 7.73076 6.16875 7.73076 6.375V10.625C7.73076 10.8313 7.56243 11 7.35669 11Z" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="text text_size_13-16 text_view_ghost">
+                  <Moment duration={start} date={start + duration} locale="ru" local />
                 </div>
               </div>
-              <div className="text text_size_13-16 text_view_ghost">1 ч 20 мин</div>
-            </div>
+            )}
           </div>
         </div>
       </div>
