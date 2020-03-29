@@ -42,7 +42,7 @@ const Card = ({ children, className, options, onClick }) => {
                     </svg>
                   </div>
                 </div>
-                <div className=" text text_size_13-16">
+                <div className="icon-box__content text text_size_13-16">
                   {branchName}
                   <a className="text text_view_ghost">{commitHash.slice(0, 7)}</a>
                 </div>

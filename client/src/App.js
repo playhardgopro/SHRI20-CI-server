@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { saveSettings, getSettings, getBuildList } from './store/actionCreators'
 import { Home, Settings, History, Details } from './components'
@@ -46,4 +46,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

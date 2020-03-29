@@ -6,7 +6,7 @@ import './scss/Header.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Header = ({ children, className }) => {
+const Header = ({ children, className, page }) => {
   const cnHeader = cn('header')
   const cnHeaderContent = cn('header', 'content')
   const cnHeaderTitle = cn('header', 'title')

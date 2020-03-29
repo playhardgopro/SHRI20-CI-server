@@ -3,6 +3,7 @@ export { default as Details } from './Details'
 export { default as Home } from './Home'
 export { default as Settings } from './Settings'
 
+export { default as Modal } from './Modal'
 export { default as Button } from './Button'
 export { default as Footer } from './Footer'
 export { default as Layout } from './Layout'

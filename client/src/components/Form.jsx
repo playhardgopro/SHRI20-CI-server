@@ -1,5 +1,5 @@
 // import React from 'react'
-import React, { useState } from 'react'
+import React, { useState, Component } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { Redirect } from 'react-router-dom'
@@ -54,7 +54,7 @@ const FormControls = (ctx) => {
   const handleSave = () => {
     ctx.props.isLoading(true)
     ctx.props.saveSettings({...ctx.state})
-    ctx.props.postSettings({...ctx.state})
+    ctx.props.postSettings()
 
     // history.push('/')
     // return <Redirect to="/" />
@@ -77,7 +77,7 @@ const Inputs = (ctx) => {
   ))
 }
 
-class Form extends React.Component {
+class Form extends Component {
   state = {...this.props.settings}
 
 

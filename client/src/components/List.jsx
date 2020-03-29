@@ -4,15 +4,11 @@ import { withNaming } from '@bem-react/classname'
 import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router-dom'
 import { getBuildList } from '../store/actionCreators'
-import { Card } from '.'
+import { Card, Modal } from '.'
 import './scss/List.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 const cnList = cn('list')
-
-const Cards = (ctx) => {
-  return ctx.props.historyPage.buildList.map((el) => <Card key={el.id} />)
-}
 
 class List extends Component {
   constructor(props) {
@@ -34,12 +30,14 @@ class List extends Component {
 // console.log(this.props)
 
     return (
-      <ul className={cnList}>
+      <ul className={cnList()}>
         {this.props.historyPage.buildList &&
           this.props.historyPage.buildList.map((el) => {
-            return <Card options={el} onClick={this.handleClick} />
+            return (<li className={cnList('item')}><Card options={el} onClick={this.handleClick} /></li>)
           })}
+          <Modal></Modal>
       </ul>
+      
     )
   }
 }

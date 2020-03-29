@@ -22,7 +22,7 @@ const History = ({ getBuildList }) => {
 
   return (
     <div className="layout layout_v-ratio_1-full-1">
-      <Header className={{ distribute: 'between' }} />
+      <Header className={{ distribute: 'between' }} page="history" />
       <Layout className={{ align: 'center', size: 's' }}>
         <Grid className={grid}>
           <List />

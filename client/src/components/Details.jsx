@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router-dom'
 import { getBuildList } from '../store/actionCreators'
@@ -16,8 +16,11 @@ const grid = {
   },
 }
 
-const Details = ({ match, location, history, list }) => {
+const Details = ({ match, location, history, list, getBuildList }) => {
   const { buildNumber } = match.params
+  // useEffect(() => {
+  //   getBuildList()
+  // })
   console.log(buildNumber)
   console.log(list)
 
@@ -27,10 +30,15 @@ const Details = ({ match, location, history, list }) => {
     <div className="layout layout_v-ratio_1-full-1">
       <Header className={{ distribute: 'between' }} />
       <Layout className={{ align: 'center', size: 's', 'indent-b': 20 }}>
-        <Grid className={grid}>
-          <Card options={options[0]} />
-          <Log />
-        </Grid>
+        {/* <Grid className={grid}> */}
+        <div className="list">
+          <div className="list__item">
+            <Card options={options[0]} />
+          </div>
+        </div>
+
+        <Log />
+        {/* </Grid> */}
       </Layout>
       <Footer />
     </div>
