@@ -14,27 +14,11 @@ const Cards = (ctx) => {
   return ctx.props.historyPage.buildList.map((el) => <Card key={el.id} />)
 }
 
-// const List = ({ children, className, history }) => {
-//   const list = cn('list')(className)
-//   return (
-//     <ul className={list}>
-//       <Card />
-//       {Cards(this)}
-//       {/* <div>{history}</div> */}
-//     </ul>
-//   )
-// }
-
 class List extends Component {
   constructor(props) {
     super(props)
     this.state = {}
   }
-  //  history = useHistory()
-
-  // state={...this.props.historyPage}
-  // this.setState
-  // props={className, history}
 
   componentWillMount() {
     this.props.getBuildList()
@@ -43,8 +27,6 @@ class List extends Component {
   handleClick = (event, buildNumber) => {
     console.log(buildNumber, 'click')
     this.props.history.push(`build/${buildNumber}`)
-    // history.push()
-    // <Redirect to={`/details/:${buildNumber}`} />
   }
 
   render() {

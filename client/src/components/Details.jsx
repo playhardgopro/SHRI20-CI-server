@@ -1,4 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { withRouter, Redirect } from 'react-router-dom'
+import { getBuildList } from '../store/actionCreators'
 import { Footer, Header, Layout, Grid, Card, Log } from '.'
 
 // import './scss/Layout.scss'
@@ -13,15 +16,19 @@ const grid = {
   },
 }
 
-const Details = ({ match, location, history }) => {
+const Details = ({ match, location, history, list }) => {
   const { buildNumber } = match.params
   console.log(buildNumber)
+  console.log(list)
+
+  const options = list.filter((el) => el.buildNumber == buildNumber)
+  console.log(options)
   return (
     <div className="layout layout_v-ratio_1-full-1">
       <Header className={{ distribute: 'between' }} />
       <Layout className={{ align: 'center', size: 's', 'indent-b': 20 }}>
         <Grid className={grid}>
-          {/* <Card /> */}
+          <Card options={options[0]} />
           <Log />
         </Grid>
       </Layout>
@@ -29,5 +36,14 @@ const Details = ({ match, location, history }) => {
     </div>
   )
 }
+function mapStateToProps(state) {
+  return {
+    list: state.history.buildList,
+  }
+}
 
-export default Details
+const mapDispatchToProps = {
+  getBuildList,
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Details))

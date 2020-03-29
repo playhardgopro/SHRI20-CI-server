@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
+import { connect } from 'react-redux'
+import { withRouter, Redirect } from 'react-router-dom'
 import Moment from 'react-moment'
 import 'moment/locale/ru'
 import { IconBox, Icon } from '.'
@@ -18,7 +20,7 @@ const Card = ({ children, className, options, onClick }) => {
   const cnCard = cn('card')(className)
   const cnText = cn('text')
   return (
-    <div onClick={(e) => onClick(e, buildNumber)} className="card">
+    <div onClick={onClick && ((e) => onClick(e, buildNumber))} className="card">
       <div className="card__token">
         <IconBox textStyle={{ view: viewStatus }}>
           <Icon name={viewStatus} />
@@ -108,4 +110,4 @@ Card.defaultProps = {
   className: {},
 }
 
-export default Card
+export default withRouter(connect()(Card))
