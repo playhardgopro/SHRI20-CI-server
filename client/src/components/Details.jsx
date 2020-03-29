@@ -13,13 +13,15 @@ const grid = {
   },
 }
 
-const Details = () => {
+const Details = ({ match, location, history }) => {
+  const { buildNumber } = match.params
+  console.log(buildNumber)
   return (
     <div className="layout layout_v-ratio_1-full-1">
       <Header className={{ distribute: 'between' }} />
       <Layout className={{ align: 'center', size: 's', 'indent-b': 20 }}>
         <Grid className={grid}>
-          <Card />
+          {/* <Card /> */}
           <Log />
         </Grid>
       </Layout>

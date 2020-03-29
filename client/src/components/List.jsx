@@ -42,11 +42,15 @@ class List extends Component {
 
   handleClick = (event, buildNumber) => {
     console.log(buildNumber, 'click')
+    this.props.history.push(`build/${buildNumber}`)
     // history.push()
     // <Redirect to={`/details/:${buildNumber}`} />
   }
 
   render() {
+
+// console.log(this.props)
+
     return (
       <ul className={cnList}>
         {this.props.historyPage.buildList &&

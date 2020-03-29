@@ -15,13 +15,21 @@ class App extends PureComponent {
 
     return (
       <Switch>
-        <Route history={history} exact path="/">
-          {this.props.settings.isCached && <Redirect to="/history" />}
-          <Home />
+        <Route
+          state={this.state}
+          history={history}
+          exact
+          path="/"
+          render={(props) => {
+            return this.props.settings.isCached ? <Redirect to="/history" /> : <Home />
+          }}
+        >
+          {/* {this.props.settings.isCached && <Redirect to="/history" />}
+          <Home /> */}
         </Route>
         <Route history={history} exact path="/settings" component={Settings} />
         <Route history={history} exact path="/history" component={History} />
-        {/* <Route history={history} exact path="/details" component={Details} /> */}
+        <Route history={history} exact path="/build/:buildNumber" component={Details} />
       </Switch>
     )
   }

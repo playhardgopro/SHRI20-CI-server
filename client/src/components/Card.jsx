@@ -9,26 +9,25 @@ import './scss/Card.scss'
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
 const Card = ({ children, className, options, onClick }) => {
-  const { buildNumber, commitMessage, commitHash, branchName, authorName, status, start, duration } = options
-  // console.log(status, 'status')
-  // const startDate = parseJSON(start) // local TZ
-  // const durationFormatted = format(duration, 'h:m')
-  // console.log(startDate)
+  const { buildNumber, commitMessage, commitHash, branchName, authorName, start, duration, status } = options
+  let viewStatus = ''
+  if (status === 'Success') viewStatus = 'success'
+  if (status === 'Waiting' || status === 'InProgress' || status === '') viewStatus = 'warning'
+  if (status === 'Canceled' || status === 'Fail') viewStatus = 'error'
+
   const cnCard = cn('card')(className)
   const cnText = cn('text')
   return (
     <div onClick={(e) => onClick(e, buildNumber)} className="card">
       <div className="card__token">
-        <IconBox textStyle={{ view: status.toLowerCase() }}>
-          <Icon name={status.toLowerCase()} />
+        <IconBox textStyle={{ view: viewStatus }}>
+          <Icon name={viewStatus} />
         </IconBox>
       </div>
       <div className="card__content">
         <div className="card__history list">
           <div className="card__status list__item">
-            <div className={`card__number ${cnText({ size: '18-20', view: status.toLowerCase() })}`}>
-              {`#${buildNumber}`}
-            </div>
+            <div className={`card__number ${cnText({ size: '18-20', view: viewStatus })}`}>{`#${buildNumber}`}</div>
             <div className="card__message text text_size_15-20 text_view_truncate">{commitMessage}</div>
           </div>
           <div className="list__item meta meta_m-distribute_vertical">

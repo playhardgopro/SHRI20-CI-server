@@ -20,7 +20,7 @@ const Header = ({ children, className }) => {
         <div className={cnHeader('controls')}>
           <LinkButton
             icon={{ name: 'settings', size: 's' }}
-            to="./settings"
+            to="/settings"
             className={{ size: 's', distribute: 'center', view_control: true }}
           >
             Settings
