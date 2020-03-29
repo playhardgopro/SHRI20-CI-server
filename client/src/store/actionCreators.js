@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export function saveSettings(payload) {
-  // console.log(payload, 'payload')
+  console.log(payload, 'payload')
   const settings = {
     repoName: payload.repoName,
     buildCommand: payload.buildCommand,
@@ -53,6 +53,27 @@ export function postSettings(settings) {
         .catch((e) => {
           console.error(e)
           dispatch(isCached(false))
+        })
+    )
+  }
+}
+
+export function runBuild(commitHash) {
+  // console.log(settings, 'settings')
+  return function (dispatch) {
+    return (
+      axios
+        .post(`http://localhost:3001/api/builds/${commitHash}`)
+        .then((response) => {
+          if (response.status === 200) {
+            // dispatch(isLoading(false))
+            console.log(response, 'response on run build')
+          }
+        })
+        // .then((json) => dispatch(saveSettings(json.data)))
+        .catch((e) => {
+          console.error(e)
+          // dispatch(isCached(false))
         })
     )
   }

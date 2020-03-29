@@ -22,11 +22,9 @@ router.get('/', (req, res) => {
     })
     .catch((e) => e.code, 'get settings error')
 })
-router.post('/', validate({ body: schemas.settings }), (req, res) => {
+router.post('/' /*, validate({ body: schemas.settings })*/, (req, res) => {
   // NOTE: сохранение настроек и скачивание репозитория
   const settings = req.body
-  // period must be a Number
-  settings.period = +settings.period
   console.log(settings, 'received settings')
   const downloadRepo = helpers
     .clear(settings)

@@ -54,7 +54,7 @@ const FormControls = (ctx) => {
   const handleSave = () => {
     ctx.props.isLoading(true)
     ctx.props.saveSettings({...ctx.state})
-    ctx.props.postSettings()
+    ctx.props.postSettings({...ctx.state})
 
     // history.push('/')
     // return <Redirect to="/" />
@@ -62,7 +62,7 @@ const FormControls = (ctx) => {
 
   return (
     <div className="form__controls">
-      <Button className={{ size: 'm', view: 'action' }} onClick={handleSave} disabled={ctx.props.settings.isLoading === true}>Save</Button>
+      <Button className={{ size: 'm', view: 'action' }} onClick={handleSave} disabled={ctx.props.settings.isLoading}>Save</Button>
       <Button className={{ size: 'm', view: 'control' }} disabled={ctx.props.settings.isLoading}>Cancel</Button>
       {/* <LinkButton to="/" className={{ size: 'm', view: 'action' }}>Get</LinkButton> */}
     </div>

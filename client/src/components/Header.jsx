@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { LinkButton, Icon, Text } from '.'
+import { connect } from 'react-redux'
+import { withRouter, Redirect } from 'react-router-dom'
+import { runBuild } from '../store/actionCreators'
+import { LinkButton, Icon, Text, Button, Modal } from '.'
 import './scss/Header.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Header = ({ children, className, page }) => {
+const Header = ({ children, className, page, runBuild }) => {
+  const [isModalShown, setIsModalShown] = useState(false)
   const cnHeader = cn('header')
   const cnHeaderContent = cn('header', 'content')
   const cnHeaderTitle = cn('header', 'title')
@@ -32,9 +36,28 @@ const Header = ({ children, className, page }) => {
           >
             Home
           </LinkButton>
+          <Button
+            icon={{ name: 'run', size: 's' }}
+            onClick={() => {
+              setIsModalShown(true)
+            }}
+            className={{ size: 's', distribute: 'center', view_control: true }}
+          >
+            Run Build
+          </Button>
           {children}
         </div>
       </div>
+      {isModalShown && (
+        <Modal
+          onSubmit={(e, inputValue) => {
+            console.log(inputValue)
+            runBuild(inputValue)
+            setIsModalShown(false)
+          }}
+          onCancel={() => setIsModalShown(false)}
+        />
+      )}
     </div>
   )
 }
@@ -48,4 +71,14 @@ Header.defaultProps = {
   className: {},
 }
 
-export default Header
+function mapStateToProps(state) {
+  return {
+    historyPage: state.history,
+  }
+}
+
+const mapDispatchToProps = {
+  runBuild,
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header))

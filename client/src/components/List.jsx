@@ -33,9 +33,9 @@ class List extends Component {
       <ul className={cnList()}>
         {this.props.historyPage.buildList &&
           this.props.historyPage.buildList.map((el) => {
-            return (<li className={cnList('item')}><Card options={el} onClick={this.handleClick} /></li>)
+            return (<li  key={el.buildNumber} className={cnList('item')}><Card options={el} onClick={this.handleClick} /></li>)
           })}
-          <Modal></Modal>
+          {/* <Modal></Modal> */}
       </ul>
       
     )

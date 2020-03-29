@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { LinkButton, Icon, Input, Button } from '.'
@@ -16,6 +16,7 @@ const inputOption = {
 
 const Modal = ({ children, className, onSubmit, onCancel }) => {
   const cnModal = cn('modal')
+  const [inputValue, setInputValue] = useState()
 
   return (
     <div className={cnModal()}>
@@ -23,15 +24,19 @@ const Modal = ({ children, className, onSubmit, onCancel }) => {
         <div className={cnModal('title')}>
           <div className="modal__header text text_type_h2 text_size_18-22">New build</div>
         </div>
-        <Input options={inputOption} change={() => {}} />
+        <Input
+          options={inputOption}
+          change={(e, value) => {
+            setInputValue(value)
+          }}
+        />
         <div className="modal__controls">
-          <Button className={{ size: 'm', view: 'action' }} onClick={onSubmit}>
+          <Button className={{ size: 'm', view: 'action' }} onClick={(e) => onSubmit(e, inputValue)}>
             Run build
           </Button>
           <Button className={{ size: 'm', view: 'control' }} onClick={onCancel}>
             Cancel
           </Button>
-          {/* <LinkButton to="/" className={{ size: 'm', view: 'action' }}>Get</LinkButton> */}
         </div>
       </div>
     </div>
