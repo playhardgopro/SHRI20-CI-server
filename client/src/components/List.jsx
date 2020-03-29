@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { connect } from 'react-redux'
+import { withRouter, Redirect } from 'react-router-dom'
 import { getBuildList } from '../store/actionCreators'
 import { Card } from '.'
 import './scss/List.scss'
@@ -29,6 +30,8 @@ class List extends Component {
     super(props)
     this.state = {}
   }
+  //  history = useHistory()
+
   // state={...this.props.historyPage}
   // this.setState
   // props={className, history}
@@ -37,16 +40,19 @@ class List extends Component {
     this.props.getBuildList()
   }
 
+  handleClick = (event, buildNumber) => {
+    console.log(buildNumber, 'click')
+    // history.push()
+    // <Redirect to={`/details/:${buildNumber}`} />
+  }
+
   render() {
     return (
       <ul className={cnList}>
         {this.props.historyPage.buildList &&
           this.props.historyPage.buildList.map((el) => {
-            return <Card options={el} />
+            return <Card options={el} onClick={this.handleClick} />
           })}
-        {/* <Card /> */}
-        {/* {Cards(this)} */}
-        <div>{console.log(this.props.historyPage.buildList, 'props')}</div>
       </ul>
     )
   }
@@ -70,4 +76,4 @@ const mapDispatchToProps = {
   getBuildList,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(List)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(List))

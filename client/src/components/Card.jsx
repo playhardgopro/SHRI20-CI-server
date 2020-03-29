@@ -8,7 +8,7 @@ import './scss/Card.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Card = ({ children, className, options }) => {
+const Card = ({ children, className, options, onClick }) => {
   const { buildNumber, commitMessage, commitHash, branchName, authorName, status, start, duration } = options
   // console.log(status, 'status')
   // const startDate = parseJSON(start) // local TZ
@@ -17,7 +17,7 @@ const Card = ({ children, className, options }) => {
   const cnCard = cn('card')(className)
   const cnText = cn('text')
   return (
-    <div className="card">
+    <div onClick={(e) => onClick(e, buildNumber)} className="card">
       <div className="card__token">
         <IconBox textStyle={{ view: status.toLowerCase() }}>
           <Icon name={status.toLowerCase()} />
