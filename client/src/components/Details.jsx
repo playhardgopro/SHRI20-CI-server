@@ -21,9 +21,9 @@ const Details = ({ match, location, history, list, getBuildList, details }) => {
   // FIXME: тут баг при перезагрузке страницы
   const options = list.filter((el) => el.buildNumber == buildNumber)
   return (
-    <div className="layout layout_v-ratio_1-full-1">
+    <div className="layout">
       <Header className={{ distribute: 'between' }} />
-      <Layout className={{ align: 'center', size: 's', 'indent-b': 20 }}>
+      <Layout className={{ align: 'center', size: 's' }}>
         {/* <Grid className={grid}> */}
         <div className="list">
           <div className="list__item">

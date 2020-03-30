@@ -15,7 +15,7 @@ const grid = {
 
 const Home = () => {
   return (
-    <div className="layout layout_v-ratio_1-full-1">
+    <div className="layout">
       <Header className={{ distribute: 'between' }} />
       <Layout className={{ hero: true, align: 'center' }}>
         <Grid className={grid}>

@@ -13,7 +13,7 @@ const grid = {
 
 const Settings = () => {
   return (
-    <div className="layout layout_v-ratio_1-full-1">
+    <div className="layout">
       <Header className={{ distribute: 'between' }} />
       <Layout className={{ align: 'center', size: 's' }}>
         <Grid className={grid}>

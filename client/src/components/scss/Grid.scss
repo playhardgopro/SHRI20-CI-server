@@ -2,28 +2,31 @@
 .grid {
   display: grid;
   width: 100%;
+  margin: auto;
+}
+.grid__fraction {
+  width: 100%;
+  max-width: 824px;
 }
 
 .grid_col-gap_full {
   column-gap: var(--gap);
 }
 
-@media screen and (min-width: $screen-m) {
-  .grid_m-columns_12 {
-    grid-template-columns: repeat(12, 1fr);
-  }
-  .grid__fraction_m-col_4 {
-    grid-column: span 4;
-  }
-  .grid__fraction_m-col_4.grid__fraction_m-offset_4 {
-    grid-column: 5 / 9;
-  }
-  .grid__fraction_m-col_7 {
-    grid-column: span 7;
-  }
-  .grid__fraction_m-col_12 {
-    grid-column: span 12;
-  }
+.grid_m-columns_12 {
+  grid-template-columns: repeat(12, 1fr);
+}
+.grid__fraction_m-col_4 {
+  grid-column: span 4;
+}
+.grid__fraction_m-col_4.grid__fraction_m-offset_4 {
+  grid-column: 5 / 9;
+}
+.grid__fraction_m-col_7 {
+  grid-column: span 7;
+}
+.grid__fraction_m-col_12 {
+  grid-column: span 12;
 }
 
 @media screen and (max-width: $screen-m) {
@@ -40,4 +43,3 @@
     grid-column: span 4;
   }
 }
-

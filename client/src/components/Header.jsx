@@ -28,13 +28,13 @@ const Header = ({ children, runBuild, settings, match, currentBuild, history, hi
     case '/history':
       hiddenBtn.runBuild = false
       hiddenBtn.settings = false
-      header.style = { type: 'h1', size: '24-30' }
+      header.style = { type: 'h1', size: '24-30', bold: true }
       header.text = settings.repoName
       break
     case '/build/:buildNumber':
       hiddenBtn.rebuild = false
       hiddenBtn.settings = false
-      header.style = { type: 'h1', size: '24-30' }
+      header.style = { type: 'h1', size: '24-30', bold: true }
       header.text = settings.repoName
       break
     default:
