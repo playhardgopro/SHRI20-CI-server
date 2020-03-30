@@ -55,7 +55,6 @@ const FormControls = (ctx) => {
     ctx.props.isLoading(true)
     ctx.props.saveSettings({...ctx.state})
     ctx.props.postSettings({...ctx.state})
-    console.log(ctx.props.history)
   }
 
   const handleCancel = () => {
@@ -82,13 +81,8 @@ const Inputs = (ctx) => {
 class Form extends Component {
   state = {...this.props.settings}
   
-  componentDidMount(){
-  console.log(this.props, 'foooorm')
-  }
-
   handleChange = (id, val) => {
     this.setState({[id]:val })
-    // console.log(this.state)
   }
 
     render() {

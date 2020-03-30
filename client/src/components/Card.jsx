@@ -76,7 +76,6 @@ const CardMeta2 = ({ start, duration }) => {
 
 const Card = ({ children, className, options, onClick, match }) => {
   const { id, buildNumber, commitMessage, commitHash, branchName, authorName, start, duration, status } = options
-  // console.log(options, 'options')
   let viewStatus = ''
   let cardMetaUnder = true
   if (status === 'Success') viewStatus = 'success'

@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 export function saveSettings(payload) {
-  console.log(payload, 'payload')
   const settings = {
     repoName: payload.repoName,
     buildCommand: payload.buildCommand,
@@ -93,27 +92,6 @@ export function runBuild(commitHash) {
     )
   }
 }
-
-// export function rebuildByCommitHash(commitHash) {
-//   // console.log(settings, 'settings')
-//   return function (dispatch) {
-//     return (
-//       axios
-//         .get(`http://localhost:3001/api/builds/${buildId}`)
-//         .then((response) => {
-//           if (response.status === 200) {
-//             dispatch(saveDetailsByBuildId(response.data))
-//             console.log(response.data, 'response details build')
-//           }
-//         })
-//         // .then((json) => dispatch(saveSettings(json.data)))
-//         .catch((e) => {
-//           console.error(e)
-//           // dispatch(isCached(false))
-//         })
-//     )
-//   }
-// }
 
 export function getDetailsByBuildId(buildId) {
   // console.log(settings, 'settings')

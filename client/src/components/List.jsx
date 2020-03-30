@@ -19,9 +19,6 @@ class List extends Component {
   componentWillMount() {
     this.props.getBuildList()
   }
-  // componentDidMount(){
-  //   this.setState({list: this.props.historyPage.buildList})
-  // }
  
   handleClick = (event, buildNumber, buildId) => {
     this.props.getDetailsByBuildId(buildId)
@@ -30,15 +27,12 @@ class List extends Component {
 
   render() {
 
-// console.log(this.props)
-
     return (
       <ul className={cnList()}>
         {this.props.historyPage.buildList &&
           this.props.historyPage.buildList.map((el) => {
             return (<li  key={el.buildNumber} className={cnList('item')}><Card options={el} onClick={this.handleClick} /></li>)
           })}
-          {/* <Modal></Modal> */}
       </ul>
       
     )

@@ -13,8 +13,7 @@ const grid = {
   },
 }
 
-const Home = (props) => {
-  console.log(props, 'home')
+const Home = () => {
   return (
     <div className="layout layout_v-ratio_1-full-1">
       <Header className={{ distribute: 'between' }} />

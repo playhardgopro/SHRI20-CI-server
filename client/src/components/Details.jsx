@@ -18,16 +18,8 @@ const grid = {
 
 const Details = ({ match, location, history, list, getBuildList, details }) => {
   const { buildNumber } = match.params
-  console.log(location)
-  console.log(match)
-
-  // const [cardDetails, setCardDetails] = useState(details)
-  // console.log(buildNumber)
-  // console.log(cardDetails, 'cardDetails')
-  // console.log(details)
-
+  // FIXME: тут баг при перезагрузке страницы
   const options = list.filter((el) => el.buildNumber == buildNumber)
-  // console.log(options)
   return (
     <div className="layout layout_v-ratio_1-full-1">
       <Header className={{ distribute: 'between' }} />
