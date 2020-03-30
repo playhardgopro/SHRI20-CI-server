@@ -108,12 +108,12 @@ const Card = ({ children, className, options, onClick, match }) => {
           <div className="list__item meta meta_m-distribute_vertical">
             <div className="meta__item">
               <div className="icon-box">
-                <div className="icon icon-box__icon icon-box__icon_size_m icon-box__icon_indent-r_4 text text_view_ghost">
+                <span className="icon icon-box__icon icon-box__icon_size_m icon-box__icon_indent-r_4 text text_view_ghost">
                   <Icon name="commit" />
-                </div>
-                <div className="icon-box__content text text_size_13-16">
-                  {branchName}
-                  <a className="text text_view_ghost">{commitHash.slice(0, 7)}</a>
+                </span>
+                <div className="icon-box__content text_size_13-16">
+                  <span className="text ">{branchName}</span>
+                  <span className="text text_view_ghost">{commitHash.slice(0, 7)}</span>
                 </div>
               </div>
             </div>
