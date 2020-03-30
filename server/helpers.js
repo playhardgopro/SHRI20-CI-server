@@ -90,7 +90,7 @@ async function buildFinish(buildObject) {
   }
   // console.log(finishLog);
   await sleep(randomDuration)
-  await console.log('Build has been finished')
+  await console.log('Build has been finished with status', finishLog.success)
   await axios
     .post('/build/finish', finishLog)
     .then(() => console.log('Build logs have been posted'))

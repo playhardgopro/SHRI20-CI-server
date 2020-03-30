@@ -37,11 +37,15 @@ router.post('/:commitHash', (req, res) => {
     })
     .then((resolve) => helpers.getCommitInfo(commitHash, resolve))
     .then((commitInfo) => axios.post('/build/request', commitInfo))
+    .then((response) => {
+      console.log(response.data.data, 'response on commitHash')
+      res.send(response.data.data)
+    })
     .catch((e) => {
       console.error(e, 'post commit hash')
     })
 
-  res.send(commitHash)
+  // res.send(commitHash)
 })
 // NOTE: получаем информацию о конкретной сборке
 router.get('/:buildId', (req, res) => {

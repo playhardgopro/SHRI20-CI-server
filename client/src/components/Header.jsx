@@ -9,17 +9,24 @@ import './scss/Header.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Header = ({ children, className, page, runBuild }) => {
+const Header = ({ children, className, page, runBuild, settings }) => {
   const [isModalShown, setIsModalShown] = useState(false)
   const cnHeader = cn('header')
-  const cnHeaderContent = cn('header', 'content')
-  const cnHeaderTitle = cn('header', 'title')
+  let headerStyle = {}
+  let headerText = ''
+  if (page === 'settings' || page === 'home') {
+    headerStyle = { type: 'h1', size: '24-28', view: 'ghost' }
+    headerText = 'School CI Server'
+  } else if (page === 'history') {
+    headerStyle = { type: 'h1', size: '24-30' }
+    headerText = settings.repoName
+  }
 
   return (
     <div className={cnHeader()}>
       <div className={cnHeader('content', { distribute: 'between' })}>
         <div className={cnHeader('title')}>
-          <Text className={{ type: 'h1', size: '24-28', view: 'ghost' }}>School CI Server</Text>
+          <Text className={headerStyle}>{headerText}</Text>
         </div>
         <div className={cnHeader('controls')}>
           <LinkButton
@@ -74,6 +81,7 @@ Header.defaultProps = {
 function mapStateToProps(state) {
   return {
     historyPage: state.history,
+    settings: state.settings,
   }
 }
 

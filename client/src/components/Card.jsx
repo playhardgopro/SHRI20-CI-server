@@ -4,9 +4,11 @@ import { withNaming } from '@bem-react/classname'
 import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router-dom'
 import Moment from 'react-moment'
-import 'moment/locale/ru'
+// import 'moment/locale/ru'
 import { IconBox, Icon } from '.'
 import './scss/Card.scss'
+
+const prettyMilliseconds = require('pretty-ms')
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
@@ -73,7 +75,7 @@ const Card = ({ children, className, options, onClick }) => {
                 </div>
               </div>
               <div className="">
-                <Moment format="D MMM, HH:mm" locale="ru" local>
+                <Moment format="D MMM, HH:mm" local>
                   {start}
                 </Moment>
               </div>
@@ -90,7 +92,7 @@ const Card = ({ children, className, options, onClick }) => {
                   </div>
                 </div>
                 <div className="text text_size_13-16 text_view_ghost">
-                  <Moment duration={start} date={start + duration} locale="ru" local />
+                  {prettyMilliseconds(duration, { compact: true })}
                 </div>
               </div>
             )}

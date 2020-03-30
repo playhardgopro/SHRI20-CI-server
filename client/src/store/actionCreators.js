@@ -67,7 +67,8 @@ export function runBuild(commitHash) {
         .then((response) => {
           if (response.status === 200) {
             // dispatch(isLoading(false))
-            console.log(response, 'response on run build')
+
+            console.log(response.data, 'response on run build')
           }
         })
         // .then((json) => dispatch(saveSettings(json.data)))

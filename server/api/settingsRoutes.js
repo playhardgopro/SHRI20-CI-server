@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
     })
     .catch((e) => e.code, 'get settings error')
 })
-router.post('/' /*, validate({ body: schemas.settings })*/, (req, res) => {
+router.post('/', validate({ body: schemas.settings }), (req, res) => {
   // NOTE: сохранение настроек и скачивание репозитория
   const settings = req.body
   console.log(settings, 'received settings')

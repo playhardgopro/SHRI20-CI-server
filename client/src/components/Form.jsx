@@ -2,7 +2,7 @@
 import React, { useState, Component } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { saveSettings, getSettings, postSettings ,isLoading} from '../store/actionCreators'
 import { useHistory } from 'react-router-dom'
@@ -55,15 +55,17 @@ const FormControls = (ctx) => {
     ctx.props.isLoading(true)
     ctx.props.saveSettings({...ctx.state})
     ctx.props.postSettings({...ctx.state})
+    console.log(ctx.props.history)
+  }
 
-    // history.push('/')
-    // return <Redirect to="/" />
+  const handleCancel = () => {
+    ctx.props.history.goBack()
   }
 
   return (
     <div className="form__controls">
       <Button className={{ size: 'm', view: 'action' }} onClick={handleSave} disabled={ctx.props.settings.isLoading}>Save</Button>
-      <Button className={{ size: 'm', view: 'control' }} disabled={ctx.props.settings.isLoading}>Cancel</Button>
+      <Button className={{ size: 'm', view: 'control' }} onClick={handleCancel} disabled={ctx.props.settings.isLoading}>Cancel</Button>
       {/* <LinkButton to="/" className={{ size: 'm', view: 'action' }}>Get</LinkButton> */}
     </div>
   )
@@ -79,7 +81,10 @@ const Inputs = (ctx) => {
 
 class Form extends Component {
   state = {...this.props.settings}
-
+  
+  componentDidMount(){
+  console.log(this.props, 'foooorm')
+  }
 
   handleChange = (id, val) => {
     this.setState({[id]:val })
@@ -121,4 +126,4 @@ Form.defaultProps = {
   className: {},
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Form))
