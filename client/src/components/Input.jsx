@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { connect } from 'react-redux'
@@ -14,6 +14,13 @@ const cnText = cn('text')
 const Input = ({ children, className, options, change, settings }) => {
   const { placeholder, label, isRequired, id, vertical, text } = options
   const [value, setValue] = useState(settings[id])
+  const [invalid, setInvalid] = useState(false)
+  const [valid, setValid] = useState(false)
+
+  useEffect(() => {
+    isRequired && value === '' ? setInvalid(true) : setInvalid(false)
+    isRequired && !invalid ? setValid(true) : setValid(false)
+  })
   const inputClass = { size: 'm', width: text ? 52 : 'full' }
   const handleClear = () => {
     setValue('')
@@ -31,7 +38,7 @@ const Input = ({ children, className, options, change, settings }) => {
             change(id, e.target.value)
             setValue(e.target.value)
           }}
-          className={cnInput(inputClass, [cnText({ size: '13-15' })])}
+          className={cnInput({ ...inputClass, invalid, valid }, [cnText({ size: '13-15' })])}
           id={id}
           type="text"
           placeholder={placeholder}

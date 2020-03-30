@@ -32,6 +32,7 @@
 
 .button_view_control:hover {
   background-color: var(--color-bg-control-hovered);
+  cursor: pointer;
 }
 
 .button_view_control:focus:after {

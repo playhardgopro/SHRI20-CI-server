@@ -18,6 +18,12 @@
   color: var(--color-bg-border-focused);
 }
 
+.input.input_invalid {
+  border: 2px solid var(--color-bg-invalid);
+}
+.input.input_valid {
+  border: 2px solid var(--color-bg-valid);
+}
 .input_size_m {
   height: var(--text-line-height-36);
   padding-right: var(--space-13);
@@ -93,8 +99,15 @@
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 0;
 }
-.input:focus .input__controls-append .button::after {
-  border: 2px solid var(--color-bg-border-focused);
+
+.input.input_invalid + .input__controls-append .button:after {
+  border: 2px solid var(--color-bg-invalid);
+  border-left: 0;
+}
+
+.input.input_valid + .input__controls-append .button:after {
+  border: 2px solid var(--color-bg-valid);
+  border-left: 0;
 }
 
 .input__group > .input:not(:last-child) {
