@@ -9,15 +9,16 @@ import './scss/Header.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Header = ({ children, className, page, runBuild, settings }) => {
+const Header = ({ children, className, runBuild, settings, location }) => {
   const [isModalShown, setIsModalShown] = useState(false)
   const cnHeader = cn('header')
+  console.log(location, 'location')
   let headerStyle = {}
   let headerText = ''
-  if (page === 'settings' || page === 'home') {
+  if (location.pathname === '/settings' || location.pathname === '/') {
     headerStyle = { type: 'h1', size: '24-28', view: 'ghost' }
     headerText = 'School CI Server'
-  } else if (page === 'history') {
+  } else if (location.pathname === '/history') {
     headerStyle = { type: 'h1', size: '24-30' }
     headerText = settings.repoName
   }
