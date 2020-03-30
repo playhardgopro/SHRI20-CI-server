@@ -18,7 +18,7 @@ const Input = ({ children, className, options, change, settings }) => {
   const [valid, setValid] = useState(false)
 
   useEffect(() => {
-    isRequired && value === '' ? setInvalid(true) : setInvalid(false)
+    isRequired && (value === '' || value === undefined) ? setInvalid(true) : setInvalid(false)
     isRequired && !invalid ? setValid(true) : setValid(false)
   })
   const inputClass = { size: 'm', width: text ? 52 : 'full' }
