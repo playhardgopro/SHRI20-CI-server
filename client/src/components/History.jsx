@@ -15,7 +15,11 @@ const grid = {
   },
 }
 
-const History = ({ getBuildList }) => {
+const History = ({ getBuildList, list }) => {
+  useEffect(() => {
+    // getBuildList()
+  }, [list])
+
   return (
     <div className="layout">
       <Header className={{ distribute: 'between' }} />
@@ -32,6 +36,7 @@ const History = ({ getBuildList }) => {
 function mapStateToProps(state) {
   return {
     historyPage: state.history,
+    list: state.history.buildList,
   }
 }
 

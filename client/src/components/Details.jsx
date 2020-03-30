@@ -18,6 +18,7 @@ const grid = {
 
 const Details = ({ match, location, history, list, getBuildList, details }) => {
   const { buildNumber } = match.params
+  useEffect(() => {}, [list])
   // FIXME: тут баг при перезагрузке страницы
   const options = list.filter((el) => el.buildNumber == buildNumber)
   return (

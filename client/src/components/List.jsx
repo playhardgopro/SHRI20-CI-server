@@ -17,7 +17,7 @@ class List extends Component {
   }
 
   componentWillMount() {
-    this.props.getBuildList()
+    // this.props.getBuildList()
   }
  
   handleClick = (event, buildNumber, buildId) => {
