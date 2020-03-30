@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router-dom'
-import { getBuildList } from '../store/actionCreators'
+import { getBuildList, getDetailsByBuildId } from '../store/actionCreators'
 import { Card, Modal } from '.'
 import './scss/List.scss'
 
@@ -16,12 +16,13 @@ class List extends Component {
     this.state = {}
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getBuildList()
   }
+ 
 
-  handleClick = (event, buildNumber) => {
-    console.log(buildNumber, 'click')
+  handleClick = (event, buildNumber, buildId) => {
+    this.props.getDetailsByBuildId(buildId)
     this.props.history.push(`build/${buildNumber}`)
   }
 
@@ -57,7 +58,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  getBuildList,
+  getBuildList, getDetailsByBuildId
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(List))

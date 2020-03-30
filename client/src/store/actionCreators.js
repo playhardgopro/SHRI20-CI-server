@@ -22,6 +22,14 @@ export function saveBuildList(list) {
   }
 }
 
+export function saveDetailsByBuildId(payload) {
+  // console.log(payload, 'caching')
+  return {
+    type: 'SAVE_BUILD_DETAILS',
+    payload,
+  }
+}
+
 export function isLoading(payload) {
   console.log(payload, 'loading')
   return {
@@ -80,6 +88,48 @@ export function runBuild(commitHash) {
   }
 }
 
+// export function rebuildByCommitHash(commitHash) {
+//   // console.log(settings, 'settings')
+//   return function (dispatch) {
+//     return (
+//       axios
+//         .get(`http://localhost:3001/api/builds/${buildId}`)
+//         .then((response) => {
+//           if (response.status === 200) {
+//             dispatch(saveDetailsByBuildId(response.data))
+//             console.log(response.data, 'response details build')
+//           }
+//         })
+//         // .then((json) => dispatch(saveSettings(json.data)))
+//         .catch((e) => {
+//           console.error(e)
+//           // dispatch(isCached(false))
+//         })
+//     )
+//   }
+// }
+
+export function getDetailsByBuildId(buildId) {
+  // console.log(settings, 'settings')
+  return function (dispatch) {
+    return (
+      axios
+        .get(`http://localhost:3001/api/builds/${buildId}`)
+        .then((response) => {
+          if (response.status === 200) {
+            dispatch(saveDetailsByBuildId(response.data))
+            console.log(response.data, 'response details build')
+          }
+        })
+        // .then((json) => dispatch(saveSettings(json.data)))
+        .catch((e) => {
+          console.error(e)
+          // dispatch(isCached(false))
+        })
+    )
+  }
+}
+
 export function getBuildList() {
   // console.log(settings, 'settings')
   return function (dispatch) {
@@ -101,7 +151,7 @@ export function getBuildList() {
   }
 }
 
-export function getSettings(settings) {
+export function getSettings() {
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.

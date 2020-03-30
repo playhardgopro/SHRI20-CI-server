@@ -13,7 +13,8 @@ const prettyMilliseconds = require('pretty-ms')
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
 const Card = ({ children, className, options, onClick }) => {
-  const { buildNumber, commitMessage, commitHash, branchName, authorName, start, duration, status } = options
+  const { id, buildNumber, commitMessage, commitHash, branchName, authorName, start, duration, status } = options
+  // console.log(options, 'options')
   let viewStatus = ''
   if (status === 'Success') viewStatus = 'success'
   if (status === 'Waiting' || status === 'InProgress' || status === '') viewStatus = 'warning'
@@ -22,7 +23,7 @@ const Card = ({ children, className, options, onClick }) => {
   const cnCard = cn('card')(className)
   const cnText = cn('text')
   return (
-    <div onClick={onClick && ((e) => onClick(e, buildNumber))} className="card">
+    <div onClick={onClick && ((e) => onClick(e, buildNumber, id))} className="card">
       <div className="card__token">
         <IconBox textStyle={{ view: viewStatus }}>
           <Icon name={viewStatus} />

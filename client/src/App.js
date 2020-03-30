@@ -5,9 +5,9 @@ import { saveSettings, getSettings, getBuildList } from './store/actionCreators'
 import { Home, Settings, History, Details } from './components'
 
 class App extends PureComponent {
-  componentWillMount(props) {
-    this.props.getSettings({ ...this.state })
-    // this.props.getBuildList({ ...this.state })
+  componentWillMount() {
+    this.props.getSettings()
+    this.props.getBuildList()
   }
 
   render() {
@@ -16,18 +16,14 @@ class App extends PureComponent {
     return (
       <Switch>
         <Route
-          state={this.state}
           history={history}
           exact
           path="/"
-          render={(props) => {
+          render={() => {
             return this.props.settings.isCached ? <Redirect to="/history" /> : <Home />
           }}
-        >
-          {/* {this.props.settings.isCached && <Redirect to="/history" />}
-          <Home /> */}
-        </Route>
-        <Route history={history} exact path="/settings" component={Settings} />
+        />
+        <Route olololist={{ qwerty: 'true' }} history={history} exact path="/settings" component={Settings} />
         <Route history={history} exact path="/history" component={History} />
         <Route history={history} exact path="/build/:buildNumber" component={Details} />
       </Switch>
@@ -43,6 +39,7 @@ const mapDispatchToProps = {
 function mapStateToProps(state) {
   return {
     settings: state.settings,
+    historyPage: state.history,
   }
 }
 

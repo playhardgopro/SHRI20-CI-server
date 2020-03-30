@@ -7,13 +7,20 @@ import './scss/Button.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const LinkButton = ({ children, className, to, disabled, icon }) => {
+const LinkButton = ({ children, className, to, disabled, icon, hideText }) => {
   const history = useHistory()
   function handleClick() {
     history.push(to)
   }
   return (
-    <Button type="button" hide="true" icon={icon} className={className} onClick={handleClick} disabled={disabled}>
+    <Button
+      type="button"
+      hideText={hideText}
+      icon={icon}
+      className={className}
+      onClick={handleClick}
+      disabled={disabled}
+    >
       {children}
     </Button>
 

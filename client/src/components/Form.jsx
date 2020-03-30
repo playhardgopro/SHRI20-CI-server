@@ -26,7 +26,7 @@ const options = [
     label: 'Build command',
     placeholder: 'npm run build',
     id: 'buildCommand',
-    isRequired: false,
+    isRequired: true,
     vertical: true,
   },
   {

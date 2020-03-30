@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router-dom'
 import { getBuildList } from '../store/actionCreators'
@@ -16,16 +16,18 @@ const grid = {
   },
 }
 
-const Details = ({ match, location, history, list, getBuildList }) => {
+const Details = ({ match, location, history, list, getBuildList, details }) => {
   const { buildNumber } = match.params
-  // useEffect(() => {
-  //   getBuildList()
-  // })
-  console.log(buildNumber)
-  console.log(list)
+  console.log(location)
+  console.log(match)
+
+  // const [cardDetails, setCardDetails] = useState(details)
+  // console.log(buildNumber)
+  // console.log(cardDetails, 'cardDetails')
+  // console.log(details)
 
   const options = list.filter((el) => el.buildNumber == buildNumber)
-  console.log(options)
+  // console.log(options)
   return (
     <div className="layout layout_v-ratio_1-full-1">
       <Header className={{ distribute: 'between' }} />
@@ -33,7 +35,12 @@ const Details = ({ match, location, history, list, getBuildList }) => {
         {/* <Grid className={grid}> */}
         <div className="list">
           <div className="list__item">
-            <Card options={options[0]} />
+            <Card
+              options={options[0]}
+              onClick={() => {
+                history.push('/history')
+              }}
+            />
           </div>
         </div>
 
@@ -47,6 +54,7 @@ const Details = ({ match, location, history, list, getBuildList }) => {
 function mapStateToProps(state) {
   return {
     list: state.history.buildList,
+    details: state.build,
   }
 }
 

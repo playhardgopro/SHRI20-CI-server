@@ -36,7 +36,16 @@ function historyReducer(state = initialState, action) {
   }
 }
 
-const reducers = combineReducers({ settings: settingsReducer, history: historyReducer })
+function buildReducer(state = initialState, action) {
+  switch (action.type) {
+    case 'SAVE_BUILD_DETAILS':
+      return { ...action.payload }
+    default:
+      return state
+  }
+}
+
+const reducers = combineReducers({ settings: settingsReducer, history: historyReducer, build: buildReducer })
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))

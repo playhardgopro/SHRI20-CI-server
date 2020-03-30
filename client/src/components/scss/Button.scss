@@ -70,6 +70,10 @@
   border-radius: 4px;
 }
 
+.button.button_hidden {
+  display: none;
+}
+
 .button:last-child {
   margin-right: 0;
 }
