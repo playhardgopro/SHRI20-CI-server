@@ -16,10 +16,6 @@ const grid = {
 }
 
 const History = ({ getBuildList }) => {
-  // useEffect(() => {
-  //   getBuildList()
-  // }, [])
-
   return (
     <div className="layout layout_v-ratio_1-full-1">
       <Header className={{ distribute: 'between' }} />

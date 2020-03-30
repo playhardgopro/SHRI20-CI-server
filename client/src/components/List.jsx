@@ -16,11 +16,13 @@ class List extends Component {
     this.state = {}
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.getBuildList()
   }
+  // componentDidMount(){
+  //   this.setState({list: this.props.historyPage.buildList})
+  // }
  
-
   handleClick = (event, buildNumber, buildId) => {
     this.props.getDetailsByBuildId(buildId)
     this.props.history.push(`build/${buildNumber}`)

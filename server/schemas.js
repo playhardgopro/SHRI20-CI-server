@@ -15,7 +15,7 @@ const settings = {
       type: 'number',
     },
   },
-  additionalProperties: true,
+  additionalProperties: false,
 }
 module.exports = {
   settings,

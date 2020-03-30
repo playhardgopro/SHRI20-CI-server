@@ -45,8 +45,14 @@ export function isCached(payload) {
   }
 }
 
-export function postSettings(settings) {
+export function postSettings(payload) {
   // console.log(settings, 'settings')
+  const settings = {
+    repoName: payload.repoName,
+    buildCommand: payload.buildCommand,
+    mainBranch: payload.mainBranch,
+    period: +payload.period,
+  }
   return function (dispatch) {
     return (
       axios
@@ -179,8 +185,14 @@ export function getSettings() {
         //   // https://github.com/facebook/react/issues/6895
         //   (error) => console.log('An error occurred.', error)
         // )
-        .then((json) => dispatch(saveSettings(json.data)))
-        .then(() => dispatch(isCached(true)))
+        .then((json) => {
+          if (json.status === 200 && json.data != '') {
+            dispatch(saveSettings(json.data))
+            dispatch(isCached(true))
+          } else {
+            dispatch(isCached(false))
+          }
+        })
         .catch((e) => {
           console.error(e)
           dispatch(isCached(false))
