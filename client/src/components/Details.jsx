@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router-dom'
-import { getBuildList } from '../store/actionCreators'
+import { getBuildList, saveDetailsByBuildId } from '../store/actionCreators'
 import { Footer, Header, Layout, Grid, Card, Log } from '.'
 
 // import './scss/Layout.scss'
@@ -16,11 +16,14 @@ const grid = {
   },
 }
 
-const Details = ({ match, location, history, list, getBuildList, details }) => {
+const Details = ({ match, history, buildList, details, saveDetailsByBuildId, getBuildList }) => {
   const { buildNumber } = match.params
-  useEffect(() => {}, [list])
-  // FIXME: тут баг при перезагрузке страницы
-  const options = list.filter((el) => el.buildNumber == buildNumber)
+  useEffect(() => {
+    getBuildList()
+  }, [buildNumber])
+  const options = buildList ? buildList.filter((el) => el.buildNumber == buildNumber) : []
+  const filteredOptions = options.length ? options : null
+
   return (
     <div className="layout">
       <Header className={{ distribute: 'between' }} />
@@ -28,12 +31,14 @@ const Details = ({ match, location, history, list, getBuildList, details }) => {
         {/* <Grid className={grid}> */}
         <div className="list">
           <div className="list__item">
-            <Card
-              options={options[0]}
-              onClick={() => {
-                history.push('/history')
-              }}
-            />
+            {filteredOptions && (
+              <Card
+                options={filteredOptions[0]}
+                onClick={() => {
+                  history.push('/history')
+                }}
+              />
+            )}
           </div>
         </div>
 
@@ -46,13 +51,14 @@ const Details = ({ match, location, history, list, getBuildList, details }) => {
 }
 function mapStateToProps(state) {
   return {
-    list: state.history.buildList,
+    buildList: state.history.buildList,
     details: state.build,
   }
 }
 
 const mapDispatchToProps = {
   getBuildList,
+  saveDetailsByBuildId,
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Details))

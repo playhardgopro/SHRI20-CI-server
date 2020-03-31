@@ -9,7 +9,7 @@ import './scss/Header.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Header = ({ children, runBuild, settings, match, currentBuild, history, historyPage }) => {
+const Header = ({ children, runBuild, settings, match, currentBuild, history, buildList }) => {
   const [isModalShown, setIsModalShown] = useState(false)
   const cnHeader = cn('header')
   const header = { style: {}, text: '' }
@@ -52,8 +52,9 @@ const Header = ({ children, runBuild, settings, match, currentBuild, history, hi
           <Button
             icon={{ name: 'rebuild', size: 's' }}
             onClick={() => {
-              runBuild(currentBuild.commitHash)
-              history.push(`/build/${historyPage.buildList[0].buildNumber}`)
+              runBuild(buildList[0].commitHash).then((response) => {
+                history.push(`/build/${response.buildNumber}`)
+              })
             }}
             className={{ size: 's', distribute: 'center', view_control: true, hidden: hiddenBtn.rebuild }}
             hideText
@@ -114,7 +115,7 @@ Header.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    historyPage: state.history,
+    buildList: state.history.buildList,
     settings: state.settings,
     currentBuild: state.build,
   }

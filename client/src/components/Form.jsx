@@ -54,8 +54,10 @@ const FormControls = (ctx) => {
 
   const handleSave = () => {
     ctx.props.isLoading(true)
-    ctx.props.saveSettings({...ctx.state})
-    ctx.props.postSettings({...ctx.state})
+    ctx.props.postSettings({...ctx.state}).then(()=>{
+      ctx.props.history.push('/history')
+    })
+    // ctx.props.history.push('/history')
   }
 
   const handleCancel = () => {

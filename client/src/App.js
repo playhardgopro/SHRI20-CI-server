@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { saveSettings, getSettings, getBuildList } from './store/actionCreators'
 import { Home, Settings, History, Details } from './components'
 
-class App extends PureComponent {
+class App extends Component {
   componentDidMount() {
     this.props.getSettings()
     this.props.getBuildList()

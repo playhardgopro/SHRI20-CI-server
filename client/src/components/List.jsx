@@ -15,10 +15,6 @@ class List extends Component {
     super(props)
     this.state = {}
   }
-
-  componentWillMount() {
-    // this.props.getBuildList()
-  }
  
   handleClick = (event, buildNumber, buildId) => {
     this.props.getDetailsByBuildId(buildId)
@@ -29,9 +25,9 @@ class List extends Component {
 
     return (
       <ul className={cnList()}>
-        {this.props.historyPage.buildList &&
-          this.props.historyPage.buildList.map((el) => {
-            return (<li  key={el.buildNumber} className={cnList('item')}><Card options={el} onClick={this.handleClick} /></li>)
+        {this.props.buildList &&
+          this.props.buildList.map((el) => {
+            return (<li key={el.buildNumber} className={cnList('item')}><Card options={el} onClick={this.handleClick} /></li>)
           })}
       </ul>
       
@@ -49,7 +45,7 @@ List.defaultProps = {
 }
 function mapStateToProps(state) {
   return {
-    historyPage: state.history,
+    buildList: state.history.buildList,
   }
 }
 

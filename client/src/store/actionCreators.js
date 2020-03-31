@@ -14,7 +14,7 @@ export function saveSettings(payload) {
 }
 
 export function saveBuildList(list) {
-  console.log(list, 'build list')
+  // console.log(list, 'build list')
   return {
     type: 'SAVE_BUILD_LIST',
     list,
@@ -53,35 +53,29 @@ export function postSettings(payload) {
     period: +payload.period,
   }
   return function (dispatch) {
-    return (
-      axios
-        .post('http://localhost:3001/api/settings', settings)
-        .then((response) => {
-          if (response.status === 200 && response.data.saveSettings === 'done') {
-            dispatch(isLoading(false))
-            // console.log(response, 'response')
-          }
-        })
-        // .then((json) => dispatch(saveSettings(json.data)))
-        .catch((e) => {
-          console.error(e)
-          dispatch(isCached(false))
-        })
-    )
+    return axios
+      .post('http://localhost:3001/api/settings', settings)
+      .then((response) => {
+        if (response.status === 200 && response.data.saveSettings === 'done') {
+          dispatch(isLoading(false))
+          console.log(response.data)
+        }
+      })
+      .catch((e) => {
+        console.error(e)
+        dispatch(isCached(false))
+      })
   }
 }
 
 export function runBuild(commitHash) {
-  // console.log(settings, 'settings')
   return function (dispatch) {
     return (
       axios
         .post(`http://localhost:3001/api/builds/${commitHash}`)
         .then((response) => {
           if (response.status === 200) {
-            // dispatch(isLoading(false))
-
-            console.log(response.data, 'response on run build')
+            return response.data
           }
         })
         // .then((json) => dispatch(saveSettings(json.data)))
