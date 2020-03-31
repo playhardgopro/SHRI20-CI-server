@@ -43,6 +43,7 @@ const options = [
     isRequired: false,
     vertical: false,
     text: true,
+    numberMask: true
   },
 ]
 

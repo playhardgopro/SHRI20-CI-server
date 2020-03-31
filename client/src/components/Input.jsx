@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { connect } from 'react-redux'
+import MaskedInput from 'react-text-mask'
 import { saveSettings } from '../store/actionCreators'
 import { Text, Icon, Button } from '.'
 import './scss/Input.scss'
@@ -11,8 +12,27 @@ const cnInput = cn('input')
 const textStyle = { size: '13-18', type: 'h2' }
 const cnText = cn('text')
 
+const Masked = ({ value, setValue, change, valid, invalid, inputClass, placeholder, id }) => {
+  return (
+    <MaskedInput
+      mask={[/\d/, /\d/, /\d/]}
+      defaultValue={value}
+      value={value}
+      onChange={(e) => {
+        change(id, e.target.value)
+        setValue(e.target.value)
+      }}
+      className={cnInput({ ...inputClass, invalid, valid }, [cnText({ size: '13-15' })])}
+      id={id}
+      type="text"
+      placeholder={placeholder}
+      guide={false}
+    />
+  )
+}
+
 const Input = ({ children, className, options, change, settings }) => {
-  const { placeholder, label, isRequired, id, vertical, text } = options
+  const { placeholder, label, isRequired, id, vertical, text, numberMask } = options
   const [value, setValue] = useState(settings[id])
   const [invalid, setInvalid] = useState(false)
   const [valid, setValid] = useState(false)
@@ -36,18 +56,21 @@ const Input = ({ children, className, options, change, settings }) => {
         <Text className={textStyle}>{label}</Text>
       </label>
       <div className={cnInput('controls')}>
-        <input
-          defaultValue={value}
-          value={value}
-          onChange={(e) => {
-            change(id, e.target.value)
-            setValue(e.target.value)
-          }}
-          className={cnInput({ ...inputClass, invalid, valid }, [cnText({ size: '13-15' })])}
-          id={id}
-          type="text"
-          placeholder={placeholder}
-        />
+        {!numberMask && (
+          <input
+            defaultValue={value}
+            value={value}
+            onChange={(e) => {
+              change(id, e.target.value)
+              setValue(e.target.value)
+            }}
+            className={cnInput({ ...inputClass, invalid, valid }, [cnText({ size: '13-15' })])}
+            id={id}
+            type="text"
+            placeholder={placeholder}
+          />
+        )}
+        {numberMask && Masked({ ...options, valid, invalid, value, setValue, inputClass, change })}
         <div className={cnInput('controls-append')}>
           {text ? (
             <Text className={{ size: '13-18' }}>minutes</Text>
