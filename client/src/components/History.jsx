@@ -16,10 +16,6 @@ const grid = {
 }
 
 const History = ({ getBuildList, list }) => {
-  useEffect(() => {
-    // getBuildList()
-  }, [list])
-
   return (
     <div className="layout">
       <Header className={{ distribute: 'between' }} />
