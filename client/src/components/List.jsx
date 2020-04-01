@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { connect } from 'react-redux'
-import { withRouter, Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { getBuildList, getDetailsByBuildId } from '../store/actionCreators'
-import { Card, Modal } from '.'
+import { Card, Button } from '.'
 import './scss/List.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
@@ -13,33 +13,43 @@ const cnList = cn('list')
 class List extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = { showButton: true }
   }
- 
+
   handleClick = (event, buildNumber, buildId) => {
-    this.props.getDetailsByBuildId(buildId)
-    this.props.history.push(`build/${buildNumber}`)
+    const { getDetailsByBuildId, history } = this.props
+    getDetailsByBuildId(buildId)
+    history.push(`build/${buildNumber}`)
   }
+
   handleShowMore = () => {
-    const currentAmount = this.props.buildList.length || 0
-    this.props.getBuildList(currentAmount + 10)
+    const { getBuildList, buildList } = this.props
+    const currentAmount = buildList.length || 0
+    getBuildList(currentAmount + 10)
   }
 
   render() {
+    const { buildList } = this.props
+    const { showButton } = this.state
 
     return (
       <ul className={cnList()}>
-        {this.props.buildList &&
-          this.props.buildList.map((el) => {
-            return (<li key={el.buildNumber} className={cnList('item')}><Card options={el} onClick={this.handleClick} /></li>)
+        {buildList &&
+          buildList.map((el) => {
+            return (
+              <li key={el.buildNumber} className={cnList('item')}>
+                <Card options={el} onClick={this.handleClick} />
+              </li>
+            )
           })}
-          <div class="list__controls">
-          <button class="button button_size_m button_view_control" onClick={this.handleShowMore}>
-            <div class="button__text">Show more</div>
-          </button>
+        <div className={cnList('controls')}>
+          {showButton && (
+            <Button className={{ size: 'm', view: 'control' }} onClick={this.handleShowMore}>
+              Show more
+            </Button>
+          )}
         </div>
       </ul>
-      
     )
   }
 }
@@ -59,7 +69,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  getBuildList, getDetailsByBuildId
+  getBuildList,
+  getDetailsByBuildId,
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(List))
