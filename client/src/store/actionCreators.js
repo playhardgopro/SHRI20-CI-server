@@ -29,6 +29,14 @@ export function saveDetailsByBuildId(payload) {
   }
 }
 
+export function saveError(payload) {
+  // console.log(payload, 'caching')
+  return {
+    type: 'SAVE_ERROR',
+    payload,
+  }
+}
+
 export function isLoading(payload) {
   console.log(payload, 'loading')
   return {
@@ -53,12 +61,15 @@ export function postSettings(payload) {
     period: +payload.period,
   }
   return function (dispatch) {
+    dispatch(isLoading(true))
     return axios
       .post('http://localhost:3001/api/settings', settings)
       .then((response) => {
         if (response.status === 200 && response.data.saveSettings === 'done') {
           dispatch(isLoading(false))
-          console.log(response.data)
+          // console.log(response.data)
+        } else {
+          dispatch(saveError(response.status))
         }
       })
       .catch((e) => {

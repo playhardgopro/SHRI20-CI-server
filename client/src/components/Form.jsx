@@ -5,7 +5,6 @@ import { withNaming } from '@bem-react/classname'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { saveSettings, getSettings, postSettings ,isLoading} from '../store/actionCreators'
-import { useHistory } from 'react-router-dom'
 
 
 import { Input, Button, LinkButton } from '.'
@@ -49,15 +48,10 @@ const options = [
 
 
 const FormControls = (ctx) => {
-  // const history = useHistory()
-  // const [loading, setLoading] = useState(false)
-
   const handleSave = () => {
-    ctx.props.isLoading(true)
     ctx.props.postSettings({...ctx.state}).then(()=>{
       ctx.props.history.push('/history')
     })
-    // ctx.props.history.push('/history')
   }
 
   const handleCancel = () => {
@@ -68,7 +62,6 @@ const FormControls = (ctx) => {
     <div className="form__controls">
       <Button className={{ size: 'm', view: 'action' }} onClick={handleSave} disabled={ctx.props.settings.isLoading}>Save</Button>
       <Button className={{ size: 'm', view: 'control' }} onClick={handleCancel} disabled={ctx.props.settings.isLoading}>Cancel</Button>
-      {/* <LinkButton to="/" className={{ size: 'm', view: 'action' }}>Get</LinkButton> */}
     </div>
   )
 }
@@ -85,7 +78,7 @@ class Form extends Component {
   state = {...this.props.settings}
   
   handleChange = (id, val) => {
-    this.setState({[id]:val })
+    this.setState({ [id]:val })
   }
 
     render() {

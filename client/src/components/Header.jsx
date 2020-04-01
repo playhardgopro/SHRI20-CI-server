@@ -94,7 +94,9 @@ const Header = ({ children, runBuild, settings, match, currentBuild, history, bu
       {isModalShown && (
         <Modal
           onSubmit={(e, inputValue) => {
-            runBuild(inputValue)
+            runBuild(inputValue).then((response) => {
+              history.push(`/build/${response.buildNumber}`)
+            })
             setIsModalShown(false)
           }}
           onCancel={() => setIsModalShown(false)}
