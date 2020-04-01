@@ -67,7 +67,7 @@ export function postSettings(payload) {
       .then((response) => {
         if (response.status === 200 && response.data.saveSettings === 'done') {
           dispatch(isLoading(false))
-          console.log(response.data)
+          // console.log(response.data)
           return { success: true }
         }
         dispatch(saveError({ postSettings: response.status }))
@@ -109,7 +109,7 @@ export function getDetailsByBuildId(buildId) {
         .then((response) => {
           if (response.status === 200) {
             dispatch(saveDetailsByBuildId(response.data))
-            console.log(response.data, 'response details build')
+            // console.log(response.data, 'response details build')
           }
         })
         // .then((json) => dispatch(saveSettings(json.data)))

@@ -51,6 +51,7 @@ const FormControls = (ctx) => {
   const handleSave = () => {
     ctx.props.postSettings({...ctx.state}).then((resolve)=>{
       if (resolve.success) {
+        ctx.props.saveSettings({...ctx.state})
         ctx.props.history.push('/history')
       } else {
         ctx.props.isLoading(false)

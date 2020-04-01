@@ -4,7 +4,7 @@ import { withNaming } from '@bem-react/classname'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { runBuild } from '../store/actionCreators'
-import { LinkButton, Text, Button, Modal } from '.'
+import { Text, Button, Modal } from '.'
 import './scss/Header.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
@@ -13,7 +13,7 @@ const Header = ({ children, runBuild, settings, match, currentBuild, history, bu
   const [isModalShown, setIsModalShown] = useState(false)
   const cnHeader = cn('header')
   const header = { style: {}, text: '' }
-  const hiddenBtn = { settings: true, runBuild: true, home: true, rebuild: true }
+  const hiddenBtn = { settings: true, runBuild: true, rebuild: true }
 
   switch (match.path) {
     case '/settings':
@@ -71,23 +71,16 @@ const Header = ({ children, runBuild, settings, match, currentBuild, history, bu
           >
             Run Build
           </Button>
-          <LinkButton
+          <Button
             icon={{ name: 'settings', size: 's' }}
-            to="/settings"
+            onClick={() => {
+              history.push('/settings')
+            }}
             className={{ size: 's', distribute: 'center', view_control: true, hidden: hiddenBtn.settings }}
             hideText
           >
             Settings
-          </LinkButton>
-          <LinkButton
-            icon={{ name: 'settings', size: 's' }}
-            to="/"
-            className={{ size: 's', distribute: 'center', view_control: true, hidden: hiddenBtn.home }}
-            hideText
-          >
-            Home
-          </LinkButton>
-
+          </Button>
           {children}
         </div>
       </div>

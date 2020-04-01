@@ -2,9 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { connect } from 'react-redux'
-import { withRouter, Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import Moment from 'react-moment'
-// import 'moment/locale/ru'
 import { IconBox, Icon } from '.'
 import './scss/Card.scss'
 
@@ -88,19 +87,21 @@ const Card = ({ children, className, options, onClick, match }) => {
       cardMetaUnder = true
   }
 
-  const cnCard = cn('card')(className)
+  const cnCard = cn('card')
   const cnText = cn('text')
   return (
     <div onClick={onClick && ((e) => onClick(e, buildNumber, id))} className="card">
-      <div className="card__token">
+      <div className={cnCard('token')}>
         <IconBox textStyle={{ view: viewStatus }}>
           <Icon name={viewStatus} />
         </IconBox>
       </div>
-      <div className="card__content">
-        <div className="card__history list">
-          <div className="card__status list__item">
-            <div className={`card__number ${cnText({ size: '18-20', view: viewStatus })}`}>{`#${buildNumber}`}</div>
+      <div className={cnCard('content')}>
+        <div className={cnCard('history', ['list'])}>
+          <div className={cnCard('status', ['list__item'])}>
+            <div
+              className={`${cnCard('number')} ${cnText({ size: '18-20', view: viewStatus })}`}
+            >{`#${buildNumber}`}</div>
             <div className="card__message text text_size_15-20 text_view_truncate">{commitMessage}</div>
           </div>
           <div className="list__item meta meta_m-distribute_vertical">
@@ -110,7 +111,7 @@ const Card = ({ children, className, options, onClick, match }) => {
                   <Icon name="commit" />
                 </span>
                 <div className="icon-box__content text_size_13-16">
-                  <span className="text ">{branchName}</span>
+                  <span className="text">{branchName}</span>
                   <span className="text text_view_ghost">{commitHash.slice(0, 7)}</span>
                 </div>
               </div>
@@ -120,7 +121,7 @@ const Card = ({ children, className, options, onClick, match }) => {
                 <div className="icon-box__icon icon-box__icon_size_m icon-box__icon_indent-r_4 text text_view_ghost">
                   <Icon name="user" className={{ view: 'ghost' }} />
                 </div>
-                <div className="text text_size_13-16">{authorName}</div>
+                <span className="text text_size_13-16">{authorName}</span>
               </div>
             </div>
           </div>

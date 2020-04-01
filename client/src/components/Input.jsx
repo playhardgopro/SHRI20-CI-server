@@ -4,7 +4,7 @@ import { withNaming } from '@bem-react/classname'
 import { connect } from 'react-redux'
 import MaskedInput from 'react-text-mask'
 import { saveSettings } from '../store/actionCreators'
-import { Text, Icon, Button } from '.'
+import { Text, Button } from '.'
 import './scss/Input.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
@@ -75,13 +75,12 @@ const Input = ({ children, className, options, change, settings }) => {
           {text ? (
             <Text className={{ size: '13-18' }}>minutes</Text>
           ) : (
-            <button
-              type="button"
+            <Button
+              className={{ size: 'm', distribute: 'center', view: 'control' }}
+              icon={{ name: 'close', size: 'm' }}
               onClick={handleClear}
-              className="button button_size_m button_distribute_center button_view_control"
-            >
-              <Icon name="close" className={{ size: 'm' }} />
-            </button>
+              empty
+            />
           )}
         </div>
       </div>

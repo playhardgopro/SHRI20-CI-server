@@ -1,12 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { Text, LinkButton } from '.'
+import { useHistory } from 'react-router'
+import { Text, Button } from '.'
 import './scss/Rep-connection.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
 const RepConnection = ({ children, className }) => {
+  const history = useHistory()
   const cnRep = cn('rep-connection')
   return (
     <div className={cnRep()}>
@@ -25,9 +27,14 @@ const RepConnection = ({ children, className }) => {
         </Text>
       </div>
       <div className={cnRep('controls')}>
-        <LinkButton to="./settings" className={{ size: 'm', view: 'action' }}>
+        <Button
+          onClick={() => {
+            history.push('/settings')
+          }}
+          className={{ size: 'm', view: 'action' }}
+        >
           Open Settings
-        </LinkButton>
+        </Button>
       </div>
     </div>
   )
