@@ -1,24 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { withNaming } from '@bem-react/classname'
 import './scss/Footer.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
 const Footer = ({ children, className }) => {
+  const cnFooter = cn('footer')
+  const cnText = cn('text')
   return (
-    <div className="footer">
-      <div className="footer__content">
-        <div className="footer__links">
-          <a href="#">
-            <div className="text text_view_ghost text_size_13-18 text_type_link">Support</div>
-          </a>
-          <a href="#">
-            <div className="text text_view_ghost text_size_13-18 text_type_link">Learning</div>
-          </a>
+    <div className={cnFooter()}>
+      <div className={cnFooter('content')}>
+        <div className={cnFooter('links')}>
+          <Link>
+            <div className={cnText({ size: '13-18', view: 'ghost', type: 'link' })}>Support</div>
+          </Link>
+          <Link>
+            <div className={cnText({ size: '13-18', view: 'ghost', type: 'link' })}>Learning</div>
+          </Link>
         </div>
-        <div className="footer__copyright">
-          <div className="text text text_size_13-18 text_view_ghost">&copy; 2020 Your Name</div>
+        <div className={cnFooter('copyright')}>
+          <div className={cnText({ size: '13-18', view: 'ghost' })}>&copy; 2020 Daniil Egortsev</div>
         </div>
       </div>
     </div>

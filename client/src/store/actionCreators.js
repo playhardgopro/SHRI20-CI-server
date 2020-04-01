@@ -68,13 +68,15 @@ export function postSettings(payload) {
         if (response.status === 200 && response.data.saveSettings === 'done') {
           dispatch(isLoading(false))
           console.log(response.data)
-        } else {
-          dispatch(saveError({ postSettings: response.status }))
+          return { success: true }
         }
+        dispatch(saveError({ postSettings: response.status }))
+        return { success: false }
       })
       .catch((e) => {
         console.error(e)
         dispatch(isCached(false))
+        return { success: false }
       })
   }
 }
@@ -119,7 +121,7 @@ export function getDetailsByBuildId(buildId) {
   }
 }
 
-export function getBuildList(limit, offset) {
+export function getBuildList(limit = 15, offset) {
   // console.log(settings, 'settings')
   return function (dispatch) {
     return (
@@ -157,31 +159,19 @@ export function getSettings() {
     // In this case, we return a promise to wait for.
     // This is not required by thunk middleware, but it is convenient for us.
 
-    return (
-      axios
-        .get('http://localhost:3030/api/settings ')
-        // .then(
-        //   (response) => response.json(),
-        //   // Do not use catch, because that will also catch
-        //   // any errors in the dispatch and resulting render,
-        //   // causing a loop of 'Unexpected batch number' errors.
-        //   // https://github.com/facebook/react/issues/6895
-        //   (error) => console.log('An error occurred.', error)
-        // )
-        .then((json) => {
-          if (json.status === 200 && json.data != '') {
-            dispatch(saveSettings(json.data))
-            dispatch(isCached(true))
-          } else {
-            dispatch(isCached(false))
-          }
-        })
-        .catch((e) => {
-          console.error(e)
+    return axios
+      .get('http://localhost:3030/api/settings ')
+      .then((json) => {
+        if (json.status === 200 && json.data != '') {
+          dispatch(saveSettings(json.data))
+          dispatch(isCached(true))
+        } else {
           dispatch(isCached(false))
-        })
-    )
+        }
+      })
+      .catch((e) => {
+        console.error(e)
+        dispatch(isCached(false))
+      })
   }
 }
-
-// export { saveSettings, getSettings }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { LinkButton, Icon, Input, Button } from '.'
+import { Input, Button } from '.'
 import './scss/Modal.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
@@ -16,13 +16,14 @@ const inputOption = {
 
 const Modal = ({ children, className, onSubmit, onCancel }) => {
   const cnModal = cn('modal')
+  const cnText = cn('text')
   const [inputValue, setInputValue] = useState()
 
   return (
     <div className={cnModal()}>
       <div className={cnModal('content')}>
         <div className={cnModal('title')}>
-          <div className="modal__header text text_type_h2 text_size_18-22">New build</div>
+          <div className={`${cnModal('header')} ${cnText({ type: 'h2', size: '18-22' })}`}>New build</div>
         </div>
         <Input
           options={inputOption}
@@ -30,7 +31,7 @@ const Modal = ({ children, className, onSubmit, onCancel }) => {
             setInputValue(value)
           }}
         />
-        <div className="modal__controls">
+        <div className={cnModal('controls')}>
           <Button className={{ size: 'm', view: 'action' }} onClick={(e) => onSubmit(e, inputValue)}>
             Run build
           </Button>

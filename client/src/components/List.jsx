@@ -11,10 +11,7 @@ const cn = withNaming({ n: '', e: '__', m: '_' })
 const cnList = cn('list')
 
 class List extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { showButton: true }
-  }
+  state = { showButton: true }
 
   handleClick = (event, buildNumber, buildId) => {
     const { getDetailsByBuildId, history } = this.props
@@ -25,6 +22,10 @@ class List extends Component {
   handleShowMore = () => {
     const { getBuildList, buildList } = this.props
     const currentAmount = buildList.length || 0
+
+    if (currentAmount === buildList[0].buildNumber) {
+      this.setState({ showButton: false })
+    }
     getBuildList(currentAmount + 10)
   }
 

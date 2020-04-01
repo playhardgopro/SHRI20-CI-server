@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { getBuildList } from '../store/actionCreators'
-import { List, Footer, Header, Layout, Grid, Card } from '.'
+import { List, Footer, Header, Layout, Grid } from '.'
 
 // import './scss/Layout.scss'
 
@@ -15,7 +15,7 @@ const grid = {
   },
 }
 
-const History = ({ getBuildList, list }) => {
+const History = () => {
   return (
     <div className="layout">
       <Header className={{ distribute: 'between' }} />

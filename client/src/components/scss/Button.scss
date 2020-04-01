@@ -4,6 +4,7 @@
 
 .button_view_action:hover {
   background-color: var(--color-bg-action-hovered);
+  cursor: pointer;
 }
 .button_view_action:focus:after {
   position: absolute;

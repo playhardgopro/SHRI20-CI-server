@@ -10,7 +10,7 @@ const router = express.Router()
 // NOTE: получаем список сборок
 router.get('/', (req, res) => {
   const { limit, offset } = req.query
-  console.log(limit)
+  // console.log(limit)
   axios
     .get('/build/list', { params: { limit, offset } })
     .then((response) => {

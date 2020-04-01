@@ -1,26 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { withRouter, Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { getBuildList, saveDetailsByBuildId } from '../store/actionCreators'
-import { Footer, Header, Layout, Grid, Card, Log } from '.'
+import { Footer, Header, Layout, Card, Log } from '.'
 
 // import './scss/Layout.scss'
 
-const grid = {
-  block: {
-    'm-columns': '12',
-    'col-gap': 'full',
-  },
-  elem: {
-    'm-col': '12',
-  },
-}
+// const grid = {
+//   block: {
+//     'm-columns': '12',
+//     'col-gap': 'full',
+//   },
+//   elem: {
+//     'm-col': '12',
+//   },
+// }
 
-const Details = ({ match, history, buildList, details, saveDetailsByBuildId, getBuildList }) => {
+const Details = ({ match, history, buildList, getBuildList }) => {
   const { buildNumber } = match.params
   useEffect(() => {
     getBuildList()
   }, [buildNumber])
+
+  // NOTE: здесь захардкожено, надо подумать, как сделать лучше
   const options = buildList ? buildList.filter((el) => el.buildNumber == buildNumber) : []
   const filteredOptions = options.length ? options : null
 

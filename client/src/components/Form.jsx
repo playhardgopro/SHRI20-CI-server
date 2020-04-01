@@ -1,5 +1,5 @@
 // import React from 'react'
-import React, { useState, Component } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { withRouter } from 'react-router-dom'
@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { saveSettings, getSettings, postSettings ,isLoading} from '../store/actionCreators'
 
 
-import { Input, Button, LinkButton } from '.'
+import { Input, Button } from '.'
 import './scss/Form.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
@@ -50,7 +50,7 @@ const options = [
 const FormControls = (ctx) => {
   const handleSave = () => {
     ctx.props.postSettings({...ctx.state}).then((resolve)=>{
-      if (resolve) {
+      if (resolve.success) {
         ctx.props.history.push('/history')
       } else {
         ctx.props.isLoading(false)

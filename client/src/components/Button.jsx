@@ -8,7 +8,6 @@ const cn = withNaming({ n: '', e: '__', m: '_' })
 
 const Button = ({ children, onClick, className, disabled, active, url, icon, hideText }) => {
   const cnButton = cn('button')
-  const cnIcon = cn('icon')
   const cnHide = [cnButton('text'), 'decorator', 'hide-mobile'].join(' ')
 
   return (
