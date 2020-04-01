@@ -12,7 +12,7 @@ const prettyMilliseconds = require('pretty-ms')
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const CardMeta = ({ start, duration }) => {
+const CardMeta = ({ start, duration, status }) => {
   return (
     <div className="card__meta card__meta_m-hr_top meta meta_distribute_vertical meta_m-distribute_horizontal text text_size_13-16 text_view_ghost">
       <div className="meta__item meta__item_indent-b_8">
@@ -28,22 +28,21 @@ const CardMeta = ({ start, duration }) => {
         </div>
       </div>
       <div className="meta__item meta__item_indent-b_8">
-        {duration && (
-          <div className="icon-box">
-            <div className="icon-box__icon icon-box__icon_size_m icon-box__icon_indent-r_4">
-              <Icon name="clock" />
-            </div>
-            <div className="text text_size_13-16 text_view_ghost">
-              {prettyMilliseconds(duration, { compact: true })}
-            </div>
+        <div className="icon-box">
+          <div className="icon-box__icon icon-box__icon_size_m icon-box__icon_indent-r_4">
+            <Icon name="clock" />
           </div>
-        )}
+          <div className="text text_size_13-16 text_view_ghost">
+            {duration && prettyMilliseconds(duration, { compact: true })}
+            {!duration && status}
+          </div>
+        </div>
       </div>
     </div>
   )
 }
 
-const CardMeta2 = ({ start, duration }) => {
+const CardMeta2 = ({ start, duration, status }) => {
   return (
     <div className="list__item meta meta_hr_top text text_size_13-16 text_view_ghost">
       <div className="meta__item meta__item_indent-b_8">
@@ -59,16 +58,15 @@ const CardMeta2 = ({ start, duration }) => {
         </div>
       </div>
       <div className="meta__item meta__item_indent-b_8">
-        {duration && (
-          <div className="icon-box">
-            <div className="icon-box__icon icon-box__icon_size_m icon-box__icon_indent-r_4">
-              <Icon name="clock" />
-            </div>
-            <div className="text text_size_13-16 text_view_ghost">
-              {prettyMilliseconds(duration, { compact: true })}
-            </div>
+        <div className="icon-box">
+          <div className="icon-box__icon icon-box__icon_size_m icon-box__icon_indent-r_4">
+            <Icon name="clock" />
           </div>
-        )}
+          <div className="text text_size_13-16 text_view_ghost">
+            {duration && prettyMilliseconds(duration, { compact: true })}
+            {!duration && status}
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -126,9 +124,9 @@ const Card = ({ children, className, options, onClick, match }) => {
               </div>
             </div>
           </div>
-          {cardMetaUnder && CardMeta2({ duration, start })}
+          {cardMetaUnder && CardMeta2({ duration, start, status })}
         </div>
-        {!cardMetaUnder && CardMeta({ duration, start })}
+        {!cardMetaUnder && CardMeta({ duration, start, status })}
       </div>
     </div>
   )

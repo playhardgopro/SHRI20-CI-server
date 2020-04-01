@@ -9,6 +9,7 @@
   &:hover {
     box-shadow: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
     cursor: pointer;
+    transition: all 150ms ease-in-out;
   }
 }
 
@@ -37,6 +38,7 @@
 
 .card__meta {
   flex-shrink: 0;
+  min-width: 100px;
 }
 
 @media screen and (max-width: $screen-m) {
