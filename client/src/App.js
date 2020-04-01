@@ -11,7 +11,7 @@ class App extends Component {
   }
 
   render() {
-    const { history } = this.props
+    const { history, settings } = this.props
 
     return (
       <Switch>
@@ -20,7 +20,7 @@ class App extends Component {
           exact
           path="/"
           render={() => {
-            return this.props.settings.isCached ? <Redirect to="/history" /> : <Home />
+            return !settings.isCached ? <Redirect to="/history" /> : <Home />
           }}
         />
         <Route history={history} exact path="/settings">

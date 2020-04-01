@@ -33,7 +33,7 @@ const RepConnection = ({ children, className }) => {
           }}
           className={{ size: 'm', view: 'action' }}
         >
-          Open Settings
+          Open settings
         </Button>
       </div>
     </div>
