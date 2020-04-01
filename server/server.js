@@ -26,6 +26,13 @@ app.use('/api/settings', settingsRoutes)
 
 app.use(express.static(path.resolve(__dirname, '../static')))
 
+app.use((err, req, res, next) => {
+  if (err instanceof ValidationError) {
+    res.status(400).send('JSON is invalid')
+    next()
+  } else next(err)
+})
+
 // NOTE: получаем список и запускаем билд для первого ожидающего
 app.get('/api/startBuild', (req, res) => {
   let list = []
@@ -52,4 +59,4 @@ app.get('/api/startBuild', (req, res) => {
     .catch((e) => console.error(e, 'get start build'))
 })
 
-app.listen(3001)
+app.listen(3030)

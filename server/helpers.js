@@ -8,13 +8,9 @@ const sleep = util.promisify(setTimeout)
 
 async function clear(settings) {
   const [userName, repo] = settings.repoName.split('/')
-  try {
-    console.log(`clearing ${userName}/${repo}`)
-    await exec(`rm -rf ./localStorage/${userName}`)
-    await console.log('done')
-  } catch (e) {
-    console.log(e.code, 'clear')
-  }
+  console.log(`clearing ${userName}/${repo}`)
+  await exec(`rm -rf ./localStorage/${userName}`)
+  await console.log('done')
   return settings
 }
 
@@ -73,7 +69,7 @@ async function buildStart(buildObject) {
 
 async function buildCancel(buildObject) {
   const buildId = buildObject.id
-  axios.post('/build/cancel', buildId).catche((e) => console.error(e.code, 'build cancel'))
+  axios.post('/build/cancel', buildId).catch((e) => console.error(e.code, 'build cancel'))
   return buildObject
 }
 

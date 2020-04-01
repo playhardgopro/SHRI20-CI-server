@@ -77,11 +77,4 @@ router.delete('/', (req, res) => {
     .catch((e) => e.code, 'delete settings error')
 })
 
-app.use((err, req, res, next) => {
-  if (err instanceof ValidationError) {
-    res.status(400).send('JSON is invalid')
-    next()
-  } else next(err)
-})
-
 module.exports = router

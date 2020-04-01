@@ -49,8 +49,12 @@ const options = [
 
 const FormControls = (ctx) => {
   const handleSave = () => {
-    ctx.props.postSettings({...ctx.state}).then(()=>{
-      ctx.props.history.push('/history')
+    ctx.props.postSettings({...ctx.state}).then((resolve)=>{
+      if (resolve) {
+        ctx.props.history.push('/history')
+      } else {
+        ctx.props.isLoading(false)
+      }
     })
   }
 

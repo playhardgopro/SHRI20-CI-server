@@ -63,13 +63,13 @@ export function postSettings(payload) {
   return function (dispatch) {
     dispatch(isLoading(true))
     return axios
-      .post('http://localhost:3001/api/settings', settings)
+      .post('http://localhost:3030/api/settings', settings)
       .then((response) => {
         if (response.status === 200 && response.data.saveSettings === 'done') {
           dispatch(isLoading(false))
-          // console.log(response.data)
+          console.log(response.data)
         } else {
-          dispatch(saveError(response.status))
+          dispatch(saveError({ postSettings: response.status }))
         }
       })
       .catch((e) => {
@@ -83,7 +83,7 @@ export function runBuild(commitHash) {
   return function (dispatch) {
     return (
       axios
-        .post(`http://localhost:3001/api/builds/${commitHash}`)
+        .post(`http://localhost:3030/api/builds/${commitHash}`)
         .then((response) => {
           if (response.status === 200) {
             return response.data
@@ -103,7 +103,7 @@ export function getDetailsByBuildId(buildId) {
   return function (dispatch) {
     return (
       axios
-        .get(`http://localhost:3001/api/builds/${buildId}`)
+        .get(`http://localhost:3030/api/builds/${buildId}`)
         .then((response) => {
           if (response.status === 200) {
             dispatch(saveDetailsByBuildId(response.data))
@@ -124,7 +124,7 @@ export function getBuildList() {
   return function (dispatch) {
     return (
       axios
-        .get('http://localhost:3001/api/builds')
+        .get('http://localhost:3030/api/builds')
         .then((response) => {
           if (response.status === 200) {
             dispatch(saveBuildList(response.data))
@@ -159,7 +159,7 @@ export function getSettings() {
 
     return (
       axios
-        .get('http://localhost:3001/api/settings ')
+        .get('http://localhost:3030/api/settings ')
         // .then(
         //   (response) => response.json(),
         //   // Do not use catch, because that will also catch
