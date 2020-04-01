@@ -119,12 +119,12 @@ export function getDetailsByBuildId(buildId) {
   }
 }
 
-export function getBuildList() {
+export function getBuildList(limit, offset) {
   // console.log(settings, 'settings')
   return function (dispatch) {
     return (
       axios
-        .get('http://localhost:3030/api/builds')
+        .get('http://localhost:3030/api/builds', { params: { limit, offset } })
         .then((response) => {
           if (response.status === 200) {
             dispatch(saveBuildList(response.data))

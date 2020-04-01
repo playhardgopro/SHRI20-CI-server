@@ -20,6 +20,10 @@ class List extends Component {
     this.props.getDetailsByBuildId(buildId)
     this.props.history.push(`build/${buildNumber}`)
   }
+  handleShowMore = () => {
+    const currentAmount = this.props.buildList.length || 0
+    this.props.getBuildList(currentAmount + 10)
+  }
 
   render() {
 
@@ -29,6 +33,11 @@ class List extends Component {
           this.props.buildList.map((el) => {
             return (<li key={el.buildNumber} className={cnList('item')}><Card options={el} onClick={this.handleClick} /></li>)
           })}
+          <div class="list__controls">
+          <button class="button button_size_m button_view_control" onClick={this.handleShowMore}>
+            <div class="button__text">Show more</div>
+          </button>
+        </div>
       </ul>
       
     )

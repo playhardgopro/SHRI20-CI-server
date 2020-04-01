@@ -7,7 +7,7 @@ import { Home, Settings, History, Details } from './components'
 class App extends Component {
   componentDidMount() {
     this.props.getSettings()
-    this.props.getBuildList()
+    this.props.getBuildList(10)
   }
 
   render() {
