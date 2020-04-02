@@ -63,7 +63,7 @@ export function postSettings(payload) {
   return function (dispatch) {
     dispatch(isLoading(true))
     return axios
-      .post('http://localhost:3030/api/settings', settings)
+      .post('/api/settings', settings)
       .then((response) => {
         if (response.status === 200 && response.data.saveSettings === 'done') {
           dispatch(isLoading(false))
@@ -85,7 +85,7 @@ export function runBuild(commitHash) {
   return function (dispatch) {
     return (
       axios
-        .post(`http://localhost:3030/api/builds/${commitHash}`)
+        .post(`/api/builds/${commitHash}`)
         .then((response) => {
           if (response.status === 200) {
             return response.data
@@ -105,7 +105,7 @@ export function getDetailsByBuildId(buildId) {
   return function (dispatch) {
     return (
       axios
-        .get(`http://localhost:3030/api/builds/${buildId}`)
+        .get(`/api/builds/${buildId}`)
         .then((response) => {
           if (response.status === 200) {
             dispatch(saveDetailsByBuildId(response.data))
@@ -126,7 +126,7 @@ export function getBuildList(limit = 15, offset) {
   return function (dispatch) {
     return (
       axios
-        .get('http://localhost:3030/api/builds', { params: { limit, offset } })
+        .get('/api/builds', { params: { limit, offset } })
         .then((response) => {
           if (response.status === 200) {
             dispatch(saveBuildList(response.data))
@@ -160,7 +160,7 @@ export function getSettings() {
     // This is not required by thunk middleware, but it is convenient for us.
 
     return axios
-      .get('http://localhost:3030/api/settings ')
+      .get('/api/settings ')
       .then((json) => {
         if (json.status === 200 && json.data != '') {
           dispatch(saveSettings(json.data))
