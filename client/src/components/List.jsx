@@ -21,12 +21,17 @@ class List extends Component {
 
   handleShowMore = () => {
     const { getBuildList, buildList } = this.props
-    const currentAmount = buildList.length || 0
+    let currentAmount = buildList.length || 10
 
-    if (currentAmount === buildList[0].buildNumber) {
-      this.setState({ showButton: false })
+    this.setState((state) => {
+      if (currentAmount >= buildList[0].buildNumber) {
+      return {
+        showButton: !state.showButton
+      }
     }
-    getBuildList(currentAmount + 10)
+    })
+    currentAmount += 10
+    getBuildList(currentAmount)
   }
 
   render() {

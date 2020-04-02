@@ -13,10 +13,10 @@ const Footer = ({ children, className }) => {
     <div className={cnFooter()}>
       <div className={cnFooter('content')}>
         <div className={cnFooter('links')}>
-          <Link>
+          <Link to="#">
             <div className={cnText({ size: '13-18', view: 'ghost', type: 'link' })}>Support</div>
           </Link>
-          <Link>
+          <Link to="#">
             <div className={cnText({ size: '13-18', view: 'ghost', type: 'link' })}>Learning</div>
           </Link>
         </div>

@@ -19,7 +19,7 @@ import { Footer, Header, Layout, Card, Log } from '.'
 const Details = ({ match, history, buildList, getBuildList }) => {
   const { buildNumber } = match.params
   useEffect(() => {
-    getBuildList()
+    getBuildList(buildList ? buildList.length : buildNumber)
   }, [buildNumber])
 
   // NOTE: здесь захардкожено, надо подумать, как сделать лучше
