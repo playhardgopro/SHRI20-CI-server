@@ -1,8 +1,7 @@
 // import React from 'react'
 import React, { useState } from 'react'
 import { withNaming } from '@bem-react/classname'
-import { connect, useSelector } from 'react-redux'
-import { saveSettings, getSettings, postSettings, isLoading } from '../../../store/actionCreators'
+import { useSelector } from 'react-redux'
 
 import { InputGroup } from '../..'
 import FormControls from './FormControls'
@@ -44,15 +43,12 @@ const options = [
   },
 ]
 
-const Form = ({ getSettings }) => {
+const Form = () => {
   const settings = useSelector((state) => state.settings)
   const [inputValue, setInputValue] = useState(settings)
-  // useEffect(() => {
-  //   getSettings()
-  // }, [inputValue])
 
   function handleChange(id, val) {
-    setInputValue({ [id]: val })
+    setInputValue({ ...inputValue, [id]: val })
   }
 
   const Inputs = () => {
@@ -77,11 +73,4 @@ const Form = ({ getSettings }) => {
   )
 }
 
-const mapDispatchToProps = {
-  saveSettings,
-  getSettings,
-  postSettings,
-  isLoading,
-}
-
-export default connect(null, mapDispatchToProps)(Form)
+export default Form

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { useHistory } from 'react-router-dom'
 import { connect, useSelector } from 'react-redux'
-import { saveSettings, getSettings, postSettings, isLoading } from '../../../store/actionCreators'
+import { saveSettings, getSettings, postSettings, isLoading, getBuildList } from '../../../store/actionCreators'
 
 import { Button } from '../..'
 import './Form.scss'
@@ -12,18 +12,20 @@ import './Form.scss'
 const cn = withNaming({ n: '', e: '__', m: '_' })
 const cnForm = cn('form')
 
-const FormControls = ({ postSettings, saveSettings, isLoading, settings }) => {
+const FormControls = ({ postSettings, saveSettings, getBuildList, isLoading, settings }) => {
   const history = useHistory()
   const isLoadingFlag = useSelector((state) => state.settings.isLoading)
   const handleSave = () => {
-    postSettings(settings).then((resolve) => {
-      if (resolve.success) {
-        saveSettings(settings)
-        history.push('/history')
-      } else {
-        isLoading(false)
-      }
-    })
+    postSettings(settings)
+      .then(() => getBuildList())
+      .then((resolve) => {
+        if (resolve.success) {
+          saveSettings(settings)
+          history.push('/history')
+        } else {
+          isLoading(false)
+        }
+      })
   }
 
   const handleCancel = () => {
@@ -47,6 +49,7 @@ const mapDispatchToProps = {
   getSettings,
   postSettings,
   isLoading,
+  getBuildList,
 }
 
 FormControls.propTypes = {

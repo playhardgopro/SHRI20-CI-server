@@ -131,11 +131,13 @@ export function getBuildList(limit, offset) {
           if (response.status === 200) {
             dispatch(saveBuildList(response.data))
             // console.log(response.data, 'response')
+            return { success: true }
           }
         })
         // .then((json) => dispatch(saveSettings(json.data)))
         .catch((e) => {
           console.error(e)
+          return { success: false }
           // dispatch(isCached(false))
         })
     )

@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { useRouteMatch } from 'react-router-dom'
 import Moment from 'react-moment'
-import { IconBox, Icon } from '../../'
+import { IconBox, Icon } from '../..'
 import './Card.scss'
 
 const prettyMilliseconds = require('pretty-ms')
@@ -71,8 +70,9 @@ const CardMeta2 = ({ start, duration, status }) => {
   )
 }
 
-const Card = ({ children, className, options, onClick, match }) => {
+const Card = ({ children, className, options, onClick }) => {
   const { id, buildNumber, commitMessage, commitHash, branchName, authorName, start, duration, status } = options
+  const match = useRouteMatch()
   let viewStatus = ''
   let cardMetaUnder = true
   if (status === 'Success') viewStatus = 'success'
@@ -90,7 +90,7 @@ const Card = ({ children, className, options, onClick, match }) => {
   const cnCard = cn('card')
   const cnText = cn('text')
   return (
-    <div onClick={onClick && ((e) => onClick(e, buildNumber, id))} className="card">
+    <div onClick={onClick && ((e) => onClick(e, options))} className="card">
       <div className={cnCard('token')}>
         <IconBox textStyle={{ view: viewStatus }}>
           <Icon name={viewStatus} />
@@ -142,4 +142,4 @@ Card.defaultProps = {
   className: {},
 }
 
-export default withRouter(connect()(Card))
+export default Card

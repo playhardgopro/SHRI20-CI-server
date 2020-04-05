@@ -23,7 +23,7 @@ const Details = ({ getBuildList }) => {
 
   useEffect(() => {
     getBuildList(buildList ? buildList.length : buildNumber)
-  }, [buildList, buildNumber])
+  }, [buildNumber])
 
   // NOTE: здесь захардкожено, надо подумать, как сделать лучше
   const options = buildList ? buildList.filter((el) => el.buildNumber == buildNumber) : []

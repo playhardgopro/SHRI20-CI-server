@@ -1,7 +1,6 @@
 import React from 'react'
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom'
-import { connect, useSelector } from 'react-redux'
-import { saveSettings, getSettings, getBuildList } from './store/actionCreators'
+import { useSelector } from 'react-redux'
 import { Home, Settings, History, Details } from './components'
 
 const App = () => {
@@ -15,7 +14,7 @@ const App = () => {
         exact
         path="/"
         render={() => {
-          return !settings.isCached ? <Redirect to="/history" /> : <Home />
+          return settings.isCached ? <Redirect to="/history" /> : <Home />
         }}
       />
       <Route history={history} exact path="/settings">
@@ -31,10 +30,4 @@ const App = () => {
   )
 }
 
-const mapDispatchToProps = {
-  saveSettings,
-  getSettings,
-  getBuildList,
-}
-
-export default connect(null, mapDispatchToProps)(App)
+export default App
