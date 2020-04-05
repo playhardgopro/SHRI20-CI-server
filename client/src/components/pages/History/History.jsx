@@ -1,7 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { getBuildList } from '../../../store/actionCreators'
-import { List, Footer, Header, Layout, Grid } from '../../index'
+import { List, Footer, Header, Layout, Grid } from '../..'
 
 // import './scss/Layout.scss'
 
@@ -16,6 +16,7 @@ const grid = {
 }
 
 const History = () => {
+  const buildList = useSelector((state) => state.history.buildList)
   return (
     <div className="layout">
       <Header className={{ distribute: 'between' }} />
@@ -29,15 +30,4 @@ const History = () => {
   )
 }
 
-function mapStateToProps(state) {
-  return {
-    historyPage: state.history,
-    list: state.history.buildList,
-  }
-}
-
-const mapDispatchToProps = {
-  getBuildList,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(History)
+export default connect(null, { getBuildList })(History)
