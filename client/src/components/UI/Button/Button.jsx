@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { Icon } from '../../'
+import { Icon } from '../..'
 import './Button.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Button = ({ children, onClick, className, disabled, active, url, icon, hideText, empty }) => {
+const Button = ({ children, onClick, className, disabled, icon, hideText, empty }) => {
   const cnButton = cn('button')
   const cnHide = [cnButton('text'), 'decorator', 'hide-mobile'].join(' ')
 
@@ -24,14 +24,20 @@ Button.propTypes = {
   onClick: PropTypes.func,
   className: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])),
   disabled: PropTypes.bool,
-  active: PropTypes.bool,
+  empty: PropTypes.bool,
+  hideText: PropTypes.bool,
+  icon: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])),
+  // active: PropTypes.bool,
 }
 Button.defaultProps = {
   children: null,
   onClick: () => {},
   className: {},
   disabled: false,
-  active: false,
+  empty: false,
+  hideText: false,
+  icon: false,
+  // active: false,
 }
 
 export default Button
