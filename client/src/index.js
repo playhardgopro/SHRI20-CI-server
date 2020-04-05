@@ -3,9 +3,13 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+import { getSettings, getBuildList } from './store/actionCreators'
 import store from './store'
 
 import App from './App'
+
+store.dispatch(getSettings())
+store.dispatch(getBuildList())
 
 ReactDOM.render(
   <Provider store={store}>
