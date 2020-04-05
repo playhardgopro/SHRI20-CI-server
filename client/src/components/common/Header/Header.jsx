@@ -1,19 +1,23 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { connect, useSelector } from 'react-redux'
+import { useRouteMatch, useHistory } from 'react-router-dom'
 import { runBuild } from '../../../store/actionCreators'
 import { Text, Button, Modal } from '../..'
 import './Header.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Header = ({ children, runBuild, settings, match, currentBuild, history, buildList }) => {
+const Header = ({ children, runBuild }) => {
   const [isModalShown, setIsModalShown] = useState(false)
+  const buildList = useSelector((state) => state.history.buildList)
+  const settings = useSelector((state) => state.settings)
   const cnHeader = cn('header')
   const header = { style: {}, text: '' }
   const hiddenBtn = { settings: true, runBuild: true, rebuild: true }
+  const match = useRouteMatch()
+  const history = useHistory()
 
   switch (match.path) {
     case '/settings':
@@ -108,16 +112,8 @@ Header.defaultProps = {
   className: {},
 }
 
-function mapStateToProps(state) {
-  return {
-    buildList: state.history.buildList,
-    settings: state.settings,
-    currentBuild: state.build,
-  }
-}
-
 const mapDispatchToProps = {
   runBuild,
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header))
+export default connect(null, mapDispatchToProps)(Header)
