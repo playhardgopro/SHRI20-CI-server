@@ -1,20 +1,29 @@
-export { default as History } from './History'
-export { default as Details } from './Details'
-export { default as Home } from './Home'
-export { default as Settings } from './Settings'
+// import './vars.scss'
 
-export { default as Modal } from './Modal'
-export { default as Button } from './Button'
-export { default as Footer } from './Footer'
-export { default as Layout } from './Layout'
-export { default as Icon } from './Icon'
-export { default as IconBox } from './IconBox'
-export { default as Header } from './Header'
-export { default as Text } from './Text'
-export { default as Form } from './Form'
-export { default as Input } from './Input'
-export { default as RepConnection } from './RepConnection'
-export { default as Grid } from './Grid'
-export { default as List } from './List'
-export { default as Card } from './Card'
-export { default as Log } from './Log'
+//#region Pages
+export { default as History } from './pages/History/History'
+export { default as Details } from './pages/Details/Details'
+export { default as Home } from './pages/Home/Home'
+export { default as Settings } from './pages/Settings/Settings'
+//endregion
+
+//#region Common
+export { default as Footer } from './common/Footer/Footer'
+export { default as Layout } from './common/Layout/Layout'
+export { default as Header } from './common/Header/Header'
+export { default as Grid } from './common/Grid/Grid'
+//endregion
+
+//#region UI
+export { default as Modal } from './UI/Modal/Modal'
+export { default as Button } from './UI/Button/Button'
+export { default as Icon } from './UI/Icon/Icon'
+export { default as IconBox } from './UI/IconBox/IconBox'
+export { default as Text } from './UI/Text/Text'
+export { default as Form } from './UI/Form/Form'
+export { default as Input } from './UI/Input/Input'
+export { default as RepConnection } from './UI/RepConnection/RepConnection'
+export { default as List } from './UI/List/List'
+export { default as Card } from './UI/Card/Card'
+export { default as Log } from './UI/Log/Log'
+//endregion
