@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { getBuildList, saveDetailsByBuildId } from '../../../store/actionCreators'
+import { connect, useSelector } from 'react-redux'
+import { useHistory, useParams } from 'react-router-dom'
+import { getBuildList } from '../../../store/actionCreators'
 import { Footer, Header, Layout, Card, Log } from '../../index'
 
 // import './scss/Layout.scss'
@@ -16,8 +16,11 @@ import { Footer, Header, Layout, Card, Log } from '../../index'
 //   },
 // }
 
-const Details = ({ match, history, buildList, getBuildList }) => {
-  const { buildNumber } = match.params
+const Details = ({ getBuildList }) => {
+  const { buildNumber } = useParams()
+  const history = useHistory()
+  const buildList = useSelector((state) => state.history.buildList)
+
   useEffect(() => {
     getBuildList(buildList ? buildList.length : buildNumber)
   }, [buildNumber])
@@ -51,16 +54,5 @@ const Details = ({ match, history, buildList, getBuildList }) => {
     </div>
   )
 }
-function mapStateToProps(state) {
-  return {
-    buildList: state.history.buildList,
-    details: state.build,
-  }
-}
 
-const mapDispatchToProps = {
-  getBuildList,
-  saveDetailsByBuildId,
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Details))
+export default connect(null, { getBuildList })(Details)
