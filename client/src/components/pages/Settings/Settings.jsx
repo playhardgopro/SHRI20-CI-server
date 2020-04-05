@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Footer, Header, Layout, Grid } from '../../index'
+import { Form, Footer, Header, Layout, Grid } from '../..'
 
 const grid = {
   block: {
