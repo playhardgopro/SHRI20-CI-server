@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import MaskedInput from 'react-text-mask'
 import { saveSettings } from '../../../store/actionCreators'
-import { Text, Button } from '../../'
-import './Input.scss'
+import { Text, Button } from '../..'
+import './InputGroup.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 const cnInput = cn('input')
@@ -31,8 +31,9 @@ const Masked = ({ value, setValue, change, valid, invalid, inputClass, placehold
   )
 }
 
-const Input = ({ children, className, options, change, settings }) => {
+const InputGroup = ({ children, className, options, change }) => {
   const { placeholder, label, isRequired, id, vertical, text, numberMask } = options
+  const settings = useSelector((state) => state.settings)
   const [value, setValue] = useState(settings[id])
   const [invalid, setInvalid] = useState(false)
   const [valid, setValid] = useState(false)
@@ -88,16 +89,15 @@ const Input = ({ children, className, options, change, settings }) => {
   )
 }
 
-Input.propTypes = {
+InputGroup.propTypes = {
   children: PropTypes.node,
   className: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])),
   options: PropTypes.objectOf(PropTypes.oneOfType(PropTypes.string, PropTypes.bool)),
 }
 
-Input.defaultProps = {
+InputGroup.defaultProps = {
   children: '',
   className: {},
-  isShort: false,
   options: {
     label: '',
     placeholder: '',
@@ -107,22 +107,8 @@ Input.defaultProps = {
     text: false,
   },
 }
-// LilInput.propTypes = {
-//   isShort: PropTypes.bool,
-//   placeholder: PropTypes.string,
-//   id: PropTypes.string,
-// }
-// LilInput.defaultProps = {
-//   isShort: false,
-//   placeholder: '',
-//   id: '',
-// }
-function mapStateToProps(state) {
-  return {
-    settings: state.settings,
-  }
-}
+
 const mapDispatchToProps = {
   saveSettings,
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Input)
+export default connect(null, mapDispatchToProps)(InputGroup)

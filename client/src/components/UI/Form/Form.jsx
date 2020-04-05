@@ -1,11 +1,11 @@
 // import React from 'react'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { connect, useSelector } from 'react-redux'
 import { saveSettings, getSettings, postSettings, isLoading } from '../../../store/actionCreators'
 
-import { Input } from '../..'
+import { InputGroup } from '../..'
 import FormControls from './FormControls'
 import './Form.scss'
 
@@ -45,9 +45,12 @@ const options = [
   },
 ]
 
-const Form = () => {
+const Form = ({ getSettings }) => {
   const settings = useSelector((state) => state.settings)
   const [inputValue, setInputValue] = useState(settings)
+  // useEffect(() => {
+  //   getSettings()
+  // }, [inputValue])
 
   function handleChange(id, val) {
     setInputValue({ [id]: val })
@@ -56,7 +59,7 @@ const Form = () => {
   const Inputs = () => {
     return options.map((el) => (
       <div key={el.id} className={cnForm('item', { 'indent-t': 'xl' })}>
-        <Input options={el} change={handleChange} />
+        <InputGroup options={el} change={handleChange} />
       </div>
     ))
   }

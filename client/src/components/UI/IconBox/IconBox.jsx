@@ -12,7 +12,6 @@ const IconBox = ({ children, className, textStyle }) => {
   return (
     <div className={cnIconBox()}>
       <div className={`${cnIconBox('icon')} ${cnText(textStyle)}`}>{children}</div>
-      {/* <div className="icon-box__icon text text_view_success">{children}</div> */}
     </div>
   )
 }

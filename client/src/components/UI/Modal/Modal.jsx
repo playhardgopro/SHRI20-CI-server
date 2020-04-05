@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { Input, Button } from '../../'
+import { InputGroup, Button } from '../..'
 import './Modal.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
@@ -25,7 +25,7 @@ const Modal = ({ children, className, onSubmit, onCancel }) => {
         <div className={cnModal('title')}>
           <div className={`${cnModal('header')} ${cnText({ type: 'h2', size: '18-22' })}`}>New build</div>
         </div>
-        <Input
+        <InputGroup
           options={inputOption}
           change={(e, value) => {
             setInputValue(value)

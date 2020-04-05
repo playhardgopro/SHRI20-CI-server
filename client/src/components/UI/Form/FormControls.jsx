@@ -1,12 +1,12 @@
 // import React from 'react'
-import React, { Component, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { withRouter, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { connect, useSelector } from 'react-redux'
 import { saveSettings, getSettings, postSettings, isLoading } from '../../../store/actionCreators'
 
-import { Input, Button } from '../..'
+import { Button } from '../..'
 import './Form.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
@@ -31,7 +31,7 @@ const FormControls = ({ postSettings, saveSettings, isLoading, settings }) => {
   }
 
   return (
-    <div className="form__controls">
+    <div className={cnForm('controls')}>
       <Button className={{ size: 'm', view: 'action' }} onClick={handleSave} disabled={isLoadingFlag}>
         Save
       </Button>
