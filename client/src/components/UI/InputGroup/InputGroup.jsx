@@ -40,12 +40,12 @@ const InputGroup = ({ children, className, options, change }) => {
 
   useEffect(() => {
     setValue(settings[id])
-  }, [settings[id]])
+  }, [settings, id])
 
   useEffect(() => {
     isRequired && value === '' ? setInvalid(true) : setInvalid(false)
     isRequired && !invalid ? setValid(true) : setValid(false)
-  })
+  }, [isRequired, value, invalid])
   const inputClass = { size: 'm', width: text ? 52 : 'full' }
   const handleClear = () => {
     setValue('')
@@ -92,7 +92,7 @@ const InputGroup = ({ children, className, options, change }) => {
 InputGroup.propTypes = {
   children: PropTypes.node,
   className: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])),
-  options: PropTypes.objectOf(PropTypes.oneOfType(PropTypes.string, PropTypes.bool)),
+  options: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])),
 }
 
 InputGroup.defaultProps = {

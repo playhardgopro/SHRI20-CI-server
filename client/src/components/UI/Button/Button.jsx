@@ -26,7 +26,10 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   empty: PropTypes.bool,
   hideText: PropTypes.bool,
-  icon: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])),
+  icon: PropTypes.oneOfType([
+    PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])),
+    PropTypes.bool,
+  ]),
   // active: PropTypes.bool,
 }
 Button.defaultProps = {

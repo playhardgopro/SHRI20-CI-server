@@ -16,7 +16,7 @@ const grid = {
 }
 
 const History = () => {
-  const buildList = useSelector((state) => state.history.buildList)
+  // const buildList = useSelector((state) => state.history.buildList)
   return (
     <div className="layout">
       <Header className={{ distribute: 'between' }} />
