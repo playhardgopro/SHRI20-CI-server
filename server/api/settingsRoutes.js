@@ -57,7 +57,7 @@ router.post('/', validate({ body: schemas.settings }), (req, res) => {
             .then((buildObject) => {
               helpers.buildFinish(buildObject)
             })
-            .catch((e) => console.error(e))
+            .catch((e) => helpers.errorHandler(e))
         })
     })
     .then(() => res.send({ saveSettings: 'done', build: 'done' }))
