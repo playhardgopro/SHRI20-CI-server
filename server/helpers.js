@@ -6,6 +6,27 @@ const exec = util.promisify(require('child_process').exec)
 
 const sleep = util.promisify(setTimeout)
 
+function errorHandler(error) {
+  if (error.response) {
+    // The request was made and the server responded with a status code
+    // that falls out of the range of 2xx
+    console.warn(error.response.status)
+    console.log(error.response.data.title)
+    console.error(error.response.data.errors)
+
+    // console.log(error.response.headers)
+  } else if (error.request) {
+    // The request was made but no response was received
+    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+    // http.ClientRequest in node.js
+    console.log(error.request)
+  } else {
+    // Something happened in setting up the request that triggered an Error
+    console.log('Error', error.message)
+  }
+  // console.log(error.config)
+}
+
 async function clear(settings) {
   const [userName, repo] = settings.repoName.split('/')
   console.log(`clearing ${userName}/${repo}`)
@@ -63,13 +84,14 @@ async function getCommitHash(settings) {
 async function buildStart(buildObject) {
   const { id } = buildObject
   const startBuild = { buildId: id, dateTime: new Date() }
-  axios.post('/build/start', startBuild).catch((e) => console.error(e.code, 'build start'))
+  axios.post('/build/start', startBuild).catch((e) => errorHandler(e))
   return buildObject
 }
 
 async function buildCancel(buildObject) {
   const buildId = buildObject.id
-  axios.post('/build/cancel', buildId).catch((e) => console.error(e.code, 'build cancel'))
+  axios.post('/build/cancel', buildId).catch((e) => errorHandler(e))
+
   return buildObject
 }
 
@@ -90,7 +112,7 @@ async function buildFinish(buildObject) {
   await axios
     .post('/build/finish', finishLog)
     .then(() => console.log('Build logs have been posted'))
-    .catch((e) => console.error(e, 'build finish'))
+    .catch((e) => errorHandler(e))
   return buildObject
 }
 
@@ -102,4 +124,5 @@ module.exports = {
   buildCancel,
   buildFinish,
   getCommitHash,
+  errorHandler,
 }

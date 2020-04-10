@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
       }
       res.send(list)
     })
-    .catch((e) => console.error(e.code ? e.code : e))
+    .catch((e) => helpers.errorHandler(e))
 })
 
 // NOTE: получаем коммитхэш, идем в локальное хранилище,
@@ -43,9 +43,7 @@ router.post('/:commitHash', (req, res) => {
       console.log(response.data.data, 'response on commitHash')
       res.send(response.data.data)
     })
-    .catch((e) => {
-      console.error(e, 'post commit hash')
-    })
+    .catch((e) => helpers.errorHandler(e))
 
   // res.send(commitHash)
 })
@@ -61,7 +59,7 @@ router.get('/:buildId', (req, res) => {
         res.send(buildDetails)
       }
     })
-    .catch((e) => console.error(e))
+    .catch((e) => helpers.errorHandler(e))
 })
 // NOTE: получение логов билда (сплошной текст)
 router.get('/:buildId/logs', (req, res) => {
@@ -88,7 +86,7 @@ router.get('/:buildId/logs', (req, res) => {
           res.send(buildLog)
         }
       })
-      .catch((e) => console.error(e.code))
+      .catch((e) => helpers.errorHandler(e))
   } else res.send(myCache.get(buildId))
   // NOTE: Раскомменть, чтобы посмотреть статистику кеша
   // console.log(myCache.getStats(), 'cached data')

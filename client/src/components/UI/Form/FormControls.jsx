@@ -29,7 +29,7 @@ const FormControls = ({ postSettings, saveSettings, getBuildList, isLoading, set
   }
 
   const handleCancel = () => {
-    history.goBack()
+    history.go(-1)
   }
 
   return (
