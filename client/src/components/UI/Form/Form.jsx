@@ -75,7 +75,6 @@ const Form = ({ postSettings, saveSettings, getBuildList }) => {
               name="repoName"
               clearable
             />
-
             {errors.repoName && <Text className={{ ...textStyle, view: 'error' }}>{errors.repoName.message}</Text>}
           </div>
         </div>

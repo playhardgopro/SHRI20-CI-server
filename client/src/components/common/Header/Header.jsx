@@ -90,8 +90,8 @@ const Header = ({ children, runBuild }) => {
       </div>
       {isModalShown && (
         <Modal
-          onSubmit={(e, inputValue) => {
-            runBuild(inputValue).then((response) => {
+          onSubmit={({ commitHashBuild }) => {
+            runBuild(commitHashBuild).then((response) => {
               history.push(`/build/${response.buildNumber}`)
             })
             setIsModalShown(false)

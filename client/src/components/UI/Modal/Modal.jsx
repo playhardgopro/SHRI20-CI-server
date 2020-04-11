@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { InputGroup, Button } from '../..'
+import { useForm } from 'react-hook-form'
+import { InputGroup, Input, Text, Button } from '../..'
 import './Modal.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
@@ -17,7 +18,19 @@ const inputOption = {
 const Modal = ({ children, className, onSubmit, onCancel }) => {
   const cnModal = cn('modal')
   const cnText = cn('text')
-  const [inputValue, setInputValue] = useState()
+  const cnInput = cn('input')
+  const textStyle = { size: '13-18', type: 'h2' }
+  const { register, handleSubmit, errors, setValue } = useForm()
+
+  const handleClear = ({ name }) => {
+    setValue(name, '')
+  }
+
+  const validators = {
+    required: { value: true, message: 'Field is required' },
+  }
+
+  const getValidators = (rules) => Object.fromEntries(Object.entries(validators).filter(([key]) => rules.includes(key)))
 
   return (
     <div className={cnModal()}>
@@ -25,14 +38,25 @@ const Modal = ({ children, className, onSubmit, onCancel }) => {
         <div className={cnModal('title')}>
           <div className={`${cnModal('header')} ${cnText({ type: 'h2', size: '18-22' })}`}>New build</div>
         </div>
-        <InputGroup
-          options={inputOption}
-          change={(e, value) => {
-            setInputValue(value)
-          }}
-        />
+        <div className={cnInput('group', { vertical: true })}>
+          <label className={cnInput('label', { required: true })} htmlFor="commitHashBuild">
+            <Text className={textStyle}>Enter the commit hash which you want to build.</Text>
+          </label>
+          <Input
+            id="commitHashBuild"
+            placeholder="Commit hash"
+            onClear={handleClear}
+            inputRef={register(getValidators(['required']))}
+            status={errors.commitHashBuild && 'invalid'}
+            name="commitHashBuild"
+            clearable
+          />
+          {errors.commitHashBuild && (
+            <Text className={{ ...textStyle, view: 'error' }}>{errors.commitHashBuild.message}</Text>
+          )}
+        </div>
         <div className={cnModal('controls')}>
-          <Button className={{ size: 'm', view: 'action' }} onClick={(e) => onSubmit(e, inputValue)}>
+          <Button className={{ size: 'm', view: 'action' }} onClick={handleSubmit(onSubmit)}>
             Run build
           </Button>
           <Button className={{ size: 'm', view: 'control' }} onClick={onCancel}>
