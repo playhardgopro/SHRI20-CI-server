@@ -7,7 +7,11 @@
     "dev": "gulp",
     "build": "gulp",
     "server": "gulp server",
-    "start": "npm run server & (cd client && npm start)"
+    "start": "npm run server & (cd client && npm start)",
+    "test:server": "./node_modules/.bin/selenium-standalone install && ./node_modules/.bin/selenium-standalone start",
+    "test": "node_modules/.bin/hermione",
+    "test:hermine": "npx hermione gui",
+    "test:mocha": "npx mocha tests/mocha/index.js"
   },
   "repository": {
     "type": "git",
@@ -29,13 +33,15 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
-    "prettier": "2.0.4",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
     "gulp-nodemon": "^2.5.0",
     "gulp-pug": "^4.0.1",
     "gulp-sass": "^4.0.2",
-    "gulp-sourcemaps": "^2.6.5"
+    "gulp-sourcemaps": "^2.6.5",
+    "mocha": "^7.1.1",
+    "prettier": "2.0.4",
+    "selenium-standalone": "^6.17.0"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -46,6 +52,7 @@
     "express": "^4.17.1",
     "express-json-validator-middleware": "^2.1.1",
     "hermione": "^3.1.0",
+    "html-reporter": "^5.15.2",
     "node-cache": "^5.1.0",
     "redux": "^4.0.5"
   }
