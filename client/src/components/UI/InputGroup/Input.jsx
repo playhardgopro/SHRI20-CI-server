@@ -57,8 +57,8 @@ Input.propTypes = {
   size: PropTypes.oneOf(['s', 'm']),
   clearable: PropTypes.bool,
   onClear: PropTypes.func,
-  status: PropTypes.oneOf(['invalid', 'valid']),
-  width: PropTypes.oneOf(['full', 52]),
+  status: PropTypes.oneOf(['invalid', 'valid', '']),
+  width: PropTypes.oneOf(['full', '52']),
 }
 
 Input.defaultProps = {
