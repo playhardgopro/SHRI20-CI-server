@@ -1,63 +1,56 @@
 // import React from 'react'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { withNaming } from '@bem-react/classname'
-import { useSelector } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
+import { useForm } from 'react-hook-form'
+import { useHistory } from 'react-router-dom'
+import { saveSettings, getSettings, postSettings, getBuildList } from '../../../store/actionCreators'
 
-import { InputGroup } from '../..'
-import FormControls from './FormControls'
+import { InputGroup, Button, Input, Text } from '../..'
 import './Form.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 const cnForm = cn('form')
+const cnInput = cn('input')
+const textStyle = { size: '13-18', type: 'h2' }
 
-const options = [
-  {
-    label: 'Github repository',
-    placeholder: 'username/repo-name',
-    id: 'repoName',
-    isRequired: true,
-    vertical: true,
-  },
-  {
-    label: 'Build command',
-    placeholder: 'npm run build',
-    id: 'buildCommand',
-    isRequired: true,
-    vertical: true,
-  },
-  {
-    label: 'Main branch',
-    placeholder: 'master',
-    id: 'mainBranch',
-    isRequired: false,
-    vertical: true,
-  },
-  {
-    label: 'Synchronize every',
-    placeholder: '10',
-    id: 'period',
-    isRequired: false,
-    vertical: false,
-    text: true,
-    numberMask: true,
-  },
-]
+const Form = ({ postSettings, saveSettings, getBuildList }) => {
+  const defaultValues = useSelector((state) => state.settings)
+  const history = useHistory()
+  const isLoading = useSelector((state) => state.settings.isLoading)
+  const { register, handleSubmit, errors, setValue, reset } = useForm()
 
-const Form = () => {
-  const settings = useSelector((state) => state.settings)
-  const [inputValue, setInputValue] = useState(settings)
+  useEffect(() => {
+    reset(defaultValues)
+  }, [defaultValues, reset])
 
-  function handleChange(id, val) {
-    setInputValue({ ...inputValue, [id]: val })
+  const handleSave = (settings) => {
+    postSettings(settings)
+      .then(() => getBuildList())
+      .then((resolve) => {
+        if (resolve.success) {
+          saveSettings(settings)
+          history.push('/history')
+        } else {
+          isLoading(false)
+        }
+      })
   }
 
-  const Inputs = () => {
-    return options.map((el) => (
-      <div key={el.id} className={cnForm('item', { 'indent-t': 'xl' })}>
-        <InputGroup options={el} change={handleChange} />
-      </div>
-    ))
+  const handleCancel = () => {
+    history.go(-1)
   }
+
+  const handleClear = ({ name }) => {
+    setValue(name, '')
+  }
+
+  const validators = {
+    required: { value: true, message: 'Field is required' },
+    pattern: { value: /^[1-9]\d*$/, message: 'Field must be number and not equal to 0' },
+  }
+
+  const getValidators = (rules) => Object.fromEntries(Object.entries(validators).filter(([key]) => rules.includes(key)))
 
   return (
     <form className={cnForm()}>
@@ -67,10 +60,93 @@ const Form = () => {
           Configure repository connection and synchronization settings.
         </div>
       </div>
-      <div className={cnForm('items')}>{Inputs()}</div>
-      <FormControls settings={inputValue} />
+      <div className={cnForm('items')}>
+        <div className={cnForm('item', { 'indent-t': 'xl' })}>
+          <div className={cnInput('group', { vertical: true })}>
+            <label className={cnInput('label', { required: true })} htmlFor="repository">
+              <Text className={textStyle}>Github repository</Text>
+            </label>
+            <Input
+              id="repoName"
+              placeholder="username/reponame"
+              onClear={handleClear}
+              inputRef={register(getValidators(['required']))}
+              status={errors.repoName && 'invalid'}
+              name="repoName"
+              clearable
+            />
+            {errors.repoName && <span style={{ color: 'red' }}>{errors.repoName.message}</span>}
+          </div>
+        </div>
+        <div className={cnForm('item', { 'indent-t': 'xl' })}>
+          <div className={cnInput('group', { vertical: true })}>
+            <label className={cnInput('label', { required: true })} htmlFor="repository">
+              <Text className={textStyle}>Build command</Text>
+            </label>
+            <Input
+              id="buildCommand"
+              placeholder="npm run build"
+              onClear={handleClear}
+              inputRef={register(getValidators(['required']))}
+              status={errors.buildCommand && 'invalid'}
+              name="buildCommand"
+              clearable
+            />
+            {errors.buildCommand && <span style={{ color: 'red' }}>{errors.buildCommand.message}</span>}
+          </div>
+        </div>
+        <div className={cnForm('item', { 'indent-t': 'xl' })}>
+          <div className={cnInput('group', { vertical: true })}>
+            <label className={cnInput('label', { required: true })} htmlFor="repository">
+              <Text className={textStyle}>Main branch</Text>
+            </label>
+            <Input
+              id="mainBranch"
+              placeholder="master"
+              onClear={handleClear}
+              inputRef={register(getValidators(['required']))}
+              status={errors.mainBranch && 'invalid'}
+              name="mainBranch"
+              clearable
+            />
+            {errors.mainBranch && <span style={{ color: 'red' }}>{errors.mainBranch.message}</span>}
+          </div>
+        </div>
+        <div className={cnForm('item', { 'indent-t': 'xl' })}>
+          <div className={cnInput('group', { vertical: false })}>
+            <label className={cnInput('label', { required: false })} htmlFor="period">
+              <Text className={textStyle}>Synchronize every</Text>
+            </label>
+            <Input
+              id="period"
+              placeholder="10"
+              onClear={handleClear}
+              inputRef={register(getValidators(['required', 'pattern']))}
+              status={errors.period && 'invalid'}
+              name="period"
+              width="52"
+              text="minutes"
+            />
+            {errors.period && <span style={{ color: 'red' }}>{errors.period.message}</span>}
+          </div>
+        </div>
+      </div>
+      <div className={cnForm('controls')}>
+        <Button className={{ size: 'm', view: 'action' }} onClick={handleSubmit(handleSave)} disabled={isLoading}>
+          Save
+        </Button>
+        <Button className={{ size: 'm', view: 'control' }} onClick={handleCancel} disabled={isLoading}>
+          Cancel
+        </Button>
+      </div>
     </form>
   )
 }
+const mapDispatchToProps = {
+  saveSettings,
+  getSettings,
+  postSettings,
+  getBuildList,
+}
 
-export default Form
+export default connect(null, mapDispatchToProps)(Form)

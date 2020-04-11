@@ -18,10 +18,10 @@
   color: var(--color-bg-border-focused);
 }
 
-.input.input_invalid {
+.input.input_status_invalid {
   border: 2px solid var(--color-bg-invalid);
 }
-.input.input_valid {
+.input.input_status_valid {
   border: 2px solid var(--color-bg-valid);
 }
 .input_size_m {

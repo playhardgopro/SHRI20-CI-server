@@ -59,7 +59,7 @@ const InputGroup = ({ children, className, options, change }) => {
       <div className={cnInput('controls')}>
         {!numberMask && (
           <input
-            defaultValue={value}
+            // defaultValue={value}
             value={value}
             onChange={(e) => {
               change(id, e.target.value)
