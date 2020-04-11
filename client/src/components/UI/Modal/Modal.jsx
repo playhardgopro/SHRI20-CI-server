@@ -1,21 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { useForm } from 'react-hook-form'
-import { InputGroup, Input, Text, Button } from '../..'
+import { Input, Text, Button } from '../..'
 import './Modal.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const inputOption = {
-  label: 'Enter the commit hash which you want to build.',
-  placeholder: 'Commit hash',
-  id: 'commitHashBuild',
-  isRequired: false,
-  vertical: true,
-}
-
-const Modal = ({ children, className, onSubmit, onCancel }) => {
+const Modal = ({ onSubmit, onCancel }) => {
   const cnModal = cn('modal')
   const cnText = cn('text')
   const cnInput = cn('input')
@@ -69,12 +61,12 @@ const Modal = ({ children, className, onSubmit, onCancel }) => {
 }
 
 Modal.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.objectOf(PropTypes.string || PropTypes.bool),
+  onSubmit: PropTypes.func,
+  onCancel: PropTypes.func,
 }
 Modal.defaultProps = {
-  children: '',
-  className: {},
+  onSubmit: () => {},
+  onCancel: () => {},
 }
 
 export default Modal
