@@ -1,12 +1,12 @@
 // import React from 'react'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { withNaming } from '@bem-react/classname'
 import { connect, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
 import { saveSettings, getSettings, postSettings, getBuildList } from '../../../store/actionCreators'
 
-import { InputGroup, Button, Input, Text } from '../..'
+import { Button, Input, Text } from '../..'
 import './Form.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
@@ -75,7 +75,8 @@ const Form = ({ postSettings, saveSettings, getBuildList }) => {
               name="repoName"
               clearable
             />
-            {errors.repoName && <span style={{ color: 'red' }}>{errors.repoName.message}</span>}
+
+            {errors.repoName && <Text className={{ ...textStyle, view: 'error' }}>{errors.repoName.message}</Text>}
           </div>
         </div>
         <div className={cnForm('item', { 'indent-t': 'xl' })}>
@@ -92,7 +93,9 @@ const Form = ({ postSettings, saveSettings, getBuildList }) => {
               name="buildCommand"
               clearable
             />
-            {errors.buildCommand && <span style={{ color: 'red' }}>{errors.buildCommand.message}</span>}
+            {errors.buildCommand && (
+              <Text className={{ ...textStyle, view: 'error' }}>{errors.buildCommand.message}</Text>
+            )}
           </div>
         </div>
         <div className={cnForm('item', { 'indent-t': 'xl' })}>
@@ -109,7 +112,7 @@ const Form = ({ postSettings, saveSettings, getBuildList }) => {
               name="mainBranch"
               clearable
             />
-            {errors.mainBranch && <span style={{ color: 'red' }}>{errors.mainBranch.message}</span>}
+            {errors.mainBranch && <Text className={{ ...textStyle, view: 'error' }}>{errors.mainBranch.message}</Text>}
           </div>
         </div>
         <div className={cnForm('item', { 'indent-t': 'xl' })}>
@@ -127,8 +130,8 @@ const Form = ({ postSettings, saveSettings, getBuildList }) => {
               width="52"
               text="minutes"
             />
-            {errors.period && <span style={{ color: 'red' }}>{errors.period.message}</span>}
           </div>
+          {errors.period && <Text className={{ ...textStyle, view: 'error' }}>{errors.period.message}</Text>}
         </div>
       </div>
       <div className={cnForm('controls')}>

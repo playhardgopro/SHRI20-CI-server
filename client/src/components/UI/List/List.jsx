@@ -16,7 +16,7 @@ const List = ({ getDetailsByBuildId, getBuildList }) => {
   const [showButton, setShowButton] = useState(true)
 
   function handleClick(event, { buildNumber, buildId }) {
-    getDetailsByBuildId(buildId)
+    // getDetailsByBuildId(buildId)
     history.push({ pathname: `build/${buildNumber}`, state: buildId })
   }
 
