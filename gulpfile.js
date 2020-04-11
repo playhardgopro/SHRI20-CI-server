@@ -1,70 +1,70 @@
-var gulp = require ('gulp');
-// var rename = require ('gulp-rename');
-// var htmlhint = require("gulp-htmlhint");
-// var concat = require('gulp-concat');
-var sass = require ('gulp-sass');
-var pug = require ('gulp-pug');
-var clean = require('gulp-clean');
-// var uncss = require('gulp-uncss');
-// var sourcemaps = require('gulp-sourcemaps');
-var browserSync = require ('browser-sync').create();
+const gulp = require('gulp')
+const nodemon = require('gulp-nodemon')
+const sass = require('gulp-sass')
+const pug = require('gulp-pug')
+const clean = require('gulp-clean')
+const browserSync = require('browser-sync').create()
 
-gulp.task('scss',function(done) {
-  gulp.src('./src/scss/style.scss')
-  // .pipe(sourcemaps.init())
-  .pipe(sass({
-    errorLogToConsole: true,
-    // outputStyle: 'compressed'
-  }))
+gulp.task('scss', (done) => {
+  gulp
+    .src('./src/scss/style.scss')
+    .pipe(
+      sass({
+        errorLogToConsole: true,
+        // outputStyle: 'compressed'
+      })
+    )
     .on('error', console.error.bind(console))
-    // .pipe(sourcemaps.write('./'))
-    // .pipe(concat('style.css'))
-  //   .pipe(uncss({
-  //     html: ['./build/*.html']
-  // }))
-    .pipe(gulp.dest('./build'))
-    .pipe(browserSync.stream());
-  
-  done();
+    .pipe(gulp.dest('./static'))
+    .pipe(browserSync.stream())
+
+  done()
 })
 
-gulp.task('html', function (done) {
-  gulp.src("./src/*.pug")
-  .pipe(
-    pug({
-      pretty: true
-    })
-  )
-  .pipe(gulp.dest('./build'))
+gulp.task('html', (done) => {
+  gulp
+    .src('./src/*.pug')
+    .pipe(
+      pug({
+        pretty: true,
+      })
+    )
+    .pipe(gulp.dest('./static'))
   done()
-});
+})
 
-gulp.task('sync',function(done) {
+gulp.task('sync', (done) => {
   browserSync.init({
     server: {
-      baseDir: "./build"
+      baseDir: './static',
     },
-    port: 3000
-    });
-    done();
-})
-
-gulp.task('reload',function browserReload(done) {
-  browserSync.reload();
+    port: 3030,
+  })
   done()
 })
 
-gulp.task('clean', function() {
-  return gulp.src(['build/*'], {read: false})
-    .pipe(clean());
-});
+gulp.task('reload', (done) => {
+  browserSync.reload()
+  done()
+})
 
-gulp.task('watchFile', function() {
-  gulp.watch("./src/scss/**/*.scss", gulp.series('scss', 'reload'));
-  gulp.watch("./src/**/*.pug", gulp.series('html', 'reload'));
-  
+gulp.task('clean', () => {
+  return gulp.src(['static/*'], { read: false }).pipe(clean())
+})
+
+gulp.task('server', () => {
+  nodemon({
+    script: './server/server.js',
+    watch: ['./server/**/*.js'],
+    ext: 'js',
+  })
+})
+
+gulp.task('watchFile', () => {
+  gulp.watch('./src/scss/**/*.scss', gulp.series('scss', 'reload'))
+  gulp.watch('./src/**/*.pug', gulp.series('html', 'reload'))
 })
 
 gulp.task('build', gulp.series('scss', 'html'))
 
-gulp.task('default', gulp.series('clean','build', gulp.parallel('watchFile', 'sync')));
+gulp.task('default', gulp.series('clean', 'build', gulp.parallel('watchFile', 'sync')))

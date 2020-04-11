@@ -1,0 +1,24 @@
+.icon-box {
+  display: flex;
+}
+
+.icon-box__icon {
+  justify-content: center;
+}
+
+.icon-box .icon {
+  position: relative;
+}
+
+.icon-box__icon_size_m {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-box__icon_indent-r_4 {
+  margin-right: 4px;
+}
+
+.icon-box__content .text:not(:last-of-type) {
+  margin-right: var(--space-4);
+}
