@@ -9,6 +9,7 @@ $screen-m: 768px;
   padding: var(--space-10) var(--padding);
   display: flex;
   margin: 0 auto;
+  max-width: 1024px;
 }
 
 .header__content_distribute_between {
