@@ -20,7 +20,9 @@ const Footer = () => {
           </Link>
         </div>
         <div className={cnFooter('copyright')}>
-          <div className={cnText({ size: '13-18', view: 'ghost' })}>&copy; 2020 Daniil Egortsev</div>
+          <a href="https://github.com/playhardgopro">
+            <div className={cnText({ size: '13-18', view: 'ghost', type: 'link' })}>&copy; 2020 Daniil Egortsev</div>
+          </a>
         </div>
       </div>
     </div>
