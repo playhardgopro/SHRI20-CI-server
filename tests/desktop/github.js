@@ -1,23 +1,36 @@
 const { assert } = require('chai')
 
-describe('github', function () {
-  it('should find hermione', function () {
+describe('Settings', function () {
+  it('input repoName exists', function () {
     return this.browser
-      .url('https://github.com/gemini-testing/hermione')
-      .getText('#readme h1')
-      .then(function (title) {
-        assert.equal(title, 'Hermione')
+      .url('http://localhost:3000/settings')
+      .isExisting('#repoName')
+      .then((exists) => {
+        assert.ok(exists, 'Инпут не появился')
       })
   })
-})
-
-describe('react', function () {
-  it('should find repoName input', function () {
+  it('input mainBranch exists', function () {
     return this.browser
-      .url('https://localhost:3000/settings')
-      .getText('#repoName')
-      .then(function (title) {
-        assert.equal(title, 'Hermione')
+      .url('http://localhost:3000/settings')
+      .isExisting('#mainBranch')
+      .then((exists) => {
+        assert.ok(exists, 'Инпут не появился')
+      })
+  })
+  it('input buildCommand exists', function () {
+    return this.browser
+      .url('http://localhost:3000/settings')
+      .isExisting('#buildCommand')
+      .then((exists) => {
+        assert.ok(exists, 'Инпут не появился')
+      })
+  })
+  it('input period exists', function () {
+    return this.browser
+      .url('http://localhost:3000/settings')
+      .isExisting('#period')
+      .then((exists) => {
+        assert.ok(exists, 'Инпут не появился')
       })
   })
 })

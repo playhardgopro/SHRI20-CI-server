@@ -11,7 +11,8 @@
     "test:server": "./node_modules/.bin/selenium-standalone install && ./node_modules/.bin/selenium-standalone start",
     "test": "node_modules/.bin/hermione",
     "test:hermine": "npx hermione gui",
-    "test:mocha": "BABEL_ENV=test mocha"
+    "test:mocha": "BABEL_ENV=test mocha",
+    "jest": "jest --rootDir __test__ --watch"
   },
   "repository": {
     "type": "git",
@@ -60,6 +61,7 @@
     "hermione": "^3.1.0",
     "html-reporter": "^5.15.2",
     "node-cache": "^5.1.0",
+    "react-test-renderer": "^16.13.1",
     "redux": "^4.0.5",
     "sinon": "^9.0.2",
     "xhr-mock": "^2.5.1"

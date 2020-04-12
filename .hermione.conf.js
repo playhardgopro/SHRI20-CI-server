@@ -4,6 +4,8 @@ module.exports = {
       files: 'tests/desktop',
     },
   },
+  // baseUrl: 'http://localhost:3000',
+  // gridUrl: 'http://0.0.0.0:4444/wd/hub',
 
   browsers: {
     chrome: {
