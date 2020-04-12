@@ -7,7 +7,7 @@ const browserSync = require('browser-sync').create()
 
 gulp.task('scss', (done) => {
   gulp
-    .src('./src/scss/style.scss')
+    .src('./server/src/scss/style.scss')
     .pipe(
       sass({
         errorLogToConsole: true,
@@ -15,7 +15,7 @@ gulp.task('scss', (done) => {
       })
     )
     .on('error', console.error.bind(console))
-    .pipe(gulp.dest('./static'))
+    .pipe(gulp.dest('./server/static'))
     .pipe(browserSync.stream())
 
   done()
@@ -23,20 +23,20 @@ gulp.task('scss', (done) => {
 
 gulp.task('html', (done) => {
   gulp
-    .src('./src/*.pug')
+    .src('./server/src/*.pug')
     .pipe(
       pug({
         pretty: true,
       })
     )
-    .pipe(gulp.dest('./static'))
+    .pipe(gulp.dest('./server/static'))
   done()
 })
 
 gulp.task('sync', (done) => {
   browserSync.init({
     server: {
-      baseDir: './static',
+      baseDir: './server/static',
     },
     port: 3030,
   })
@@ -49,7 +49,7 @@ gulp.task('reload', (done) => {
 })
 
 gulp.task('clean', () => {
-  return gulp.src(['static/*'], { read: false }).pipe(clean())
+  return gulp.src(['/server/static/*'], { read: false }).pipe(clean())
 })
 
 gulp.task('server', () => {
@@ -61,8 +61,8 @@ gulp.task('server', () => {
 })
 
 gulp.task('watchFile', () => {
-  gulp.watch('./src/scss/**/*.scss', gulp.series('scss', 'reload'))
-  gulp.watch('./src/**/*.pug', gulp.series('html', 'reload'))
+  gulp.watch('./server/src/scss/**/*.scss', gulp.series('scss', 'reload'))
+  gulp.watch('./server/src/**/*.pug', gulp.series('html', 'reload'))
 })
 
 gulp.task('build', gulp.series('scss', 'html'))

@@ -24,7 +24,7 @@ app.use(cors())
 app.use('/api/builds', buildsRoutes)
 app.use('/api/settings', settingsRoutes)
 
-app.use(express.static(path.resolve(__dirname, '../static')))
+app.use(express.static(path.resolve(__dirname, './static')))
 
 app.use((err, req, res, next) => {
   if (err instanceof ValidationError) {
@@ -60,3 +60,6 @@ app.get('/api/startBuild', (req, res) => {
 })
 
 app.listen(3030)
+
+// NOTE: for testing
+module.exports = app

@@ -11,7 +11,7 @@
     "test:server": "./node_modules/.bin/selenium-standalone install && ./node_modules/.bin/selenium-standalone start",
     "test": "node_modules/.bin/hermione",
     "test:hermine": "npx hermione gui",
-    "test:mocha": "npx mocha tests/mocha/index.js"
+    "test:mocha": "BABEL_ENV=test mocha"
   },
   "repository": {
     "type": "git",
@@ -44,8 +44,14 @@
     "selenium-standalone": "^6.17.0"
   },
   "dependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/register": "^7.9.0",
     "axios": "^0.19.2",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "cross-fetch": "^3.0.4",
     "dotenv": "^8.2.0",
@@ -54,6 +60,30 @@
     "hermione": "^3.1.0",
     "html-reporter": "^5.15.2",
     "node-cache": "^5.1.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "sinon": "^9.0.2",
+    "xhr-mock": "^2.5.1"
+  },
+  "proxy": "http://localhost:3030",
+  "babel": {
+    "env": {
+      "test-console": {
+        "presets": [
+          "@babel/preset-env"
+        ],
+        "plugins": [
+          "@babel/plugin-proposal-class-properties"
+        ]
+      },
+      "test": {
+        "presets": [
+          "@babel/preset-env"
+        ],
+        "plugins": [
+          "@babel/plugin-proposal-class-properties",
+          "transform-remove-console"
+        ]
+      }
+    }
   }
 }
