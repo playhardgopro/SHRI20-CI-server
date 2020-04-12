@@ -157,9 +157,9 @@ exports[`renders Card correctly 1`] = `
             className=""
           >
             <time
-              dateTime={"2020-04-12T20:04:29.284Z"}
+              dateTime={"2020-04-12T20:13:31.333Z"}
             >
-              12 Apr, 23:04
+              12 Apr, 23:13
             </time>
           </div>
         </div>

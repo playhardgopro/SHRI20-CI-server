@@ -18,6 +18,7 @@ it('renders Card correctly', () => {
     branchName: 'master',
     authorName: 'Daniel',
     status: 'Waiting',
+    start: '2020-04-12T20:13:31.333Z',
   }
   const card = renderer.create(<Card options={options} />).toJSON()
   expect(card).toMatchSnapshot()
