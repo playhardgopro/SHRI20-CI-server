@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input empty renders correctly 1`] = `
+<div
+  className="input__controls"
+>
+  <input
+    className="input input_width_full input_size_m text text_size_13-15"
+    id="test"
+    name="test"
+    placeholder="test"
+  />
+  <div
+    className="input__controls-append"
+  >
+    <button
+      className="button button_size_m button_distribute_center button_view_control"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        className="icon icon_size_m"
+      >
+        <svg
+          height="16"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 16C3.6 16 0 12.4 0 8C0 3.6 3.6 0 8 0C12.4 0 16 3.6 16 8C16 12.4 12.4 16 8 16ZM12 5.12L10.88 4L8 6.88L5.12 4L4 5.12L6.88 8L4 10.88L5.12 12L8 9.12L10.88 12L12 10.88L9.12 8L12 5.12Z"
+          />
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Input invalid renders correctly 1`] = `
+<div
+  className="input__controls"
+>
+  <input
+    className="input input_status_invalid input_width_full input_size_m text text_size_13-15"
+    id="test"
+    name="test"
+    placeholder=""
+  />
+  <div
+    className="input__controls-append"
+  >
+    <button
+      className="button button_size_m button_distribute_center button_view_control"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        className="icon icon_size_m"
+      >
+        <svg
+          height="16"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 16C3.6 16 0 12.4 0 8C0 3.6 3.6 0 8 0C12.4 0 16 3.6 16 8C16 12.4 12.4 16 8 16ZM12 5.12L10.88 4L8 6.88L5.12 4L4 5.12L6.88 8L4 10.88L5.12 12L8 9.12L10.88 12L12 10.88L9.12 8L12 5.12Z"
+          />
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Input renders correctly 1`] = `
+<div
+  className="input__controls"
+>
+  <input
+    className="input input_width_full input_size_m text text_size_13-15"
+    id="test"
+    name="test"
+    placeholder=""
+  />
+  <div
+    className="input__controls-append"
+  >
+    <button
+      className="button button_size_m button_distribute_center button_view_control"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        className="icon icon_size_m"
+      >
+        <svg
+          height="16"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 16C3.6 16 0 12.4 0 8C0 3.6 3.6 0 8 0C12.4 0 16 3.6 16 8C16 12.4 12.4 16 8 16ZM12 5.12L10.88 4L8 6.88L5.12 4L4 5.12L6.88 8L4 10.88L5.12 12L8 9.12L10.88 12L12 10.88L9.12 8L12 5.12Z"
+          />
+        </svg>
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Input short renders correctly 1`] = `
+<div
+  className="input__controls"
+>
+  <input
+    className="input input_width_52 input_size_m text text_size_13-15"
+    id="test"
+    name="test"
+    placeholder=""
+  />
+  <div
+    className="input__controls-append"
+  >
+    <span
+      className="text text_size_13-18"
+    >
+      minutes
+    </span>
+  </div>
+</div>
+`;
