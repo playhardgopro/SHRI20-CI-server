@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Log renders correctly 1`] = `
+<div
+  className="log"
+>
+  <div
+    className="log__pre log__pre_scroll"
+  >
+    <pre
+      className="pre"
+    >
+      <div
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "> shri-2020-task-1@1.0.0 build 
+> webpack --mode=production \\"--colors\\"
+
+Hash: <b>e541e85eb5e88a853b17<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">
+Version: webpack <b>4.41.5<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">
+Time: <b>1782<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">ms
+Built at: 2020-03-30 <b>0:39:32<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">
+        <b>Asset<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">      <b>Size<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">  <b>Chunks<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">  <b><span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">                 <b><span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\"><b>Chunk Names<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">
+    <b><span style=\\"color:#0A0\\">script.js<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">  1.83 KiB       <b>0<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">  <b><span style=\\"color:#0A0\\">[emitted]<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">        main
+<b><span style=\\"color:#0A0\\">script.js.map<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">  7.03 KiB       <b>0<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">  <b><span style=\\"color:#0A0\\">[emitted] [dev]<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">  main
+    <b><span style=\\"color:#0A0\\">style.css<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">  20.5 KiB       <b>0<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">  <b><span style=\\"color:#0A0\\">[emitted]<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">        main
+<b><span style=\\"color:#0A0\\">style.css.map<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">  24.8 KiB       <b>0<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">  <b><span style=\\"color:#0A0\\">[emitted] [dev]<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">  main
+Entrypoint <b>main<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\"> = <b><span style=\\"color:#0A0\\">style.css<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\"> <b><span style=\\"color:#0A0\\">script.js<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\"> <b><span style=\\"color:#0A0\\">style.css.map<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\"> <b><span style=\\"color:#0A0\\">script.js.map<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">
+[0] <b>./src/js/utils.js<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\"> 514 bytes {<b><span style=\\"color:#A50\\">0<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">}<b><span style=\\"color:#0A0\\"> [built]<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">
+[1] <b>multi ./src/js/_index.js ./src/scss/index.scss<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\"> 40 bytes {<b><span style=\\"color:#A50\\">0<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">}<b><span style=\\"color:#0A0\\"> [built]<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">
+[2] <b>./src/js/_index.js<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\"> 89 bytes {<b><span style=\\"color:#A50\\">0<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">}<b><span style=\\"color:#0A0\\"> [built]<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">
+[3] <b>./src/js/onoffswitch.js<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\"> 654 bytes {<b><span style=\\"color:#A50\\">0<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">}<b><span style=\\"color:#0A0\\"> [built]<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">
+[4] <b>./src/js/e-accordion.js<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\"> 403 bytes {<b><span style=\\"color:#A50\\">0<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">}<b><span style=\\"color:#0A0\\"> [built]<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">
+[5] <b>./src/scss/index.scss<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\"> 39 bytes {<b><span style=\\"color:#A50\\">0<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">}<b><span style=\\"color:#0A0\\"> [built]<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">
+    + 1 hidden module
+Child <b>mini-css-extract-plugin node_modules/css-loader/dist/cjs.js??ref--5-1!node_modules/postcss-loader/src/index.js!node_modules/sass-loader/dist/cjs.js!src/scss/index.scss<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">:
+    Entrypoint <b>mini-css-extract-plugin<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\"> = <b><span style=\\"color:#0A0\\">*<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">
+    [0] <b>./node_modules/css-loader/dist/cjs.js??ref--5-1!./node_modules/postcss-loader/src!./node_modules/sass-loader/dist/cjs.js!./src/scss/index.scss<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\"> 20.7 KiB {<b><span style=\\"color:#A50\\">0<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">}<b><span style=\\"color:#0A0\\"> [built]<span style=\\"color:#000\\"><span style=\\"font-weight:normal;text-decoration:none;font-style:normal\\">
+        + 1 hidden module
+</span></span></span></b></span></span></span></b></span></span></b></span></span></span></b></span></span></b></span></span></b></span></span></span></b></span></span></span></b></span></span></b></span></span></span></b></span></span></span></b></span></span></b></span></span></span></b></span></span></span></b></span></span></b></span></span></span></b></span></span></span></b></span></span></b></span></span></span></b></span></span></span></b></span></span></b></span></span></span></b></span></span></span></b></span></span></b></span></span></span></b></span></span></span></b></span></span></span></b></span></span></span></b></span></span></b></span></span></span></b></span></span></b></span></span></span></b></span></span></span></b></span></span></b></span></span></span></b></span></span></span></b></span></span></b></span></span></span></b></span></span></span></b></span></span></b></span></span></span></b></span></span></b></span></span></b></span></span></b></span></span></b></span></span></b></span></span></b></span></span></b></span></span></b></span></span></b></span></span></b>",
+          }
+        }
+      />
+    </pre>
+  </div>
+</div>
+`;

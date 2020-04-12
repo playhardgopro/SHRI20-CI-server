@@ -2,11 +2,6 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import Button from '../components/UI/Button/Button'
 
-jest.mock('react-router-dom', () => ({
-  useRouteMatch: jest.fn(() => {
-    return { path: '/history' }
-  }),
-}))
 describe('Button', () => {
   it('renders hidden correctly', () => {
     const hiddenBtn = renderer

@@ -8,7 +8,7 @@ jest.mock('react-router-dom', () => ({
   }),
 }))
 describe('Card', () => {
-  it('renders correctly', () => {
+  it('history renders correctly', () => {
     const options = {
       id: '8c677446-d637-4f4c-8cca-f77baa71bd7c',
       configurationId: '262f7f07-1e2c-44f0-8931-cf4f5012c10b',
@@ -22,6 +22,5 @@ describe('Card', () => {
     }
     const card = renderer.create(<Card options={options} />).toJSON()
     expect(card).toMatchSnapshot()
-    return undefined
   })
 })
