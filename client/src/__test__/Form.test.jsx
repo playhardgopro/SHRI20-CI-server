@@ -105,9 +105,10 @@ const Stub = () => {
     </form>
   )
 }
+describe('Form', () => {
+  it('renders correctly', () => {
+    const form = renderer.create(<Stub />).toJSON()
 
-it('renders Form correctly', () => {
-  const form = renderer.create(<Stub />).toJSON()
-
-  expect(form).toMatchSnapshot()
+    expect(form).toMatchSnapshot()
+  })
 })

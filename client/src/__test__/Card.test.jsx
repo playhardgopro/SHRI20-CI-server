@@ -7,20 +7,21 @@ jest.mock('react-router-dom', () => ({
     return { path: '/history' }
   }),
 }))
-
-it('renders Card correctly', () => {
-  const options = {
-    id: '8c677446-d637-4f4c-8cca-f77baa71bd7c',
-    configurationId: '262f7f07-1e2c-44f0-8931-cf4f5012c10b',
-    buildNumber: 5,
-    commitMessage: "Merge branch 'dz-4-react'",
-    commitHash: '563db2c756a782e94c552ca86c50dfc16b558ab4',
-    branchName: 'master',
-    authorName: 'Daniel',
-    status: 'Waiting',
-    start: '2020-04-12T20:13:31.333Z',
-  }
-  const card = renderer.create(<Card options={options} />).toJSON()
-  expect(card).toMatchSnapshot()
-  return undefined
+describe('Card', () => {
+  it('renders correctly', () => {
+    const options = {
+      id: '8c677446-d637-4f4c-8cca-f77baa71bd7c',
+      configurationId: '262f7f07-1e2c-44f0-8931-cf4f5012c10b',
+      buildNumber: 5,
+      commitMessage: "Merge branch 'dz-4-react'",
+      commitHash: '563db2c756a782e94c552ca86c50dfc16b558ab4',
+      branchName: 'master',
+      authorName: 'Daniel',
+      status: 'Waiting',
+      start: '2020-04-12T20:13:31.333Z',
+    }
+    const card = renderer.create(<Card options={options} />).toJSON()
+    expect(card).toMatchSnapshot()
+    return undefined
+  })
 })
