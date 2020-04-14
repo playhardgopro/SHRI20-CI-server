@@ -4,14 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "gulp",
-    "build": "gulp",
-    "server": "gulp server",
+    "dev:server": "gulp server",
+    "build:server": "gulp server",
+    "server": "node ./server/server.js",
     "start": "npm run server & (cd client && npm start)",
     "test:server": "./node_modules/.bin/selenium-standalone install && ./node_modules/.bin/selenium-standalone start",
-    "test": "node_modules/.bin/hermione",
-    "test:hermine": "npx hermione gui",
-    "test:mocha": "BABEL_ENV=test mocha",
+    "test:int": "node_modules/.bin/hermione",
+    "test:hermione": "npx hermione gui",
     "jest": "jest --rootDir __test__ --watch"
   },
   "repository": {
