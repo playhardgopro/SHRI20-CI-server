@@ -33,4 +33,11 @@ describe('Settings', function () {
         assert.ok(exists, 'Инпут не появился')
       })
   })
+  it('screenshot test', async function () {
+    return this.browser.url('http://localhost:3000/settings').assertView('settings', 'body', {
+      allowViewportOverflow: true,
+      compositeImage: true,
+      screenshotDelay: 100,
+    })
+  })
 })

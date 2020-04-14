@@ -40,7 +40,6 @@
     "gulp-pug": "^4.0.1",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
-    "mocha": "^7.1.1",
     "prettier": "2.0.4",
     "selenium-standalone": "^6.17.0"
   },
@@ -62,30 +61,7 @@
     "html-reporter": "^5.15.2",
     "node-cache": "^5.1.0",
     "react-test-renderer": "^16.13.1",
-    "redux": "^4.0.5",
-    "sinon": "^9.0.2",
-    "xhr-mock": "^2.5.1"
+    "redux": "^4.0.5"
   },
-  "proxy": "http://localhost:3030",
-  "babel": {
-    "env": {
-      "test-console": {
-        "presets": [
-          "@babel/preset-env"
-        ],
-        "plugins": [
-          "@babel/plugin-proposal-class-properties"
-        ]
-      },
-      "test": {
-        "presets": [
-          "@babel/preset-env"
-        ],
-        "plugins": [
-          "@babel/plugin-proposal-class-properties",
-          "transform-remove-console"
-        ]
-      }
-    }
-  }
+  "proxy": "http://localhost:3030"
 }

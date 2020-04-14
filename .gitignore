@@ -1,4 +1,6 @@
 node_modules/
 .env
+coverage
+images
 localStorage/
-tests/hermione-reports
+hermione/reports
