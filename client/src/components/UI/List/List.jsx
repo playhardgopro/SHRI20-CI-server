@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { connect, useSelector } from 'react-redux'
@@ -10,25 +10,22 @@ import './List.scss'
 const cn = withNaming({ n: '', e: '__', m: '_' })
 const cnList = cn('list')
 
-const List = ({ getDetailsByBuildId, getBuildList }) => {
+const List = ({ getBuildList }) => {
   const history = useHistory()
   const buildList = useSelector((state) => state.history.buildList)
-  const [showButton, setShowButton] = useState(false)
+  const [showButton, setShowButton] = useState(true)
 
   function handleClick(event, { buildNumber, buildId }) {
     // getDetailsByBuildId(buildId)
     history.push({ pathname: `build/${buildNumber}`, state: buildId })
   }
 
-  useEffect(() => {}, [showButton])
-
   function handleShowMore() {
     let currentAmount = buildList.length || 10
 
     if (currentAmount >= buildList[0].buildNumber) {
-      setShowButton(false)
+      setShowButton(!showButton)
     }
-    setShowButton(true)
 
     currentAmount += 25
     getBuildList(currentAmount)
