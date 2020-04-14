@@ -38,7 +38,7 @@ export function saveError(payload) {
 }
 
 export function isLoading(payload) {
-  console.log(payload, 'loading')
+  // console.log(payload, 'loading')
   return {
     type: 'IS_LOADING',
     payload,
@@ -162,7 +162,7 @@ export function getSettings() {
     // This is not required by thunk middleware, but it is convenient for us.
 
     return axios
-      .get('/api/settings ')
+      .get('/api/settings')
       .then((json) => {
         if (json.status === 200 && json.data != '') {
           dispatch(saveSettings(json.data))
