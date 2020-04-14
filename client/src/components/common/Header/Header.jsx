@@ -33,13 +33,13 @@ const Header = ({ children, runBuild }) => {
       hiddenBtn.runBuild = false
       hiddenBtn.settings = false
       header.style = { type: 'h1', size: '24-30', bold: true }
-      header.text = settings.repoName
+      header.text = settings.repoName || 'username/reponame'
       break
     case '/build/:buildNumber':
       hiddenBtn.rebuild = false
       hiddenBtn.settings = false
       header.style = { type: 'h1', size: '24-30', bold: true }
-      header.text = settings.repoName
+      header.text = settings.repoName || 'username/reponame'
       break
     default:
       header.style = { type: 'h1', size: '24-28', view: 'ghost' }
@@ -103,17 +103,15 @@ const Header = ({ children, runBuild }) => {
   )
 }
 
-Header.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.objectOf(PropTypes.string || PropTypes.bool),
-}
-Header.defaultProps = {
-  children: '',
-  className: {},
-}
-
 const mapDispatchToProps = {
   runBuild,
 }
 
 export default connect(null, mapDispatchToProps)(Header)
+
+Header.propTypes = {
+  children: PropTypes.node,
+}
+Header.defaultProps = {
+  children: '',
+}

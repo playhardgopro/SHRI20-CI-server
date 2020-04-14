@@ -70,7 +70,7 @@ const CardMeta2 = ({ start, duration, status }) => {
   )
 }
 
-const Card = ({ children, className, options, onClick }) => {
+const Card = ({ options, onClick }) => {
   const { id, buildNumber, commitMessage, commitHash, branchName, authorName, start, duration, status } = options
   const match = useRouteMatch()
   let viewStatus = ''
@@ -134,12 +134,20 @@ const Card = ({ children, className, options, onClick }) => {
 }
 
 Card.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])),
+  options: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
 }
 Card.defaultProps = {
-  children: '',
-  className: {},
+  options: {
+    id: '1',
+    buildNumber: '1',
+    commitMessage: 'commit message',
+    commitHash: 'commit hash',
+    branchName: 'branchName',
+    authorName: 'authorName',
+    start: '"2020-04-14T18:36:22.229Z"',
+    duration: '1234',
+    status: 'Waiting',
+  },
 }
 
 export default Card
