@@ -1,12 +1,14 @@
-const util = require('util')
-const fs = require('fs')
-const axios = require('axios')
+import { promisify } from 'util'
+import { mkdir } from 'fs'
+import axios, { AxiosError } from 'axios'
+import { exec } from 'child_process'
 
-const exec = util.promisify(require('child_process').exec)
+const execAsync = promisify(exec)
+const mkdirAsync = promisify(mkdir)
 
-const sleep = util.promisify(setTimeout)
+const sleep = promisify(setTimeout)
 
-function errorHandler(error) {
+export function errorHandler(error: AxiosError) {
   if (error.response) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
@@ -27,21 +29,21 @@ function errorHandler(error) {
   // console.log(error.config)
 }
 
-async function clear(settings) {
+export async function clear(settings: BuildSettings): Promise<BuildSettings> {
   const [userName, repo] = settings.repoName.split('/')
   console.log(`clearing ${userName}/${repo}`)
-  await exec(`rm -rf ./localStorage/${userName}`)
-  await console.log('done')
+  await execAsync(`rm -rf ./localStorage/${userName}`)
+  console.log('done')
   return settings
 }
 
-async function gitClone(settings) {
+export async function gitClone(settings: BuildSettings): Promise<BuildSettings> {
   const [userName, repo] = settings.repoName.split('/')
-  fs.mkdirSync(`./localStorage/${userName}`, { recursive: true })
 
   try {
+    await mkdirAsync(`./localStorage/${userName}`, { recursive: true })
     console.log(`downloading repository from https://github.com/${userName}/${repo}.git`)
-    await exec(`git clone https://github.com/${userName}/${repo}.git`, {
+    await execAsync(`git clone https://github.com/${userName}/${repo}.git`, {
       cwd: `./localStorage/${userName}`,
     })
     await console.log('done')
@@ -51,12 +53,12 @@ async function gitClone(settings) {
   return settings
 }
 
-async function getCommitInfo(commitHash, settings) {
+export async function getCommitInfo(commitHash: string, settings: BuildSettings): Promise<CommitInfo> {
   const [userName, repo] = settings.repoName.split('/')
-  const branch = await exec(`git branch --contains ${commitHash}`, {
+  const branch = await execAsync(`git branch --contains ${commitHash}`, {
     cwd: `./localStorage/${userName}/${repo}`,
   })
-  const commitInfo = await exec(`git show ${commitHash} --pretty=format:"%an|%s" --no-patch`, {
+  const commitInfo = await execAsync(`git show ${commitHash} --pretty=format:"%an|%s" --no-patch`, {
     cwd: `./localStorage/${userName}/${repo}`,
   })
   const branchName = branch.stdout.replace('*', '').trim()
@@ -73,29 +75,31 @@ async function getCommitInfo(commitHash, settings) {
   }
 }
 
-async function getCommitHash(settings) {
+export async function getCommitHash(settings: BuildSettings) {
   const [userName, repo] = settings.repoName.split('/')
-  const commitHash = await exec('git rev-parse HEAD', {
+  const commitHash = await execAsync('git rev-parse HEAD', {
     cwd: `./localStorage/${userName}/${repo}`,
   })
   return commitHash.stdout.trim()
 }
 
-async function buildStart(buildObject) {
+export type buildObjectStart = {}
+
+export async function buildStart(buildObject: BuildTask) {
   const { id } = buildObject
   const startBuild = { buildId: id, dateTime: new Date() }
   axios.post('/build/start', startBuild).catch((e) => errorHandler(e))
   return buildObject
 }
 
-async function buildCancel(buildObject) {
+export async function buildCancel(buildObject: BuildTask) {
   const buildId = buildObject.id
   axios.post('/build/cancel', buildId).catch((e) => errorHandler(e))
 
   return buildObject
 }
 
-async function buildFinish(buildObject) {
+export async function buildFinish(buildObject: BuildTask) {
   const randomDuration = Math.round(Math.random() * 10000)
   console.log('Starting build for', buildObject.id)
 
@@ -116,13 +120,13 @@ async function buildFinish(buildObject) {
   return buildObject
 }
 
-module.exports = {
-  gitClone,
-  clear,
-  getCommitInfo,
-  buildStart,
-  buildCancel,
-  buildFinish,
-  getCommitHash,
-  errorHandler,
-}
+// module.exports = {
+//   gitClone,
+//   clear,
+//   getCommitInfo,
+//   buildStart,
+//   buildCancel,
+//   buildFinish,
+//   getCommitHash,
+//   errorHandler,
+// }
