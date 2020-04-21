@@ -5,8 +5,6 @@ import cors from 'cors'
 import buildsRoutes from './api/buildsRoutes'
 import settingsRoutes from './api/settingsRoutes'
 
-const x: ErrorRequestHandler = () => {}
-
 require('dotenv').config()
 
 const { AUTH_TOKEN } = process.env
@@ -26,13 +24,14 @@ app.use('/api/settings', settingsRoutes)
 
 // app.use(static(path.resolve(__dirname, './static')))
 
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  // if (err instanceof ValidationError) {
-  //   res.status(400).send('JSON is invalid')
-  //   next()
-  // } else next(err)
-  next(err)
-})
+// app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+// // app.use((err, req, res, next) => {
+//   // if (err instanceof ValidationError) {
+//   //   res.status(400).send('JSON is invalid')
+//   //   next()
+//   // } else next(err)
+//   next(err)
+// })
 
 app.listen(3030)
 
