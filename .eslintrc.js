@@ -4,7 +4,13 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb'],
+  extends: [
+    'plugin:react/recommended',
+    'airbnb',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
+  ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -17,10 +23,16 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint'],
+  plugins: ['react', '@typescript-eslint', 'import'],
   rules: {
     'object-curly-newline': ['warn'],
     semi: ['off'],
+    'import/extensions': [
+      'warn',
+      {
+        ts: 'never' | 'always' | 'ignorePackages',
+      },
+    ],
     'jsx-a11y/href-no-hash': ['off'],
     'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],
     'max-len': [

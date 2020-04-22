@@ -1,4 +1,4 @@
-import express, { json, Request, Response, NextFunction } from 'express'
+import express, { json } from 'express'
 import axios from 'axios'
 import { Agent } from 'https'
 import cors from 'cors'
@@ -22,17 +22,4 @@ app.use(cors())
 app.use('/api/builds', buildsRoutes)
 app.use('/api/settings', settingsRoutes)
 
-// app.use(static(path.resolve(__dirname, './static')))
-
-// app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-// // app.use((err, req, res, next) => {
-//   // if (err instanceof ValidationError) {
-//   //   res.status(400).send('JSON is invalid')
-//   //   next()
-//   // } else next(err)
-//   next(err)
-// })
-
 app.listen(3030)
-
-export default app

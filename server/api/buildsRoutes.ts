@@ -1,9 +1,9 @@
-const express = require('express')
-const axios = require('axios')
-const NodeCache = require('node-cache')
+import express from 'express'
+import axios from 'axios'
+import NodeCache from 'node-cache'
+import * as helpers from '../helpers'
 
 const myCache = new NodeCache()
-const helpers = require('../helpers')
 
 const router = express.Router()
 
@@ -27,17 +27,14 @@ router.get('/', (req, res) => {
 // NOTE: получаем информацию и формируем JSON для /build/request
 router.post('/:commitHash', (req, res) => {
   const { commitHash } = req.params
-  let settings = {}
   axios
     .get('/conf')
     .then((response) => {
       if (response.status === 200) {
-        settings = response.data.data
-        return new Promise((resolve) => resolve(settings))
+        const settings: BuildSettings = response.data.data
+        helpers.getCommitInfo(commitHash, settings)
       }
-      return res.send(response.status)
     })
-    .then((resolve) => helpers.getCommitInfo(commitHash, resolve))
     .then((commitInfo) => axios.post('/build/request', commitInfo))
     .then((response) => {
       console.log(response.data.data, 'response on commitHash')
@@ -92,4 +89,4 @@ router.get('/:buildId/logs', (req, res) => {
   // console.log(myCache.getStats(), 'cached data')
 })
 
-module.exports = router
+export default router

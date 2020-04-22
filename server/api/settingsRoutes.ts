@@ -50,7 +50,7 @@ router.post<{}, BuildTask[], BuildSettings>('/', (req, res) => {
           const buildsList: BuildTask[] = response.data.data
           buildStart(buildsList.filter((el) => el.status === 'Waiting')[0])
             .then((buildObject) => {
-              buildFinish(buildObject).catch((e) => buildCancel(buildObject))
+              buildFinish(buildObject).catch(() => buildCancel(buildObject))
             })
             .catch((e) => errorHandler(e))
         }
