@@ -23,14 +23,14 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'import'],
+  plugins: ['react', '@typescript-eslint', 'import', 'promise'],
   rules: {
     'object-curly-newline': ['warn'],
     semi: ['off'],
     'import/extensions': [
       'warn',
       {
-        ts: 'never' | 'always' | 'ignorePackages',
+        ts: 'never',
       },
     ],
     'jsx-a11y/href-no-hash': ['off'],

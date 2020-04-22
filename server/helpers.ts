@@ -1,32 +1,23 @@
 import { promisify } from 'util'
 import { mkdir } from 'fs'
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
+import type { AxiosError } from 'axios'
 import { exec } from 'child_process'
 
 const execAsync = promisify(exec)
 const mkdirAsync = promisify(mkdir)
-
 const sleep = promisify(setTimeout)
 
-export function errorHandler(error: AxiosError) {
+export function errorHandler(error: AxiosError<any>): void {
   if (error.response) {
-    // The request was made and the server responded with a status code
-    // that falls out of the range of 2xx
     console.warn(error.response.status)
     console.log(error.response.data.title)
     console.error(error.response.data.errors)
-
-    // console.log(error.response.headers)
   } else if (error.request) {
-    // The request was made but no response was received
-    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-    // http.ClientRequest in node.js
     console.log(error.request)
   } else {
-    // Something happened in setting up the request that triggered an Error
     console.log('Error', error.message)
   }
-  // console.log(error.config)
 }
 
 export async function clear(settings: BuildSettings): Promise<BuildSettings> {
@@ -112,21 +103,10 @@ export async function buildFinish(buildObject: BuildTask) {
   }
   // console.log(finishLog);
   await sleep(randomDuration)
-  await console.log('Build has been finished with status', finishLog.success)
+  console.log('Build has been finished with status', finishLog.success)
   await axios
     .post('/build/finish', finishLog)
     .then(() => console.log('Build logs have been posted'))
     .catch((e) => errorHandler(e))
   return buildObject
 }
-
-// module.exports = {
-//   gitClone,
-//   clear,
-//   getCommitInfo,
-//   buildStart,
-//   buildCancel,
-//   buildFinish,
-//   getCommitHash,
-//   errorHandler,
-// }
