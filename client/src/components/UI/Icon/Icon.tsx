@@ -1,5 +1,4 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import './Icon.scss'
 
@@ -63,19 +62,28 @@ const icons = {
   ),
 }
 
-const Icon = ({ className, name }) => {
-  const cnIcon = cn('icon')(className)
-  return <span className={cnIcon}>{icons[name]}</span>
+interface IconProps {
+  className?: {
+    size?: 'm' | 's'
+    view?: 'ghost'
+  }
+  name:
+    | 'settings'
+    | 'run'
+    | 'rebuild'
+    | 'close'
+    | 'calendar'
+    | 'clock'
+    | 'commit'
+    | 'error'
+    | 'success'
+    | 'user'
+    | 'warning'
 }
 
-Icon.propTypes = {
-  // children: PropTypes.node,
-  className: PropTypes.objectOf(PropTypes.string || PropTypes.bool),
-  name: PropTypes.string.isRequired,
-}
-Icon.defaultProps = {
-  // children: '',
-  className: {},
+const Icon: React.FC<IconProps> = ({ className, name }) => {
+  const cnIcon = cn('icon')(className)
+  return <span className={cnIcon}>{icons[name]}</span>
 }
 
 export default Icon

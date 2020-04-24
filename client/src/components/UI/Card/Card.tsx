@@ -82,7 +82,7 @@ const CardMeta2: React.FC<CardMeta> = ({ start, duration, status }) => {
 const Card: React.FC<CardProps> = ({ options, onClick }) => {
   const { id, buildNumber, commitMessage, commitHash, branchName, authorName, start, duration, status } = options
   const match = useRouteMatch()
-  let viewStatus = ''
+  let viewStatus: 'success' | 'warning' | 'error' = 'error'
   let cardMetaUnder = true
   if (status === 'Success') viewStatus = 'success'
   if (status === 'Waiting' || status === 'InProgress') viewStatus = 'warning'
