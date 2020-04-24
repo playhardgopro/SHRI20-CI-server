@@ -1,18 +1,33 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { connect, useSelector } from 'react-redux'
+import { connect, useSelector, useDispatch, ConnectedProps } from 'react-redux'
 import { useRouteMatch, useHistory } from 'react-router-dom'
 import { runBuild } from '../../../store/actionCreators'
 import { Text, Button, Modal } from '../../index'
+import store from '../../../store/index'
 import './Header.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Header = ({ className, children, runBuild }) => {
+const mapDispatch = {
+  runBuild,
+}
+const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux & HeaderProps
+interface HeaderProps {
+  children: React.ReactNode
+  // runBuild(commitHash: string): Promise<BuildRequestResultModel>
+}
+
+const Header: React.FC<Props> = ({ children, runBuild }) => {
   const [isModalShown, setIsModalShown] = useState(false)
-  const buildList = useSelector((state) => state.history.buildList)
-  const settings = useSelector((state) => state.settings)
+  const buildList = useSelector((state: RootState) => state.history.buildList)
+  const settings = useSelector((state: RootState) => state.settings)
+  // const useThunkDispatch = () => useDispatch<typeof store.dispatch>()
+  // const thunkDispatch = useThunkDispatch()
   const cnHeader = cn('header')
   const header = { style: {}, text: '' }
   const hiddenBtn = { settings: true, runBuild: true, rebuild: true }
@@ -103,15 +118,4 @@ const Header = ({ className, children, runBuild }) => {
   )
 }
 
-const mapDispatchToProps = {
-  runBuild,
-}
-
-export default connect(null, mapDispatchToProps)(Header)
-
-Header.propTypes = {
-  children: PropTypes.node,
-}
-Header.defaultProps = {
-  children: '',
-}
+export default connector(Header)

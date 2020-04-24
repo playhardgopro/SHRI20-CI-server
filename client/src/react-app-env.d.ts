@@ -28,3 +28,23 @@ declare interface BuildTask {
   start: string
   duration: number
 }
+
+declare interface BuildRequestResultModel {
+  id: string
+  buildNumber: number
+  status: BuildStatus
+}
+declare enum BuildStatus {
+  Waiting = 'Waiting',
+  InProgress = 'InProgress',
+  Success = 'Success',
+  Fail = 'Fail',
+  Canceled = 'Canceled',
+}
+
+declare interface RootState {
+  settings: BuildSettings
+  history: {
+    buildList: BuildTask[]
+  }
+}

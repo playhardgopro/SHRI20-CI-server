@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { ThunkAction } from 'redux-thunk'
+import { Action } from 'redux'
 
 export const SAVE_SETTINGS = 'SAVE_SETTINGS'
 export const SAVE_BUILD_LIST = 'SAVE_BUILD_LIST'
@@ -88,15 +90,16 @@ export function postSettings(payload: BuildSettings) {
   }
 }
 
-export function runBuild(commitHash: string) {
+export const runBuild = (commitHash: string): ThunkAction<Promise<any>, RootState, unknown, Action<string>> => {
   return function (dispatch) {
     return (
       axios
-        .post(`/api/builds/${commitHash}`)
+        .post<BuildRequestResultModel>(`/api/builds/${commitHash}`)
         .then((response) => {
           if (response.status === 200) {
             return response.data
           }
+          throw Error(`Can not run build with commit hash ${commitHash}`)
         })
         // .then((json) => dispatch(saveSettings(json.data)))
         .catch((e) => {
@@ -107,7 +110,7 @@ export function runBuild(commitHash: string) {
   }
 }
 
-export function getDetailsByBuildId(buildId: string) {
+export const getDetailsByBuildId = (buildId: string): ThunkAction<void, RootState, unknown, Action<string>> => {
   // console.log(settings, 'settings')
   return function (dispatch) {
     return (
@@ -128,12 +131,12 @@ export function getDetailsByBuildId(buildId: string) {
   }
 }
 
-export function getBuildList(limit: number, offset?: number) {
+export const getBuildList = (limit: number, offset?: number): ThunkAction<void, RootState, unknown, Action<string>> => {
   // console.log(settings, 'settings')
   return function (dispatch) {
     return (
       axios
-        .get('/api/builds', { params: { limit, offset } })
+        .get<BuildTask[]>('/api/builds', { params: { limit, offset } })
         .then((response) => {
           if (response.status === 200) {
             dispatch(saveBuildList(response.data))
@@ -151,7 +154,7 @@ export function getBuildList(limit: number, offset?: number) {
   }
 }
 
-export function getSettings() {
+export const getSettings = (): ThunkAction<void, RootState, unknown, Action<string>> => {
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
@@ -169,9 +172,9 @@ export function getSettings() {
     // This is not required by thunk middleware, but it is convenient for us.
 
     return axios
-      .get('/api/settings')
+      .get<BuildSettings>('/api/settings')
       .then((json) => {
-        if (json.status === 200 && json.data != '') {
+        if (json.status === 200) {
           dispatch(saveSettings(json.data))
           dispatch(isCached(true))
         } else {

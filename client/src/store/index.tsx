@@ -1,5 +1,5 @@
-import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk'
+import { combineReducers, createStore, applyMiddleware, compose, Action } from 'redux'
+import thunk, { ThunkMiddleware } from 'redux-thunk'
 import { SAVE_SETTINGS, IS_LOADING, IS_CACHED, SAVE_BUILD_LIST, SAVE_BUILD_DETAILS, SAVE_ERROR } from './actionCreators'
 
 const initialState = {
@@ -55,6 +55,6 @@ const reducers = combineReducers({
 })
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk as ThunkMiddleware<RootState, Action>)))
 
 export default store
