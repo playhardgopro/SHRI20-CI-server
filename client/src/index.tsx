@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import { Provider } from 'react-redux'
@@ -9,7 +9,7 @@ import store from './store'
 import App from './App'
 
 store.dispatch(getSettings())
-store.dispatch(getBuildList())
+store.dispatch(getBuildList(25))
 
 ReactDOM.render(
   <Provider store={store}>

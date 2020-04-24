@@ -1,7 +1,7 @@
-import React from 'react'
+import * as React from 'react'
 import { connect, useSelector } from 'react-redux'
 import { getBuildList } from '../../../store/actionCreators'
-import { List, Footer, Header, Layout, Grid } from '../..'
+import { List, Footer, Header, Layout, Grid } from '../../index'
 
 // import './scss/Layout.scss'
 

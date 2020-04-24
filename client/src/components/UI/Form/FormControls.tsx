@@ -1,12 +1,12 @@
-// import React from 'react'
-import React from 'react'
+// import * as React from 'react'
+import * as React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { useHistory } from 'react-router-dom'
 import { connect, useSelector } from 'react-redux'
 import { saveSettings, getSettings, postSettings, isLoading, getBuildList } from '../../../store/actionCreators'
 
-import { Button } from '../..'
+import { Button } from '../../index'
 import './Form.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })

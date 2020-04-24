@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { withNaming } from '@bem-react/classname'
 import './Footer.scss'

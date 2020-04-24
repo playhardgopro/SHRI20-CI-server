@@ -1,8 +1,8 @@
-import React from 'react'
+import * as React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { useForm } from 'react-hook-form'
-import { Input, Text, Button } from '../..'
+import { Input, Text, Button } from '../../index'
 import './Modal.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })

@@ -1,11 +1,18 @@
-import React from 'react'
+import * as React from 'react'
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Home, Settings, History, Details } from './components/index'
 
+export interface RootState {
+  settings: BuildSettings
+  history: {
+    buildList: BuildTask[]
+  }
+}
+
 const App = () => {
   const history = useHistory()
-  const settings: BuildSettings = useSelector((state) => state.settings)
+  const settings: BuildSettings = useSelector((state: RootState) => state.settings)
 
   return (
     <Switch>

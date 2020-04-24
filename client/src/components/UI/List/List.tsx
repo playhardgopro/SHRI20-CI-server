@@ -4,7 +4,7 @@ import { withNaming } from '@bem-react/classname'
 import { connect, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { getBuildList, getDetailsByBuildId } from '../../../store/actionCreators'
-import { Card, Button } from '../..'
+import { Card, Button } from '../../index'
 import './List.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })

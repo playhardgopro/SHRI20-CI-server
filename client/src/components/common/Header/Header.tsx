@@ -4,7 +4,7 @@ import { withNaming } from '@bem-react/classname'
 import { connect, useSelector } from 'react-redux'
 import { useRouteMatch, useHistory } from 'react-router-dom'
 import { runBuild } from '../../../store/actionCreators'
-import { Text, Button, Modal } from '../..'
+import { Text, Button, Modal } from '../../index'
 import './Header.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })

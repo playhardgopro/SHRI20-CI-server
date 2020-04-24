@@ -128,7 +128,7 @@ export function getDetailsByBuildId(buildId: string) {
   }
 }
 
-export function getBuildList(limit: number, offset: number) {
+export function getBuildList(limit: number, offset?: number) {
   // console.log(settings, 'settings')
   return function (dispatch) {
     return (

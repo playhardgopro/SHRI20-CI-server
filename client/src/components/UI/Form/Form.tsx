@@ -1,4 +1,4 @@
-// import React from 'react'
+// import * as React from 'react'
 import React, { useEffect } from 'react'
 import { withNaming } from '@bem-react/classname'
 import { connect, useSelector } from 'react-redux'
@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
 import { saveSettings, getSettings, postSettings, getBuildList } from '../../../store/actionCreators'
 
-import { Button, Input, Text } from '../..'
+import { Button, Input, Text } from '../../index'
 import './Form.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })

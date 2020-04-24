@@ -1,9 +1,9 @@
-import React from 'react'
+import * as React from 'react'
 import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { useRouteMatch } from 'react-router-dom'
 import Moment from 'react-moment'
-import { IconBox, Icon } from '../..'
+import { IconBox, Icon } from '../../index'
 import './Card.scss'
 
 const prettyMilliseconds = require('pretty-ms')
