@@ -8,7 +8,7 @@ describe('Button', () => {
       .create(
         <Button
           icon={{ name: 'settings', size: 's' }}
-          className={{ size: 's', distribute: 'center', view_control: true, hidden: true }}
+          className={{ size: 's', distribute: 'center', view: 'control', hidden: true }}
           hideText
         >
           Settings
@@ -23,7 +23,7 @@ describe('Button', () => {
       .create(
         <Button
           icon={{ name: 'settings', size: 's' }}
-          className={{ size: 's', distribute: 'center', view_control: true, hidden: false }}
+          className={{ size: 's', distribute: 'center', view: 'control', hidden: false }}
           hideText
         >
           Settings

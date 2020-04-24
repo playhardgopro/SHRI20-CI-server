@@ -15,9 +15,9 @@ const cnInput = cn('input')
 const textStyle = { size: '13-18', type: 'h2' }
 
 const Form = ({ postSettings, saveSettings, getBuildList }) => {
-  const defaultValues = useSelector((state) => state.settings)
+  const defaultValues = useSelector((state: RootState) => state.settings)
   const history = useHistory()
-  const isLoading = useSelector((state) => state.settings.isLoading)
+  const isLoading = useSelector((state: RootState) => state.settings.isLoading)
   const { register, handleSubmit, errors, setValue, reset } = useForm()
 
   useEffect(() => {

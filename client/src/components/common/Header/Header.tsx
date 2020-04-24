@@ -75,7 +75,7 @@ const Header: React.FC<Props> = ({ children, runBuild, className }) => {
                 history.push(`/build/${response.buildNumber}`)
               })
             }}
-            className={{ size: 's', distribute: 'center', view_control: true, hidden: hiddenBtn.rebuild }}
+            className={{ size: 's', distribute: 'center', view: 'control', hidden: hiddenBtn.rebuild }}
             hideText
           >
             Rebuild
@@ -85,7 +85,7 @@ const Header: React.FC<Props> = ({ children, runBuild, className }) => {
             onClick={() => {
               setIsModalShown(true)
             }}
-            className={{ size: 's', distribute: 'center', view_control: true, hidden: hiddenBtn.runBuild }}
+            className={{ size: 's', distribute: 'center', view: 'control', hidden: hiddenBtn.runBuild }}
             hideText
           >
             Run Build
@@ -95,7 +95,7 @@ const Header: React.FC<Props> = ({ children, runBuild, className }) => {
             onClick={() => {
               history.push('/settings')
             }}
-            className={{ size: 's', distribute: 'center', view_control: true, hidden: hiddenBtn.settings }}
+            className={{ size: 's', distribute: 'center', view: 'control', hidden: hiddenBtn.settings }}
             hideText
           >
             Settings
