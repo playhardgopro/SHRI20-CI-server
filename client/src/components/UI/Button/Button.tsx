@@ -14,7 +14,21 @@ interface ButtonProps {
     hidden?: boolean
   }
   disabled?: boolean
-  icon?: { name: 'settings' | 'run' | 'rebuild'; size: 's' | 'm' }
+  icon?: {
+    name:
+      | 'settings'
+      | 'run'
+      | 'rebuild'
+      | 'close'
+      | 'calendar'
+      | 'clock'
+      | 'commit'
+      | 'error'
+      | 'success'
+      | 'user'
+      | 'warning'
+    size: 's' | 'm'
+  }
   hideText?: boolean
   empty?: boolean
 }

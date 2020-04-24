@@ -1,5 +1,4 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { Text, Button } from '../../index'
 import './InputGroup.scss'
@@ -8,7 +7,22 @@ const cn = withNaming({ n: '', e: '__', m: '_' })
 const cnInput = cn('input')
 const cnText = cn('text')
 
-export const Input = ({
+type name = 'repoName' | 'buildCommand' | 'mainBranch' | 'period'
+interface InputProps {
+  clearable: boolean
+  id: name
+  name: name
+  width: 'full' | 52
+  size: 's' | 'm'
+  placeholder: string
+  onClear(name: name): void
+  text: string
+  status: 'invalid' | 'valid'
+  className: {}
+  inputRef: (ref: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null) => void
+}
+
+export const Input: React.FC<InputProps> = ({
   id,
   name,
   clearable,
@@ -21,8 +35,8 @@ export const Input = ({
   width,
   size,
 }) => {
-  const handleClear = (e) => {
-    onClear({ name })
+  const handleClear = () => {
+    onClear(name)
   }
   return (
     <div className={cnInput('controls')}>
@@ -49,23 +63,3 @@ export const Input = ({
 }
 
 export default Input
-
-Input.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  size: PropTypes.oneOf(['s', 'm']),
-  clearable: PropTypes.bool,
-  onClear: PropTypes.func,
-  status: PropTypes.oneOf(['invalid', 'valid', '']),
-  width: PropTypes.oneOf(['full', '52']),
-}
-
-Input.defaultProps = {
-  placeholder: '',
-  width: 'full',
-  clearable: false,
-  status: '',
-  size: 'm',
-  onClear: () => {},
-}

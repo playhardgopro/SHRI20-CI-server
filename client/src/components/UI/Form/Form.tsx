@@ -14,6 +14,8 @@ const cnForm = cn('form')
 const cnInput = cn('input')
 const textStyle = { size: '13-18', type: 'h2' }
 
+type name = 'repoName' | 'buildCommand' | 'mainBranch' | 'period'
+
 const Form = ({ postSettings, saveSettings, getBuildList }) => {
   const defaultValues = useSelector((state: RootState) => state.settings)
   const history = useHistory()
@@ -24,7 +26,7 @@ const Form = ({ postSettings, saveSettings, getBuildList }) => {
     reset(defaultValues)
   }, [defaultValues, reset])
 
-  const handleSave = (settings) => {
+  const handleSave = (settings: BuildSettings) => {
     postSettings(settings)
       .then(() => getBuildList())
       .then((resolve) => {
@@ -41,7 +43,7 @@ const Form = ({ postSettings, saveSettings, getBuildList }) => {
     history.go(-1)
   }
 
-  const handleClear = ({ name }) => {
+  const handleClear = (name: name) => {
     setValue(name, '')
   }
 
