@@ -13,6 +13,7 @@ export interface GridProps {
     }
     elem: {
       'm-col': number
+      'm-offset'?: number
     }
   }
 }

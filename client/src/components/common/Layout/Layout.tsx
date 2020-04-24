@@ -5,7 +5,7 @@ import './Layout.scss'
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
 interface LayoutProps {
-  className: { align: string; size: string }
+  className: { align: string; size?: string; hero?: boolean }
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, className }) => {

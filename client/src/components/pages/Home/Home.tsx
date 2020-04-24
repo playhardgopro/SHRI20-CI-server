@@ -3,12 +3,12 @@ import { Footer, Header, Layout, RepConnection, Grid } from '../../index'
 
 const grid = {
   block: {
-    'm-columns': '12',
+    'm-columns': 12,
     'col-gap': 'full',
   },
   elem: {
-    'm-col': '4',
-    'm-offset': '4',
+    'm-col': 4,
+    'm-offset': 4,
   },
 }
 
