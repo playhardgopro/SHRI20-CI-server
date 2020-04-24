@@ -24,7 +24,7 @@ declare interface BuildTask {
   commitHash: string
   branchName: string
   authorName: string
-  status: string
+  status: BuildStatus
   start: string
   duration: number
 }

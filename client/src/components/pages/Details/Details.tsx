@@ -1,32 +1,29 @@
 import React, { useEffect } from 'react'
-import { connect, useSelector } from 'react-redux'
+import { connect, useSelector, ConnectedProps } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import { getBuildList } from '../../../store/actionCreators'
 import { Footer, Header, Layout, Card, Log } from '../../index'
 
-// import './scss/Layout.scss'
+const mapDispatch = {
+  getBuildList,
+}
+const connector = connect(null, mapDispatch)
 
-// const grid = {
-//   block: {
-//     'm-columns': '12',
-//     'col-gap': 'full',
-//   },
-//   elem: {
-//     'm-col': '12',
-//   },
-// }
+type PropsFromRedux = ConnectedProps<typeof connector>
 
-const Details = ({ getBuildList }) => {
+type Props = PropsFromRedux
+
+const Details: React.FC<Props> = ({ getBuildList }) => {
   const { buildNumber } = useParams()
   const history = useHistory()
-  const buildList = useSelector((state) => state.history.buildList)
+  const buildList = useSelector((state: RootState) => state.history.buildList)
 
   useEffect(() => {
-    getBuildList(buildList ? buildList.length : buildNumber)
+    getBuildList(buildList ? buildList.length : Number(buildNumber))
   }, [buildNumber])
 
   // NOTE: здесь захардкожено, надо подумать, как сделать лучше
-  const options = buildList ? buildList.filter((el) => el.buildNumber == buildNumber) : []
+  const options = buildList ? buildList.filter((el) => el.buildNumber === Number(buildNumber)) : []
   const filteredOptions = options.length ? options : null
 
   return (
@@ -55,4 +52,4 @@ const Details = ({ getBuildList }) => {
   )
 }
 
-export default connect(null, { getBuildList })(Details)
+export default connector(Details)

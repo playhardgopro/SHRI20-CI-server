@@ -18,11 +18,11 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 
 type Props = PropsFromRedux & HeaderProps
 interface HeaderProps {
-  children: React.ReactNode
+  className: { distribute: string }
   // runBuild(commitHash: string): Promise<BuildRequestResultModel>
 }
 
-const Header: React.FC<Props> = ({ children, runBuild }) => {
+const Header: React.FC<Props> = ({ children, runBuild, className }) => {
   const [isModalShown, setIsModalShown] = useState(false)
   const buildList = useSelector((state: RootState) => state.history.buildList)
   const settings = useSelector((state: RootState) => state.settings)

@@ -1,5 +1,4 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { useRouteMatch } from 'react-router-dom'
 import Moment from 'react-moment'
@@ -10,7 +9,17 @@ const prettyMilliseconds = require('pretty-ms')
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const CardMeta = ({ start, duration, status }) => {
+interface CardProps {
+  options: BuildTask
+  onClick?(event: React.MouseEvent, { buildNumber, buildId }: { buildNumber: number; buildId: string }): void
+}
+interface CardMeta {
+  start: string
+  duration: number
+  status: BuildStatus
+}
+
+const CardMeta: React.FC<CardMeta> = ({ start, duration, status }) => {
   return (
     <div className="card__meta card__meta_m-hr_top meta meta_distribute_vertical meta_m-distribute_horizontal text text_size_13-16 text_view_ghost">
       <div className="meta__item meta__item_indent-b_8">
@@ -40,7 +49,7 @@ const CardMeta = ({ start, duration, status }) => {
   )
 }
 
-const CardMeta2 = ({ start, duration, status }) => {
+const CardMeta2: React.FC<CardMeta> = ({ start, duration, status }) => {
   return (
     <div className="list__item meta meta_hr_top text text_size_13-16 text_view_ghost">
       <div className="meta__item meta__item_indent-b_8">
@@ -70,13 +79,13 @@ const CardMeta2 = ({ start, duration, status }) => {
   )
 }
 
-const Card = ({ options, onClick }) => {
+const Card: React.FC<CardProps> = ({ options, onClick }) => {
   const { id, buildNumber, commitMessage, commitHash, branchName, authorName, start, duration, status } = options
   const match = useRouteMatch()
   let viewStatus = ''
   let cardMetaUnder = true
   if (status === 'Success') viewStatus = 'success'
-  if (status === 'Waiting' || status === 'InProgress' || status === '') viewStatus = 'warning'
+  if (status === 'Waiting' || status === 'InProgress') viewStatus = 'warning'
   if (status === 'Canceled' || status === 'Fail') viewStatus = 'error'
 
   switch (match.path) {
@@ -90,7 +99,7 @@ const Card = ({ options, onClick }) => {
   const cnCard = cn('card')
   const cnText = cn('text')
   return (
-    <div onClick={onClick && ((e) => onClick(e, options))} className="card">
+    <div onClick={onClick && ((e) => onClick(e, { buildNumber, buildId: id }))} className="card">
       <div className={cnCard('token')}>
         <IconBox textStyle={{ view: viewStatus }}>
           <Icon name={viewStatus} />
@@ -131,23 +140,6 @@ const Card = ({ options, onClick }) => {
       </div>
     </div>
   )
-}
-
-Card.propTypes = {
-  options: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
-}
-Card.defaultProps = {
-  options: {
-    id: '1',
-    buildNumber: '1',
-    commitMessage: 'commit message',
-    commitHash: 'commit hash',
-    branchName: 'branchName',
-    authorName: 'authorName',
-    start: '"2020-04-14T18:36:22.229Z"',
-    duration: '1234',
-    status: 'Waiting',
-  },
 }
 
 export default Card

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import PropTypes, { number } from 'prop-types'
 import { withNaming } from '@bem-react/classname'
 import { connect, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -12,10 +12,10 @@ const cnList = cn('list')
 
 const List = ({ getBuildList }) => {
   const history = useHistory()
-  const buildList = useSelector((state) => state.history.buildList)
+  const buildList = useSelector((state: RootState) => state.history.buildList)
   const [showButton, setShowButton] = useState(true)
 
-  function handleClick(event, { buildNumber, buildId }) {
+  function handleClick(event: React.MouseEvent, { buildNumber, buildId }: { buildNumber: number; buildId: string }) {
     // getDetailsByBuildId(buildId)
     history.push({ pathname: `build/${buildNumber}`, state: buildId })
   }
