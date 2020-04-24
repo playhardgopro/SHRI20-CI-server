@@ -1,16 +1,24 @@
 import React, { useState } from 'react'
-import PropTypes, { number } from 'prop-types'
 import { withNaming } from '@bem-react/classname'
-import { connect, useSelector } from 'react-redux'
+import { connect, useSelector, ConnectedProps } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { getBuildList, getDetailsByBuildId } from '../../../store/actionCreators'
+import { getBuildList } from '../../../store/actionCreators'
 import { Card, Button } from '../../index'
 import './List.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 const cnList = cn('list')
 
-const List = ({ getBuildList }) => {
+const mapDispatch = {
+  getBuildList,
+}
+const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux
+
+const List: React.FC<Props> = ({ getBuildList }) => {
   const history = useHistory()
   const buildList = useSelector((state: RootState) => state.history.buildList)
   const [showButton, setShowButton] = useState(true)
@@ -52,18 +60,4 @@ const List = ({ getBuildList }) => {
   )
 }
 
-List.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])),
-}
-List.defaultProps = {
-  children: '',
-  className: {},
-}
-
-const mapDispatchToProps = {
-  getBuildList,
-  getDetailsByBuildId,
-}
-
-export default connect(null, mapDispatchToProps)(List)
+export default connector(List)
