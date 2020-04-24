@@ -16,12 +16,16 @@
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    "typeRoots": [
+      "./node_modules/@types/",
+      "../typings/"
+    ],
+    "isolatedModules": true
   },
   "exclude": [
-    "**/__mocks__/*",
-    "**/__test__/*"
+    "__mocks__/*",
+    "__test__/*"
   ],
   "include": [
     "src"
