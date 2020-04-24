@@ -110,3 +110,21 @@ export async function buildFinish(buildObject: BuildTask) {
     .catch((e) => errorHandler(e))
   return buildObject
 }
+
+export async function downloadRepo(settings: BuildSettings) {
+  clear(settings)
+    .then((buildSettings) => gitClone(buildSettings))
+    .then((buildSettings) => getCommitHash(buildSettings))
+    .then((commitHash) => getCommitInfo(commitHash, settings))
+    .then((commitInfo) => {
+      axios.post('/build/request', commitInfo)
+      console.log('settings have been saved')
+    })
+    .catch((e) => errorHandler(e))
+  return 'success'
+}
+
+export async function saveSettings(settings: BuildSettings) {
+  axios.post('/conf', settings).catch((e) => console.log(e, 'can not post settings'))
+  return 'success'
+}

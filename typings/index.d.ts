@@ -1,3 +1,5 @@
+declare type ResponseSuccess = 'success'
+
 declare interface BuildSettings {
   repoName: string
   buildCommand: string

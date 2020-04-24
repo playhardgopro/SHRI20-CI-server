@@ -8,13 +8,13 @@ const myCache = new NodeCache()
 const router = express.Router()
 
 // NOTE: получаем список сборок
-router.get('/', (req, res) => {
+router.get<{}, {}, {}, { limit: number; offset: number }>('/', (req, res) => {
   const { limit, offset } = req.query
   // console.log(limit)
   axios
     .get('/build/list', { params: { limit, offset } })
     .then((response) => {
-      let list = []
+      let list: BuildTask[] = []
       if (response.status === 200) {
         list = response.data.data
       }
@@ -25,45 +25,46 @@ router.get('/', (req, res) => {
 
 // NOTE: получаем коммитхэш, идем в локальное хранилище,
 // NOTE: получаем информацию и формируем JSON для /build/request
-router.post('/:commitHash', (req, res) => {
+router.post<{ commitHash: string }>('/:commitHash', (req, res) => {
   const { commitHash } = req.params
   axios
     .get('/conf')
     .then((response) => {
       if (response.status === 200) {
         const settings: BuildSettings = response.data.data
-        helpers.getCommitInfo(commitHash, settings)
+        return helpers.getCommitInfo(commitHash, settings)
       }
+      throw Error('Can not get /conf')
     })
     .then((commitInfo) => axios.post('/build/request', commitInfo))
     .then((response) => {
       console.log(response.data.data, 'response on commitHash')
-      res.send(response.data.data)
+      res.status(200).send(response.data.data)
     })
     .catch((e) => helpers.errorHandler(e))
 
   // res.send(commitHash)
 })
 // NOTE: получаем информацию о конкретной сборке
-router.get('/:buildId', (req, res) => {
+router.get<{ buildId: string }>('/:buildId', (req, res) => {
   const { buildId } = req.params
 
   axios
     .get(`/build/details?buildId=${buildId}`)
     .then((response) => {
       if (response.status === 200) {
-        const buildDetails = response.data.data
+        const buildDetails: BuildTask = response.data.data
         res.send(buildDetails)
       }
     })
     .catch((e) => helpers.errorHandler(e))
 })
 // NOTE: получение логов билда (сплошной текст)
-router.get('/:buildId/logs', (req, res) => {
+router.get<{ buildId: string }>('/:buildId/logs', (req, res) => {
   const { buildId } = req.params
   console.warn(buildId)
 
-  const cachedLog = myCache.get(buildId)
+  const cachedLog: string | undefined = myCache.get(buildId)
 
   if (cachedLog === undefined) {
     axios
@@ -78,13 +79,13 @@ router.get('/:buildId/logs', (req, res) => {
       })
       .then((response) => {
         if (response.status === 200) {
-          const buildLog = response.data
+          const buildLog: string = response.data.data
           myCache.set(buildId, buildLog)
           res.send(buildLog)
         }
       })
       .catch((e) => helpers.errorHandler(e))
-  } else res.send(myCache.get(buildId))
+  } else res.send(cachedLog)
   // NOTE: Раскомменть, чтобы посмотреть статистику кеша
   // console.log(myCache.getStats(), 'cached data')
 })
