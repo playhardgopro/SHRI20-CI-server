@@ -7,11 +7,11 @@ import { List, Footer, Header, Layout, Grid } from '../../index'
 
 const grid = {
   block: {
-    'm-columns': '12',
+    'm-columns': 12,
     'col-gap': 'full',
   },
   elem: {
-    'm-col': '12',
+    'm-col': 12,
   },
 }
 

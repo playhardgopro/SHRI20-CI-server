@@ -1,11 +1,23 @@
-import * as React from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactChildren } from 'react'
 import { withNaming } from '@bem-react/classname'
 import './Grid.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Grid = ({ children, className }) => {
+export interface GridProps {
+  children: React.ReactNode
+  className: {
+    block: {
+      'm-columns': number
+      'col-gap': string
+    }
+    elem: {
+      'm-col': number
+    }
+  }
+}
+
+const Grid: React.FC<GridProps> = ({ children, className }) => {
   const block = cn('grid')(className.block)
   const elem = cn('grid', 'fraction')(className.elem)
 
@@ -14,15 +26,6 @@ const Grid = ({ children, className }) => {
       <div className={elem}>{children}</div>
     </div>
   )
-}
-
-Grid.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  className: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.object])),
-}
-Grid.defaultProps = {
-  children: '',
-  className: {},
 }
 
 export default Grid
