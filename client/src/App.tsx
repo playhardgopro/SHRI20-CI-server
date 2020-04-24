@@ -1,11 +1,11 @@
 import React from 'react'
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { Home, Settings, History, Details } from './components'
+import { Home, Settings, History, Details } from './components/index'
 
 const App = () => {
   const history = useHistory()
-  const settings = useSelector((state) => state.settings)
+  const settings: BuildSettings = useSelector((state) => state.settings)
 
   return (
     <Switch>

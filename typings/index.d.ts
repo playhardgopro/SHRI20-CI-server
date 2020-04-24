@@ -1,6 +1,7 @@
 declare type ResponseSuccess = 'success'
 
 declare interface BuildSettings {
+  isCached?: boolean
   repoName: string
   buildCommand: string
   mainBranch: string

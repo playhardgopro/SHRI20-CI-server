@@ -1,22 +1,29 @@
 import axios from 'axios'
 
-export function saveSettings(payload) {
-  const settings = {
+export const SAVE_SETTINGS = 'SAVE_SETTINGS'
+export const SAVE_BUILD_LIST = 'SAVE_BUILD_LIST'
+export const SAVE_BUILD_DETAILS = 'SAVE_BUILD_DETAILS'
+export const SAVE_ERROR = 'SAVE_ERROR'
+export const IS_LOADING = 'IS_LOADING'
+export const IS_CACHED = 'IS_CACHED'
+
+export function saveSettings(payload: BuildSettings) {
+  const settings: BuildSettings = {
     repoName: payload.repoName,
     buildCommand: payload.buildCommand,
     mainBranch: payload.mainBranch,
     period: +payload.period,
   }
   return {
-    type: 'SAVE_SETTINGS',
+    type: SAVE_SETTINGS,
     settings,
   }
 }
 
-export function saveBuildList(list) {
+export function saveBuildList(list: BuildTask[]) {
   // console.log(list, 'build list')
   return {
-    type: 'SAVE_BUILD_LIST',
+    type: SAVE_BUILD_LIST,
     list,
   }
 }
@@ -24,7 +31,7 @@ export function saveBuildList(list) {
 export function saveDetailsByBuildId(payload) {
   // console.log(payload, 'caching')
   return {
-    type: 'SAVE_BUILD_DETAILS',
+    type: SAVE_BUILD_DETAILS,
     payload,
   }
 }
@@ -32,27 +39,27 @@ export function saveDetailsByBuildId(payload) {
 export function saveError(payload) {
   // console.log(payload, 'caching')
   return {
-    type: 'SAVE_ERROR',
+    type: SAVE_ERROR,
     payload,
   }
 }
 
-export function isLoading(payload) {
+export function isLoading(payload: boolean) {
   // console.log(payload, 'loading')
   return {
-    type: 'IS_LOADING',
+    type: IS_LOADING,
     payload,
   }
 }
-export function isCached(payload) {
+export function isCached(payload: boolean) {
   // console.log(payload, 'caching')
   return {
-    type: 'IS_CACHED',
+    type: IS_CACHED,
     payload,
   }
 }
 
-export function postSettings(payload) {
+export function postSettings(payload: BuildSettings) {
   // console.log(settings, 'settings')
   const settings = {
     repoName: payload.repoName,
@@ -81,7 +88,7 @@ export function postSettings(payload) {
   }
 }
 
-export function runBuild(commitHash) {
+export function runBuild(commitHash: string) {
   return function (dispatch) {
     return (
       axios
@@ -100,7 +107,7 @@ export function runBuild(commitHash) {
   }
 }
 
-export function getDetailsByBuildId(buildId) {
+export function getDetailsByBuildId(buildId: string) {
   // console.log(settings, 'settings')
   return function (dispatch) {
     return (
@@ -121,7 +128,7 @@ export function getDetailsByBuildId(buildId) {
   }
 }
 
-export function getBuildList(limit, offset) {
+export function getBuildList(limit: number, offset: number) {
   // console.log(settings, 'settings')
   return function (dispatch) {
     return (

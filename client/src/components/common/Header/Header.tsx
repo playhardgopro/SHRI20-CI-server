@@ -9,7 +9,7 @@ import './Header.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Header = ({ children, runBuild }) => {
+const Header = ({ className, children, runBuild }) => {
   const [isModalShown, setIsModalShown] = useState(false)
   const buildList = useSelector((state) => state.history.buildList)
   const settings = useSelector((state) => state.settings)
