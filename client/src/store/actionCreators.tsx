@@ -1,15 +1,20 @@
 import axios from 'axios'
 import { ThunkAction } from 'redux-thunk'
 import { Action } from 'redux'
+import {
+  SAVE_BUILD_DETAILS,
+  SAVE_SETTINGS,
+  SAVE_BUILD_LIST,
+  SAVE_ERROR,
+  IS_CACHED,
+  IS_LOADING,
+  SettingsActionTypes,
+  BuildListDetailsActionTypes,
+  BuildListActionTypes,
+  ErrorActionTypes,
+} from './types'
 
-export const SAVE_SETTINGS = 'SAVE_SETTINGS'
-export const SAVE_BUILD_LIST = 'SAVE_BUILD_LIST'
-export const SAVE_BUILD_DETAILS = 'SAVE_BUILD_DETAILS'
-export const SAVE_ERROR = 'SAVE_ERROR'
-export const IS_LOADING = 'IS_LOADING'
-export const IS_CACHED = 'IS_CACHED'
-
-export function saveSettings(payload: BuildSettings) {
+export function saveSettings(payload: BuildSettings): SettingsActionTypes {
   const settings: BuildSettings = {
     repoName: payload.repoName,
     buildCommand: payload.buildCommand,
@@ -18,19 +23,19 @@ export function saveSettings(payload: BuildSettings) {
   }
   return {
     type: SAVE_SETTINGS,
-    settings,
+    payload: settings,
   }
 }
 
-export function saveBuildList(list: BuildTask[]) {
+export function saveBuildList(list: BuildTask[]): BuildListActionTypes {
   // console.log(list, 'build list')
   return {
     type: SAVE_BUILD_LIST,
-    list,
+    payload: list,
   }
 }
 
-export function saveDetailsByBuildId(payload: BuildTask) {
+export function saveDetailsByBuildId(payload: BuildTask): BuildListDetailsActionTypes {
   // console.log(payload, 'caching')
   return {
     type: SAVE_BUILD_DETAILS,
@@ -38,7 +43,7 @@ export function saveDetailsByBuildId(payload: BuildTask) {
   }
 }
 
-export function saveError(payload: string | number) {
+export function saveError(payload: string | number): ErrorActionTypes {
   // console.log(payload, 'caching')
   return {
     type: SAVE_ERROR,
@@ -46,14 +51,14 @@ export function saveError(payload: string | number) {
   }
 }
 
-export function isLoading(payload: boolean) {
+export function isLoading(payload: boolean): SettingsActionTypes {
   // console.log(payload, 'loading')
   return {
     type: IS_LOADING,
     payload,
   }
 }
-export function isCached(payload: boolean) {
+export function isCached(payload: boolean): SettingsActionTypes {
   // console.log(payload, 'caching')
   return {
     type: IS_CACHED,
@@ -156,35 +161,18 @@ export const getBuildList = (
 }
 
 export const getSettings = (): ThunkAction<void, RootState, unknown, Action<string>> => {
-  // Thunk middleware knows how to handle functions.
-  // It passes the dispatch method as an argument to the function,
-  // thus making it able to dispatch actions itself.
-
-  return function (dispatch) {
-    // First dispatch: the app state is updated to inform
-    // that the API call is starting.
-
-    // dispatch(saveSettings(settings))
-
-    // The function called by the thunk middleware can return a value,
-    // that is passed on as the return value of the dispatch method.
-
-    // In this case, we return a promise to wait for.
-    // This is not required by thunk middleware, but it is convenient for us.
-
-    return axios
-      .get<BuildSettings>('/api/settings')
-      .then((json) => {
-        if (json.status === 200) {
-          dispatch(saveSettings(json.data))
-          dispatch(isCached(true))
-        } else {
-          dispatch(isCached(false))
-        }
-      })
-      .catch((e) => {
-        console.error(e)
+  return async function (dispatch) {
+    try {
+      const json = await axios.get<BuildSettings>('/api/settings')
+      if (json.status === 200) {
+        dispatch(saveSettings(json.data))
+        dispatch(isCached(true))
+      } else {
         dispatch(isCached(false))
-      })
+      }
+    } catch (e) {
+      console.error(e)
+      dispatch(isCached(false))
+    }
   }
 }

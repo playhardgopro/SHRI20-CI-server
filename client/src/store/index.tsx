@@ -1,16 +1,27 @@
 import { combineReducers, createStore, applyMiddleware, compose, Action } from 'redux'
 import thunk, { ThunkMiddleware } from 'redux-thunk'
-import { SAVE_SETTINGS, IS_LOADING, IS_CACHED, SAVE_BUILD_LIST, SAVE_BUILD_DETAILS, SAVE_ERROR } from './actionCreators'
+import {
+  SAVE_SETTINGS,
+  IS_LOADING,
+  IS_CACHED,
+  SAVE_BUILD_LIST,
+  SAVE_BUILD_DETAILS,
+  SAVE_ERROR,
+  SettingsActionTypes,
+  BuildListActionTypes,
+  BuildListDetailsActionTypes,
+  ErrorActionTypes,
+} from './types'
 
 const initialState = {
   // isLoading: false,
 }
 
 // сюда приходят actions и возвращают state в зависимости от switch
-function settingsReducer(state = initialState, action) {
+function settingsReducer(state = initialState, action: SettingsActionTypes) {
   switch (action.type) {
     case SAVE_SETTINGS:
-      return { ...state, ...action.settings }
+      return { ...state, ...action.payload }
     case IS_LOADING:
       return { ...state, isLoading: action.payload }
     case IS_CACHED:
@@ -20,16 +31,16 @@ function settingsReducer(state = initialState, action) {
   }
 }
 
-function historyReducer(state = initialState, action) {
+function historyReducer(state = initialState, action: BuildListActionTypes) {
   switch (action.type) {
     case SAVE_BUILD_LIST:
-      return { buildList: [...action.list] }
+      return { buildList: [...action.payload] }
     default:
       return state
   }
 }
 
-function buildReducer(state = initialState, action) {
+function buildReducer(state = initialState, action: BuildListDetailsActionTypes) {
   switch (action.type) {
     case SAVE_BUILD_DETAILS:
       return { ...action.payload }
@@ -38,10 +49,10 @@ function buildReducer(state = initialState, action) {
   }
 }
 
-function errorsReducer(state = initialState, action) {
+function errorsReducer(state = initialState, action: ErrorActionTypes) {
   switch (action.type) {
     case SAVE_ERROR:
-      return { ...action.payload }
+      return action.payload
     default:
       return state
   }

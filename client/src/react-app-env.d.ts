@@ -49,4 +49,5 @@ declare interface RootState {
     buildList: BuildTask[]
   }
   build: BuildTask
+  errors: string[]
 }
