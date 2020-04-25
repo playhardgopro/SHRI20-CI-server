@@ -9,16 +9,16 @@ const cnText = cn('text')
 
 type name = 'repoName' | 'buildCommand' | 'mainBranch' | 'period'
 interface InputProps {
-  clearable: boolean
+  clearable?: boolean
   id: name
   name: name
-  width: 'full' | 52
-  size: 's' | 'm'
+  width?: 'full' | 52
+  size?: 's' | 'm'
   placeholder: string
   onClear(name: name): void
-  text: string
-  status: 'invalid' | 'valid'
-  className: {}
+  text?: string
+  status: 'invalid' | 'valid' | undefined
+  className?: {}
   inputRef: (ref: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null) => void
 }
 
