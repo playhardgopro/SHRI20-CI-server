@@ -88,6 +88,8 @@ const Form: React.FC<Props> = ({ postSettings, saveSettings, getBuildList, isLoa
               onClear={handleClear}
               inputRef={register(getValidators(['required']))}
               status={errors.repoName && 'invalid'}
+              size="m"
+              width="full"
               name="repoName"
               clearable
             />
@@ -105,6 +107,8 @@ const Form: React.FC<Props> = ({ postSettings, saveSettings, getBuildList, isLoa
               onClear={handleClear}
               inputRef={register(getValidators(['required']))}
               status={errors.buildCommand && 'invalid'}
+              size="m"
+              width="full"
               name="buildCommand"
               clearable
             />
@@ -124,6 +128,8 @@ const Form: React.FC<Props> = ({ postSettings, saveSettings, getBuildList, isLoa
               onClear={handleClear}
               inputRef={register(getValidators(['required']))}
               status={errors.mainBranch && 'invalid'}
+              size="m"
+              width="full"
               name="mainBranch"
               clearable
             />
@@ -142,6 +148,7 @@ const Form: React.FC<Props> = ({ postSettings, saveSettings, getBuildList, isLoa
               inputRef={register(getValidators(['required', 'pattern']))}
               status={errors.period && 'invalid'}
               name="period"
+              size="m"
               width={52}
               text="minutes"
             />
