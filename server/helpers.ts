@@ -6,7 +6,6 @@ import { exec } from 'child_process'
 
 const execAsync = promisify(exec)
 const mkdirAsync = promisify(mkdir)
-const sleep = promisify(setTimeout)
 
 export function errorHandler(error: AxiosError<any>): void {
   if (error.response) {
@@ -37,7 +36,7 @@ export async function gitClone(settings: BuildSettings): Promise<BuildSettings> 
     await execAsync(`git clone https://github.com/${userName}/${repo}.git`, {
       cwd: `./localStorage/${userName}`,
     })
-    await console.log('done')
+    console.log('done')
   } catch (e) {
     console.log(e.code, 'gitClone')
   }
@@ -76,40 +75,40 @@ export async function getCommitHash(settings: BuildSettings) {
 
 export type buildObjectStart = {}
 
-export async function buildStart(buildObject: BuildTask) {
-  const { id } = buildObject
-  const startBuild = { buildId: id, dateTime: new Date() }
-  axios.post('/build/start', startBuild).catch((e) => errorHandler(e))
-  return buildObject
-}
+// export async function buildStart(buildObject: BuildTask) {
+//   const { id } = buildObject
+//   const startBuild = { buildId: id, dateTime: new Date() }
+//   axios.post('/build/start', startBuild).catch((e) => errorHandler(e))
+//   return buildObject
+// }
 
-export async function buildCancel(buildObject: BuildTask) {
-  const buildId = buildObject.id
-  axios.post('/build/cancel', buildId).catch((e) => errorHandler(e))
+// export async function buildCancel(buildObject: BuildTask) {
+//   const buildId = buildObject.id
+//   axios.post('/build/cancel', buildId).catch((e) => errorHandler(e))
 
-  return buildObject
-}
+//   return buildObject
+// }
 
-export async function buildFinish(buildObject: BuildTask) {
-  const randomDuration = Math.round(Math.random() * 10000)
-  console.log('Starting build for', buildObject.id)
+// export async function buildFinish(buildObject: BuildTask) {
+//   const randomDuration = Math.round(Math.random() * 10000)
+//   console.log('Starting build for', buildObject.id)
 
-  const finishLog = {
-    buildId: buildObject.id,
-    duration: randomDuration,
-    success: !!Math.round(Math.random()),
-    buildLog:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  }
-  // console.log(finishLog);
-  await sleep(randomDuration)
-  console.log('Build has been finished with status', finishLog.success)
-  await axios
-    .post('/build/finish', finishLog)
-    .then(() => console.log('Build logs have been posted'))
-    .catch((e) => errorHandler(e))
-  return buildObject
-}
+//   const finishLog = {
+//     buildId: buildObject.id,
+//     duration: randomDuration,
+//     success: !!Math.round(Math.random()),
+//     buildLog:
+//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+//   }
+//   // console.log(finishLog);
+//   await sleep(randomDuration)
+//   console.log('Build has been finished with status', finishLog.success)
+//   await axios
+//     .post('/build/finish', finishLog)
+//     .then(() => console.log('Build logs have been posted'))
+//     .catch((e) => errorHandler(e))
+//   return buildObject
+// }
 
 export async function downloadRepo(settings: BuildSettings) {
   clear(settings)
