@@ -7,14 +7,21 @@ import './Modal.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
-const Modal = ({ onSubmit, onCancel }) => {
+interface ModalProps {
+  onSubmit(commitHash: string): void
+  onCancel(): void
+}
+
+const Modal: React.FC<ModalProps> = ({ onSubmit, onCancel }) => {
   const cnModal = cn('modal')
   const cnText = cn('text')
   const cnInput = cn('input')
   const textStyle = { size: '13-18', type: 'h2' }
-  const { register, handleSubmit, errors, setValue } = useForm()
+  const { register, handleSubmit, errors, setValue } = useForm<any>()
 
-  const handleClear = ({ name }) => {
+  type name = 'commitHashBuild'
+
+  const handleClear = (name: name) => {
     setValue(name, '')
   }
 
@@ -22,7 +29,8 @@ const Modal = ({ onSubmit, onCancel }) => {
     required: { value: true, message: 'Field is required' },
   }
 
-  const getValidators = (rules) => Object.fromEntries(Object.entries(validators).filter(([key]) => rules.includes(key)))
+  const getValidators = (rules: string[]) =>
+    Object.fromEntries(Object.entries(validators).filter(([key]) => rules.includes(key)))
 
   return (
     <div className={cnModal()}>
@@ -58,15 +66,6 @@ const Modal = ({ onSubmit, onCancel }) => {
       </div>
     </div>
   )
-}
-
-Modal.propTypes = {
-  onSubmit: PropTypes.func,
-  onCancel: PropTypes.func,
-}
-Modal.defaultProps = {
-  onSubmit: () => {},
-  onCancel: () => {},
 }
 
 export default Modal

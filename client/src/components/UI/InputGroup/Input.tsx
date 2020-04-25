@@ -7,7 +7,7 @@ const cn = withNaming({ n: '', e: '__', m: '_' })
 const cnInput = cn('input')
 const cnText = cn('text')
 
-type name = 'repoName' | 'buildCommand' | 'mainBranch' | 'period'
+type name = 'repoName' | 'buildCommand' | 'mainBranch' | 'period' | 'commitHashBuild'
 interface InputProps {
   clearable?: boolean
   id: name

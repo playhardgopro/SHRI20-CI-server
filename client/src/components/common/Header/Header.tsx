@@ -105,8 +105,8 @@ const Header: React.FC<Props> = ({ children, runBuild, className }) => {
       </div>
       {isModalShown && (
         <Modal
-          onSubmit={({ commitHashBuild }) => {
-            runBuild(commitHashBuild).then((response) => {
+          onSubmit={(commitHash) => {
+            runBuild(commitHash).then((response) => {
               history.push(`/build/${response.buildNumber}`)
             })
             setIsModalShown(false)
