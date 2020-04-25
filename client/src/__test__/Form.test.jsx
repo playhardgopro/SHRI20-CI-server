@@ -38,6 +38,8 @@ const Stub = () => {
               id="repoName"
               placeholder="username/reponame"
               status={errors.repoName && 'invalid'}
+              size="m"
+              width="full"
               name="repoName"
               clearable
             />
@@ -53,6 +55,8 @@ const Stub = () => {
               id="buildCommand"
               placeholder="npm run build"
               status={errors.buildCommand && 'invalid'}
+              size="m"
+              width="full"
               name="buildCommand"
               clearable
             />
@@ -70,6 +74,8 @@ const Stub = () => {
               id="mainBranch"
               placeholder="master"
               status={errors.mainBranch && 'invalid'}
+              size="m"
+              width="full"
               name="mainBranch"
               clearable
             />
@@ -86,7 +92,8 @@ const Stub = () => {
               placeholder="10"
               status={errors.period && 'invalid'}
               name="period"
-              width="52"
+              size="m"
+              width={52}
               text="minutes"
             />
           </div>
@@ -95,10 +102,10 @@ const Stub = () => {
         </div>
       </div>
       <div className={cnForm('controls')}>
-        <Button className={{ size: 'm', view: 'action' }} disabled={false}>
+        <Button className={{ size: 'm', view: 'action' }} disabled={false} onClick={()=>{}}>
           Save
         </Button>
-        <Button className={{ size: 'm', view: 'control' }} disabled={false}>
+        <Button className={{ size: 'm', view: 'control' }} disabled={false} onClick={()=>{}}>
           Cancel
         </Button>
       </div>

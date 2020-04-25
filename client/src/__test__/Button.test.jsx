@@ -9,6 +9,8 @@ describe('Button', () => {
         <Button
           icon={{ name: 'settings', size: 's' }}
           className={{ size: 's', distribute: 'center', view: 'control', hidden: true }}
+          disabled={false}
+          onClick={()=>{}}
           hideText
         >
           Settings
@@ -24,6 +26,8 @@ describe('Button', () => {
         <Button
           icon={{ name: 'settings', size: 's' }}
           className={{ size: 's', distribute: 'center', view: 'control', hidden: false }}
+          disabled={false}
+          onClick={()=>{}}
           hideText
         >
           Settings
