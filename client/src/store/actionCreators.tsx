@@ -94,43 +94,30 @@ export const postSettings = (payload: BuildSettings): ThunkAction<Promise<any>, 
 }
 
 export const runBuild = (commitHash: string): ThunkAction<Promise<any>, RootState, unknown, Action<string>> => {
-  return function (dispatch) {
-    return (
-      axios
-        .post<BuildRequestResultModel>(`/api/builds/${commitHash}`)
-        .then((response) => {
-          if (response.status === 200) {
-            return response.data
-          }
-          throw Error(`Can not run build with commit hash ${commitHash}`)
-        })
-        // .then((json) => dispatch(saveSettings(json.data)))
-        .catch((e) => {
-          console.error(e)
-          // dispatch(isCached(false))
-        })
-    )
+  return async function (dispatch) {
+    try {
+      const json = await axios.post<BuildRequestResultModel>(`/api/builds/${commitHash}`)
+      if (json.status === 200) {
+        return json.data
+      }
+      throw Error(`Can not run build with commit hash ${commitHash}`)
+    } catch (e) {
+      console.error(e)
+    }
   }
 }
 
 export const getDetailsByBuildId = (buildId: string): ThunkAction<Promise<any>, RootState, unknown, Action<string>> => {
   // console.log(settings, 'settings')
-  return function (dispatch) {
-    return (
-      axios
-        .get(`/api/builds/${buildId}`)
-        .then((response) => {
-          if (response.status === 200) {
-            dispatch(saveDetailsByBuildId(response.data))
-            // console.log(response.data, 'response details build')
-          }
-        })
-        // .then((json) => dispatch(saveSettings(json.data)))
-        .catch((e) => {
-          console.error(e)
-          // dispatch(isCached(false))
-        })
-    )
+  return async function (dispatch) {
+    try {
+      const json = await axios.get(`/api/builds/${buildId}`)
+      if (json.status === 200) {
+        dispatch(saveDetailsByBuildId(json.data))
+      }
+    } catch (e) {
+      console.error(e)
+    }
   }
 }
 
@@ -139,24 +126,17 @@ export const getBuildList = (
   offset?: number
 ): ThunkAction<Promise<any>, RootState, unknown, Action<string>> => {
   // console.log(settings, 'settings')
-  return function (dispatch) {
-    return (
-      axios
-        .get<BuildTask[]>('/api/builds', { params: { limit, offset } })
-        .then((response) => {
-          if (response.status === 200) {
-            dispatch(saveBuildList(response.data))
-            // console.log(response.data, 'response')
-            return { success: true }
-          }
-        })
-        // .then((json) => dispatch(saveSettings(json.data)))
-        .catch((e) => {
-          console.error(e)
-          return { success: false }
-          // dispatch(isCached(false))
-        })
-    )
+  return async function (dispatch) {
+    try {
+      const json = await axios.get<BuildTask[]>('/api/builds', { params: { limit, offset } })
+      if (json.status === 200) {
+        dispatch(saveBuildList(json.data))
+        return { success: true }
+      }
+    } catch (e) {
+      console.error(e)
+      return { success: false }
+    }
   }
 }
 
