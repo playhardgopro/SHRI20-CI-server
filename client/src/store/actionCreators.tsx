@@ -30,7 +30,7 @@ export function saveBuildList(list: BuildTask[]) {
   }
 }
 
-export function saveDetailsByBuildId(payload) {
+export function saveDetailsByBuildId(payload: BuildTask) {
   // console.log(payload, 'caching')
   return {
     type: SAVE_BUILD_DETAILS,
@@ -38,7 +38,7 @@ export function saveDetailsByBuildId(payload) {
   }
 }
 
-export function saveError(payload) {
+export function saveError(payload: string | number) {
   // console.log(payload, 'caching')
   return {
     type: SAVE_ERROR,
@@ -69,24 +69,22 @@ export const postSettings = (payload: BuildSettings): ThunkAction<Promise<any>, 
     mainBranch: payload.mainBranch,
     period: +payload.period,
   }
-  return function (dispatch) {
+  return async function (dispatch) {
     dispatch(isLoading(true))
-    return axios
-      .post('/api/settings', settings)
-      .then((response) => {
-        if (response.status === 200 && response.data.saveSettings === 'done') {
-          dispatch(isLoading(false))
-          // console.log(response.data)
-          return { success: true }
-        }
-        dispatch(saveError({ postSettings: response.status }))
-        return { success: false }
-      })
-      .catch((e) => {
-        console.error(e)
-        dispatch(isCached(false))
-        return { success: false }
-      })
+    try {
+      const response = await axios.post('/api/settings', settings)
+      if (response.status === 200 && response.data.saveSettings === 'done') {
+        dispatch(isLoading(false))
+        // console.log(response.data)
+        return { success: true }
+      }
+      // dispatch(saveError({ postSettings: response.status }))
+      return { success: false }
+    } catch (e) {
+      console.error(e)
+      dispatch(isCached(false))
+      return { success: false }
+    }
   }
 }
 
