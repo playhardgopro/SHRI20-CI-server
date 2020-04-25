@@ -48,4 +48,5 @@ declare interface RootState {
   history: {
     buildList: BuildTask[]
   }
+  build: BuildTask
 }

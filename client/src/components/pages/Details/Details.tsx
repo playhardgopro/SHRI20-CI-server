@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect, useSelector, ConnectedProps } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
-import { getBuildList } from '../../../store/actionCreators'
+import { getBuildList, getDetailsByBuildId } from '../../../store/actionCreators'
 import { Footer, Header, Layout, Card, Log } from '../../index'
 
 const mapDispatch = {

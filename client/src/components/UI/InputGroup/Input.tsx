@@ -51,7 +51,7 @@ export const Input: React.FC<InputProps> = ({
         {clearable && (
           <Button
             className={{ size: 'm', distribute: 'center', view: 'control' }}
-            icon={{ name: 'close', size }}
+            icon={{ name: 'close', size: 'm' }}
             onClick={handleClear}
             empty
           />
