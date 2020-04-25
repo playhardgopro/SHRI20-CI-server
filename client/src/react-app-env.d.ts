@@ -28,6 +28,7 @@ declare interface BuildTask {
   status: BuildStatus
   start: string
   duration: number
+  logs?: string
 }
 
 declare interface BuildRequestResultModel {
@@ -50,4 +51,25 @@ declare interface RootState {
   }
   build: BuildTask
   errors: string[]
+}
+
+interface Options {
+  fg?: string
+  bg?: string
+  newline: boolean
+  escapeXML: boolean
+  stream: boolean
+}
+
+declare class AnsiToHtml {
+  constructor(options: Options) {}
+  toHtml(logText: string | undefined): string {
+    throw new Error('Method not implemented.')
+  }
+}
+declare module AnsiToHtml {
+  export function toHtml(text: string | undefined): string
+}
+declare module 'ansi-to-html' {
+  export = AnsiToHtml
 }

@@ -79,7 +79,7 @@ router.get<{ buildId: string }>('/:buildId/logs', (req, res) => {
       })
       .then((response) => {
         if (response.status === 200) {
-          const buildLog: string = response.data.data
+          const buildLog: string = response.data
           myCache.set(buildId, buildLog)
           res.send(buildLog)
         }

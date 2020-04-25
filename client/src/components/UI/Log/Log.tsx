@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { withNaming } from '@bem-react/classname'
 import './Log.scss'
 import { useSelector } from 'react-redux'
 
-const Convert = require('ansi-to-html')
+import Convert from 'ansi-to-html'
 
 const convert = new Convert({
   fg: '#000',
@@ -21,20 +21,13 @@ interface LogProps {
 
 const Log: React.FC<LogProps> = () => {
   const cnLog = cn('log')
-  const log = `> shri-2020-task-1@1.0.0 build \n> webpack --mode=production "--colors"\n\nHash: \u001b[1me541e85eb5e88a853b17\u001b[39m\u001b[22m\nVersion: webpack \u001b[1m4.41.5\u001b[39m\u001b[22m\nTime: \u001b[1m1782\u001b[39m\u001b[22mms\nBuilt at: 2020-03-30 \u001b[1m0:39:32\u001b[39m\u001b[22m\n        \u001b[1mAsset\u001b[39m\u001b[22m      \u001b[1mSize\u001b[39m\u001b[22m  \u001b[1mChunks\u001b[39m\u001b[22m  \u001b[1m\u001b[39m\u001b[22m                 \u001b[1m\u001b[39m\u001b[22m\u001b[1mChunk Names\u001b[39m\u001b[22m\n    \u001b[1m\u001b[32mscript.js\u001b[39m\u001b[22m  1.83 KiB       \u001b[1m0\u001b[39m\u001b[22m  \u001b[1m\u001b[32m[emitted]\u001b[39m\u001b[22m        main\n\u001b[1m\u001b[32mscript.js.map\u001b[39m\u001b[22m  7.03 KiB       \u001b[1m0\u001b[39m\u001b[22m  \u001b[1m\u001b[32m[emitted] [dev]\u001b[39m\u001b[22m  main\n    \u001b[1m\u001b[32mstyle.css\u001b[39m\u001b[22m  20.5 KiB       \u001b[1m0\u001b[39m\u001b[22m  \u001b[1m\u001b[32m[emitted]\u001b[39m\u001b[22m        main\n\u001b[1m\u001b[32mstyle.css.map\u001b[39m\u001b[22m  24.8 KiB       \u001b[1m0\u001b[39m\u001b[22m  \u001b[1m\u001b[32m[emitted] [dev]\u001b[39m\u001b[22m  main\nEntrypoint \u001b[1mmain\u001b[39m\u001b[22m = \u001b[1m\u001b[32mstyle.css\u001b[39m\u001b[22m \u001b[1m\u001b[32mscript.js\u001b[39m\u001b[22m \u001b[1m\u001b[32mstyle.css.map\u001b[39m\u001b[22m \u001b[1m\u001b[32mscript.js.map\u001b[39m\u001b[22m\n[0] \u001b[1m./src/js/utils.js\u001b[39m\u001b[22m 514 bytes {\u001b[1m\u001b[33m0\u001b[39m\u001b[22m}\u001b[1m\u001b[32m [built]\u001b[39m\u001b[22m\n[1] \u001b[1mmulti ./src/js/_index.js ./src/scss/index.scss\u001b[39m\u001b[22m 40 bytes {\u001b[1m\u001b[33m0\u001b[39m\u001b[22m}\u001b[1m\u001b[32m [built]\u001b[39m\u001b[22m\n[2] \u001b[1m./src/js/_index.js\u001b[39m\u001b[22m 89 bytes {\u001b[1m\u001b[33m0\u001b[39m\u001b[22m}\u001b[1m\u001b[32m [built]\u001b[39m\u001b[22m\n[3] \u001b[1m./src/js/onoffswitch.js\u001b[39m\u001b[22m 654 bytes {\u001b[1m\u001b[33m0\u001b[39m\u001b[22m}\u001b[1m\u001b[32m [built]\u001b[39m\u001b[22m\n[4] \u001b[1m./src/js/e-accordion.js\u001b[39m\u001b[22m 403 bytes {\u001b[1m\u001b[33m0\u001b[39m\u001b[22m}\u001b[1m\u001b[32m [built]\u001b[39m\u001b[22m\n[5] \u001b[1m./src/scss/index.scss\u001b[39m\u001b[22m 39 bytes {\u001b[1m\u001b[33m0\u001b[39m\u001b[22m}\u001b[1m\u001b[32m [built]\u001b[39m\u001b[22m\n    + 1 hidden module\nChild \u001b[1mmini-css-extract-plugin node_modules/css-loader/dist/cjs.js??ref--5-1!node_modules/postcss-loader/src/index.js!node_modules/sass-loader/dist/cjs.js!src/scss/index.scss\u001b[39m\u001b[22m:\n    Entrypoint \u001b[1mmini-css-extract-plugin\u001b[39m\u001b[22m = \u001b[1m\u001b[32m*\u001b[39m\u001b[22m\n    [0] \u001b[1m./node_modules/css-loader/dist/cjs.js??ref--5-1!./node_modules/postcss-loader/src!./node_modules/sass-loader/dist/cjs.js!./src/scss/index.scss\u001b[39m\u001b[22m 20.7 KiB {\u001b[1m\u001b[33m0\u001b[39m\u001b[22m}\u001b[1m\u001b[32m [built]\u001b[39m\u001b[22m\n        + 1 hidden module\n`
-
-  // const logText = useSelector((state: RootState) => state.build)
-
-  // useEffect(() => {
-  //   const currentBuild = buildList.filter((el) => el.buildNumber === Number(buildNumber))[0]
-  //   getDetailsByBuildId(currentBuild.id)
-  // }, [])
+  const logText = useSelector((state: RootState) => state.build.logs) || 'Please, wait, until build process ends'
 
   return (
     <div className={cnLog()}>
       <div className={cnLog('pre', { scroll: true })}>
         <pre className="pre">
-          <div dangerouslySetInnerHTML={{ __html: convert.toHtml(log) }} />
+          <div dangerouslySetInnerHTML={{ __html: convert.toHtml(logText) }} />
         </pre>
       </div>
     </div>

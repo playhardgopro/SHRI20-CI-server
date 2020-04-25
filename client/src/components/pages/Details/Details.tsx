@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { connect, useSelector, ConnectedProps } from 'react-redux'
-import { useHistory, useParams } from 'react-router-dom'
-import { getBuildList, getDetailsByBuildId } from '../../../store/actionCreators'
+import { useHistory, useParams, useLocation } from 'react-router-dom'
+import { getBuildList, getLogs } from '../../../store/actionCreators'
 import { Footer, Header, Layout, Card, Log } from '../../index'
 
 const mapDispatch = {
   getBuildList,
+  getLogs,
 }
 const connector = connect(null, mapDispatch)
 
@@ -13,14 +14,23 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 
 type Props = PropsFromRedux
 
-const Details: React.FC<Props> = ({ getBuildList }) => {
+const Details: React.FC<Props> = ({ getBuildList, getLogs }) => {
   const { buildNumber } = useParams()
   const history = useHistory()
+  const location = useLocation<string>()
+  const currentBuildId = location.state
+  console.log(currentBuildId, 'currentBuild')
   const buildList = useSelector((state: RootState) => state.history.buildList)
 
   useEffect(() => {
     getBuildList(buildList ? buildList.length : Number(buildNumber))
   }, [buildNumber])
+
+  useEffect(() => {
+    getLogs(currentBuildId)
+  }, [currentBuildId])
+
+  // const currentBuild = useSelector((state: RootState) => state.build)
 
   // NOTE: здесь захардкожено, надо подумать, как сделать лучше
   const options = buildList ? buildList.filter((el) => el.buildNumber === Number(buildNumber)) : []

@@ -6,6 +6,7 @@ import {
   SAVE_SETTINGS,
   SAVE_BUILD_LIST,
   SAVE_ERROR,
+  SAVE_LOGS,
   IS_CACHED,
   IS_LOADING,
   SettingsActionTypes,
@@ -47,6 +48,14 @@ export function saveError(payload: string | number): ErrorActionTypes {
   // console.log(payload, 'caching')
   return {
     type: SAVE_ERROR,
+    payload,
+  }
+}
+
+export function saveLogs(payload: string): BuildListDetailsActionTypes {
+  // console.log(payload, 'caching')
+  return {
+    type: SAVE_LOGS,
     payload,
   }
 }
@@ -136,6 +145,20 @@ export const getBuildList = (
     } catch (e) {
       console.error(e)
       return { success: false }
+    }
+  }
+}
+
+export const getLogs = (buildId: string): ThunkAction<void, RootState, unknown, Action<string>> => {
+  return async function (dispatch) {
+    try {
+      const plainText = await axios.get<string>(`/api/builds/${buildId}/logs`)
+      if (plainText.status === 200) {
+        console.log(plainText.data)
+        dispatch(saveLogs(plainText.data))
+      }
+    } catch (e) {
+      console.error(e)
     }
   }
 }

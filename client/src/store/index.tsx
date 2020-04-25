@@ -7,6 +7,7 @@ import {
   SAVE_BUILD_LIST,
   SAVE_BUILD_DETAILS,
   SAVE_ERROR,
+  SAVE_LOGS,
   SettingsActionTypes,
   BuildListActionTypes,
   BuildListDetailsActionTypes,
@@ -44,6 +45,8 @@ function buildReducer(state = initialState, action: BuildListDetailsActionTypes)
   switch (action.type) {
     case SAVE_BUILD_DETAILS:
       return { ...action.payload }
+    case SAVE_LOGS:
+      return { logs: action.payload }
     default:
       return state
   }
