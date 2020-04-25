@@ -1,10 +1,10 @@
 // import * as React from 'react'
 import React, { useEffect } from 'react'
 import { withNaming } from '@bem-react/classname'
-import { connect, useSelector } from 'react-redux'
+import { connect, useSelector, ConnectedProps, useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router-dom'
-import { saveSettings, getSettings, postSettings, getBuildList } from '../../../store/actionCreators'
+import { saveSettings, postSettings, getBuildList, isLoading } from '../../../store/actionCreators'
 
 import { Button, Input, Text } from '../../index'
 import './Form.scss'
@@ -16,11 +16,24 @@ const textStyle = { size: '13-18', type: 'h2' }
 
 type name = 'repoName' | 'buildCommand' | 'mainBranch' | 'period'
 
-const Form = ({ postSettings, saveSettings, getBuildList }) => {
+const mapDispatch = {
+  postSettings,
+  saveSettings,
+  getBuildList,
+  isLoading,
+}
+const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux
+
+const Form: React.FC<Props> = ({ postSettings, saveSettings, getBuildList, isLoading }) => {
   const defaultValues = useSelector((state: RootState) => state.settings)
   const history = useHistory()
-  const isLoading = useSelector((state: RootState) => state.settings.isLoading)
-  const { register, handleSubmit, errors, setValue, reset } = useForm()
+  const isLoadingState = useSelector((state: RootState) => state.settings.isLoading)
+  const dispatch = useDispatch()
+  const { register, handleSubmit, errors, setValue, reset } = useForm<BuildSettings>()
 
   useEffect(() => {
     reset(defaultValues)
@@ -28,13 +41,13 @@ const Form = ({ postSettings, saveSettings, getBuildList }) => {
 
   const handleSave = (settings: BuildSettings) => {
     postSettings(settings)
-      .then(() => getBuildList())
+      .then(() => getBuildList(25))
       .then((resolve) => {
         if (resolve.success) {
           saveSettings(settings)
           history.push('/history')
         } else {
-          isLoading(false)
+          dispatch(isLoading(false))
         }
       })
   }
@@ -52,7 +65,8 @@ const Form = ({ postSettings, saveSettings, getBuildList }) => {
     pattern: { value: /^[1-9]\d*$/, message: 'Field must be number and not equal to 0' },
   }
 
-  const getValidators = (rules) => Object.fromEntries(Object.entries(validators).filter(([key]) => rules.includes(key)))
+  const getValidators = (rules: string[]) =>
+    Object.fromEntries(Object.entries(validators).filter(([key]) => rules.includes(key)))
 
   return (
     <form className={cnForm()}>
@@ -128,7 +142,7 @@ const Form = ({ postSettings, saveSettings, getBuildList }) => {
               inputRef={register(getValidators(['required', 'pattern']))}
               status={errors.period && 'invalid'}
               name="period"
-              width="52"
+              width={52}
               text="minutes"
             />
           </div>
@@ -136,21 +150,15 @@ const Form = ({ postSettings, saveSettings, getBuildList }) => {
         </div>
       </div>
       <div className={cnForm('controls')}>
-        <Button className={{ size: 'm', view: 'action' }} onClick={handleSubmit(handleSave)} disabled={isLoading}>
+        <Button className={{ size: 'm', view: 'action' }} onClick={handleSubmit(handleSave)} disabled={isLoadingState}>
           Save
         </Button>
-        <Button className={{ size: 'm', view: 'control' }} onClick={handleCancel} disabled={isLoading}>
+        <Button className={{ size: 'm', view: 'control' }} onClick={handleCancel} disabled={isLoadingState}>
           Cancel
         </Button>
       </div>
     </form>
   )
 }
-const mapDispatchToProps = {
-  saveSettings,
-  getSettings,
-  postSettings,
-  getBuildList,
-}
 
-export default connect(null, mapDispatchToProps)(Form)
+export default connector(Form)
