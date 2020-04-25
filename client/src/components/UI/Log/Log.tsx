@@ -34,7 +34,7 @@ const Log: React.FC<LogProps> = () => {
     <div className={cnLog()}>
       <div className={cnLog('pre', { scroll: true })}>
         <pre className="pre">
-          <div dangerouslySetInnerHTML={{ __html: convert.toHtml(logText) }} />
+          <div dangerouslySetInnerHTML={{ __html: convert.toHtml(log) }} />
         </pre>
       </div>
     </div>
