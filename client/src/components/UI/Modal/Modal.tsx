@@ -49,6 +49,8 @@ const Modal: React.FC<ModalProps> = ({ onSubmit, onCancel }) => {
             inputRef={register(getValidators(['required']))}
             status={errors.commitHashBuild && 'invalid'}
             name="commitHashBuild"
+            size="m"
+            width="full"
             clearable
           />
           {errors.commitHashBuild && (
