@@ -6,8 +6,9 @@ import { Text, Button } from '../../index'
 import './Rep-connection.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
+interface RepConnectionProps {}
 
-const RepConnection = ({ children, className }) => {
+const RepConnection: React.FC<RepConnectionProps> = () => {
   const history = useHistory()
   const cnRep = cn('rep-connection')
   return (
@@ -38,15 +39,6 @@ const RepConnection = ({ children, className }) => {
       </div>
     </div>
   )
-}
-
-RepConnection.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  className: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.bool])),
-}
-RepConnection.defaultProps = {
-  children: '',
-  className: {},
 }
 
 export default RepConnection

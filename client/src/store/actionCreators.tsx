@@ -61,7 +61,7 @@ export function isCached(payload: boolean) {
   }
 }
 
-export function postSettings(payload: BuildSettings) {
+export const postSettings = (payload: BuildSettings): ThunkAction<Promise<any>, RootState, unknown, Action<string>> => {
   // console.log(settings, 'settings')
   const settings = {
     repoName: payload.repoName,
@@ -110,7 +110,7 @@ export const runBuild = (commitHash: string): ThunkAction<Promise<any>, RootStat
   }
 }
 
-export const getDetailsByBuildId = (buildId: string): ThunkAction<void, RootState, unknown, Action<string>> => {
+export const getDetailsByBuildId = (buildId: string): ThunkAction<Promise<any>, RootState, unknown, Action<string>> => {
   // console.log(settings, 'settings')
   return function (dispatch) {
     return (
@@ -131,7 +131,10 @@ export const getDetailsByBuildId = (buildId: string): ThunkAction<void, RootStat
   }
 }
 
-export const getBuildList = (limit: number, offset?: number): ThunkAction<void, RootState, unknown, Action<string>> => {
+export const getBuildList = (
+  limit: number,
+  offset?: number
+): ThunkAction<Promise<any>, RootState, unknown, Action<string>> => {
   // console.log(settings, 'settings')
   return function (dispatch) {
     return (
