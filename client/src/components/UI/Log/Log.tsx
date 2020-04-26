@@ -7,8 +7,8 @@ import Convert from 'ansi-to-html'
 
 const convert = new Convert({
   fg: '#000',
-  bg: '#000',
-  newline: false,
+  bg: '#E6E6E6',
+  newline: true,
   escapeXML: false,
   stream: false,
 })
