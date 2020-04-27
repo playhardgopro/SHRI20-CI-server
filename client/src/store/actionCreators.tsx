@@ -15,6 +15,8 @@ import {
   ErrorActionTypes,
 } from './types'
 
+type ResolveSuccess = { success: boolean; error?: string }
+
 export function saveSettings(payload: BuildSettings): SettingsActionTypes {
   const settings: BuildSettings = {
     repoName: payload.repoName,
@@ -75,7 +77,9 @@ export function isCached(payload: boolean): SettingsActionTypes {
   }
 }
 
-export const postSettings = (payload: BuildSettings): ThunkAction<Promise<any>, RootState, unknown, Action<string>> => {
+export const postSettings = (
+  payload: BuildSettings
+): ThunkAction<Promise<ResolveSuccess>, RootState, unknown, Action<string>> => {
   // console.log(settings, 'settings')
   const settings = {
     repoName: payload.repoName,
@@ -87,17 +91,17 @@ export const postSettings = (payload: BuildSettings): ThunkAction<Promise<any>, 
     dispatch(isLoading(true))
     try {
       const response = await axios.post('/api/settings', settings)
-      if (response.status === 200 && response.data.saveSettings === 'done') {
+      if (response.status === 200) {
         dispatch(isLoading(false))
         // console.log(response.data)
         return { success: true }
       }
       // dispatch(saveError({ postSettings: response.status }))
-      return { success: false }
+      return { success: false, error: `Can not post settings, response status: ${response.status}` }
     } catch (e) {
       console.error(e)
       dispatch(isCached(false))
-      return { success: false }
+      return { success: false, error: e }
     }
   }
 }
@@ -105,27 +109,36 @@ export const postSettings = (payload: BuildSettings): ThunkAction<Promise<any>, 
 export const runBuild = (commitHash: string): ThunkAction<Promise<any>, RootState, unknown, Action<string>> => {
   return async function (dispatch) {
     try {
-      const json = await axios.post<BuildRequestResultModel>(`/api/builds/${commitHash}`)
-      if (json.status === 200) {
-        return json.data
+      const response = await axios.post<BuildRequestResultModel>(`/api/builds/${commitHash}`)
+      if (response.status === 200) {
+        return response.data
       }
-      throw new Error(`Can not run build with commit hash ${commitHash}`)
+      return {
+        success: false,
+        error: `Can not run build with commit hash: ${commitHash.slice(0, 7)}, response status: ${response.status}`,
+      }
     } catch (e) {
       console.error(e)
+      return { success: false, error: e }
     }
   }
 }
 
-export const getDetailsByBuildId = (buildId: string): ThunkAction<Promise<any>, RootState, unknown, Action<string>> => {
+export const getDetailsByBuildId = (
+  buildId: string
+): ThunkAction<Promise<ResolveSuccess>, RootState, unknown, Action<string>> => {
   // console.log(settings, 'settings')
   return async function (dispatch) {
     try {
       const json = await axios.get(`/api/builds/${buildId}`)
       if (json.status === 200) {
         dispatch(saveDetailsByBuildId(json.data))
+        return { success: true }
       }
+      return { success: false }
     } catch (e) {
       console.error(e)
+      return { success: false, error: e }
     }
   }
 }
@@ -133,7 +146,7 @@ export const getDetailsByBuildId = (buildId: string): ThunkAction<Promise<any>, 
 export const getBuildList = (
   limit: number,
   offset?: number
-): ThunkAction<Promise<any>, RootState, unknown, Action<string>> => {
+): ThunkAction<Promise<ResolveSuccess>, RootState, unknown, Action<string>> => {
   // console.log(settings, 'settings')
   return async function (dispatch) {
     try {
@@ -142,40 +155,47 @@ export const getBuildList = (
         dispatch(saveBuildList(json.data))
         return { success: true }
       }
+      return { success: false }
     } catch (e) {
       console.error(e)
-      return { success: false }
+      return { success: false, error: e }
     }
   }
 }
 
-export const getLogs = (buildId: string): ThunkAction<void, RootState, unknown, Action<string>> => {
+export const getLogs = (buildId: string): ThunkAction<Promise<ResolveSuccess>, RootState, unknown, Action<string>> => {
   return async function (dispatch) {
     try {
       const plainText = await axios.get<string>(`/api/builds/${buildId}/logs`)
       if (plainText.status === 200) {
         console.log(plainText.data)
         dispatch(saveLogs(plainText.data))
+        return { success: true }
       }
+      return { success: false }
     } catch (e) {
       console.error(e)
+      return { success: false, error: e }
     }
   }
 }
 
-export const getSettings = (): ThunkAction<void, RootState, unknown, Action<string>> => {
+export const getSettings = (): ThunkAction<Promise<ResolveSuccess>, RootState, unknown, Action<string>> => {
   return async function (dispatch) {
     try {
       const json = await axios.get<BuildSettings>('/api/settings')
       if (json.status === 200) {
         dispatch(saveSettings(json.data))
         dispatch(isCached(true))
+        return { success: true }
       } else {
         dispatch(isCached(false))
+        return { success: false }
       }
     } catch (e) {
       console.error(e)
       dispatch(isCached(false))
+      return { success: false, error: e }
     }
   }
 }

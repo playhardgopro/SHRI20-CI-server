@@ -40,16 +40,16 @@ const Form: React.FC<Props> = ({ postSettings, saveSettings, getBuildList, isLoa
   }, [defaultValues, reset])
 
   const handleSave = (settings: BuildSettings) => {
-    postSettings(settings)
-      .then(() => getBuildList(25))
-      .then((resolve) => {
-        if (resolve.success) {
-          saveSettings(settings)
-          history.push('/history')
-        } else {
-          dispatch(isLoading(false))
-        }
-      })
+    postSettings(settings).then((resolve) => {
+      if (resolve.success) {
+        getBuildList(25)
+        saveSettings(settings)
+        history.push('/history')
+      } else {
+        dispatch(isLoading(false))
+        console.error(resolve?.error)
+      }
+    })
   }
 
   const handleCancel = () => {
