@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { connect, useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 import { getBuildList } from '../../../store/actionCreators'
 import { List, Footer, Header, Layout, Grid } from '../../index'
 

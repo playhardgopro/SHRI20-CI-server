@@ -109,7 +109,7 @@ export const runBuild = (commitHash: string): ThunkAction<Promise<any>, RootStat
       if (json.status === 200) {
         return json.data
       }
-      throw Error(`Can not run build with commit hash ${commitHash}`)
+      throw new Error(`Can not run build with commit hash ${commitHash}`)
     } catch (e) {
       console.error(e)
     }

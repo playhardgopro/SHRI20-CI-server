@@ -9,7 +9,7 @@ interface ButtonProps {
   onClick(): void
   className: {
     size: 'm' | 's'
-    view?: 'action' | 'control'
+    view: 'action' | 'control'
     distribute?: 'center'
     hidden?: boolean
   }

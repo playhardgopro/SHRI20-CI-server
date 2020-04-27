@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useCallback } from 'react'
 import { withNaming } from '@bem-react/classname'
 import { Text, Button } from '../../index'
 import './InputGroup.scss'
@@ -12,7 +12,7 @@ interface InputProps {
   clearable?: boolean
   id: name
   name: name
-  width?: 'full' | 52
+  width: 'full' | 52
   size?: 's' | 'm'
   placeholder: string
   onClear(name: name): void
@@ -35,9 +35,9 @@ export const Input: React.FC<InputProps> = ({
   width,
   size,
 }) => {
-  const handleClear = () => {
+  const handleClear = useCallback(() => {
     onClear(name)
-  }
+  }, [])
   return (
     <div className={cnInput('controls')}>
       <input

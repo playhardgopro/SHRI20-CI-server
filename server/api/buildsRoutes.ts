@@ -34,7 +34,7 @@ router.post<{ commitHash: string }>('/:commitHash', (req, res) => {
         const settings: BuildSettings = response.data.data
         return helpers.getCommitInfo(commitHash, settings)
       }
-      throw Error('Can not get /conf')
+      throw new Error('Can not get /conf')
     })
     .then((commitInfo) => axios.post('/build/request', commitInfo))
     .then((response) => {

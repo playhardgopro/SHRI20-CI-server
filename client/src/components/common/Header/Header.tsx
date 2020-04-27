@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { withNaming } from '@bem-react/classname'
-import { connect, useSelector, useDispatch, ConnectedProps } from 'react-redux'
+import { connect, useSelector, ConnectedProps } from 'react-redux'
 import { useRouteMatch, useHistory } from 'react-router-dom'
 import { runBuild } from '../../../store/actionCreators'
 import { Text, Button, Modal } from '../../index'
-import store from '../../../store/index'
 import './Header.scss'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
@@ -18,7 +17,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 
 type Props = PropsFromRedux & HeaderProps
 interface HeaderProps {
-  className: { distribute: string }
+  className: { distribute: 'between' }
   // runBuild(commitHash: string): Promise<BuildRequestResultModel>
 }
 
