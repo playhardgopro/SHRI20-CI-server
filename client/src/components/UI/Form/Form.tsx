@@ -1,25 +1,73 @@
-import React, { useRef, useState } from 'react'
-import renderer from 'react-test-renderer'
+// import * as React from 'react'
+import React, { useEffect } from 'react'
 import { withNaming } from '@bem-react/classname'
-import Input from '../components/UI/InputGroup/Input'
-import Button from '../components/UI/Button/Button'
-import Text from '../components/UI/Text/Text'
+import { connect, useSelector, ConnectedProps, useDispatch } from 'react-redux'
+import { useForm } from 'react-hook-form'
+import { useHistory } from 'react-router-dom'
+import { saveSettings, postSettings, getBuildList, isLoading } from '../../../store/actionCreators'
 
-// jest.mock('react-text-mask', () => (props) => <input type="text" {...{ ...props }} />)
+import { Button, Input, Text } from '../../index'
+import './Form.scss'
 
-const Stub = () => {
-  const cn = withNaming({ n: '', e: '__', m: '_' })
-  const cnForm = cn('form')
-  const cnInput = cn('input')
-  const textStyle = { size: '13-18', type: 'h2' }
+const cn = withNaming({ n: '', e: '__', m: '_' })
+const cnForm = cn('form')
+const cnInput = cn('input')
+const textStyle = { size: '13-18', type: 'h2' }
 
-  const errors = {
-    repoName: { message: 'Field is required' },
-    buildCommand: { message: 'Field is required' },
-    mainBranch: { message: 'Field is required' },
-    period: { message: 'Field is required' },
+type name = 'repoName' | 'buildCommand' | 'mainBranch' | 'period'
+
+const mapDispatch = {
+  postSettings,
+  saveSettings,
+  getBuildList,
+  isLoading,
+}
+const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+type Props = PropsFromRedux
+
+const Form: React.FC<Props> = ({ postSettings, saveSettings, getBuildList, isLoading }) => {
+  const defaultValues = useSelector((state: RootState) => state.settings)
+  const history = useHistory()
+  const isLoadingState = useSelector((state: RootState) => state.settings.isLoading)
+  const dispatch = useDispatch()
+  const { register, handleSubmit, errors, setValue, reset } = useForm<BuildSettings>()
+
+  useEffect(() => {
+    reset(defaultValues)
+  }, [defaultValues, reset])
+
+  const handleSave = (settings: BuildSettings) => {
+    postSettings(settings).then((resolve) => {
+      if (resolve.success) {
+        getBuildList(25)
+        saveSettings(settings)
+        history.push('/history')
+      } else {
+        dispatch(isLoading(false))
+        console.error(resolve?.error)
+      }
+    })
   }
-  // const formRef = useRef(null)
+
+  const handleCancel = () => {
+    history.go(-1)
+  }
+
+  const handleClear = (name: name) => {
+    setValue(name, '')
+  }
+
+  const validators = {
+    required: { value: true, message: 'Field is required' },
+    pattern: { value: /^[1-9]\d*$/, message: 'Field must be number and not equal to 0' },
+  }
+
+  const getValidators = (rules: string[]) =>
+    Object.fromEntries(Object.entries(validators).filter(([key]) => rules.includes(key)))
+
   return (
     <form className={cnForm()}>
       <div className={cnForm('title')}>
@@ -37,6 +85,8 @@ const Stub = () => {
             <Input
               id="repoName"
               placeholder="username/reponame"
+              onClear={handleClear}
+              inputRef={register(getValidators(['required']))}
               status={errors.repoName && 'invalid'}
               size="m"
               width="full"
@@ -54,6 +104,8 @@ const Stub = () => {
             <Input
               id="buildCommand"
               placeholder="npm run build"
+              onClear={handleClear}
+              inputRef={register(getValidators(['required']))}
               status={errors.buildCommand && 'invalid'}
               size="m"
               width="full"
@@ -73,6 +125,8 @@ const Stub = () => {
             <Input
               id="mainBranch"
               placeholder="master"
+              onClear={handleClear}
+              inputRef={register(getValidators(['required']))}
               status={errors.mainBranch && 'invalid'}
               size="m"
               width="full"
@@ -90,6 +144,8 @@ const Stub = () => {
             <Input
               id="period"
               placeholder="10"
+              onClear={handleClear}
+              inputRef={register(getValidators(['required', 'pattern']))}
               status={errors.period && 'invalid'}
               name="period"
               size="m"
@@ -98,24 +154,18 @@ const Stub = () => {
             />
           </div>
           {errors.period && <Text className={{ ...textStyle, view: 'error' }}>{errors.period.message}</Text>}
-          <Text className={{ ...textStyle, view: 'error' }}>Field is required</Text>
         </div>
       </div>
       <div className={cnForm('controls')}>
-        <Button className={{ size: 'm', view: 'action' }} disabled={false} onClick={()=>{}}>
+        <Button className={{ size: 'm', view: 'action' }} onClick={handleSubmit(handleSave)} disabled={isLoadingState}>
           Save
         </Button>
-        <Button className={{ size: 'm', view: 'control' }} disabled={false} onClick={()=>{}}>
+        <Button className={{ size: 'm', view: 'control' }} onClick={handleCancel} disabled={isLoadingState}>
           Cancel
         </Button>
       </div>
     </form>
   )
 }
-describe('Form', () => {
-  it('renders correctly', () => {
-    const form = renderer.create(<Stub />).toJSON()
 
-    expect(form).toMatchSnapshot()
-  })
-})
+export default connector(Form)
