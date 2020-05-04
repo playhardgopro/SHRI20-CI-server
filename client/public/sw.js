@@ -33,6 +33,11 @@ self.addEventListener('install', (event) => {
   console.info('ServiceWorker installed')
 })
 
+self.addEventListener('activate', (event) => {
+  event.waitUntil(caches.delete(CACHE))
+  console.info('Cache cleared on activation')
+})
+
 self.addEventListener('fetch', (event) => {
   if (event.request.url.startsWith('chrome-extension')) {
     return
