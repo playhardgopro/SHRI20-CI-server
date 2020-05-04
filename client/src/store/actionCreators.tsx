@@ -168,7 +168,7 @@ export const getLogs = (buildId: string): ThunkAction<Promise<ResolveSuccess>, R
     try {
       const plainText = await axios.get<string>(`/api/builds/${buildId}/logs`)
       if (plainText.status === 200) {
-        console.log(plainText.data)
+        // console.log(plainText.data)
         dispatch(saveLogs(plainText.data))
         return { success: true }
       }

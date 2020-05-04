@@ -19,7 +19,7 @@ const Details: React.FC<Props> = ({ getBuildList, getLogs }) => {
   const history = useHistory()
   const location = useLocation<string>()
   const currentBuildId = location.state
-  console.log(currentBuildId, 'currentBuild')
+  // console.log(currentBuildId, 'currentBuild')
   const buildList = useSelector((state: RootState) => state.history.buildList)
 
   useEffect(() => {
