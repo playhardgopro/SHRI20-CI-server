@@ -1,6 +1,34 @@
 const CACHE = 'static'
 const timeout = 500
 
+async function fromCache(request) {
+  const cache = await caches.open(CACHE)
+  const matching = await cache.match(request)
+  return matching || Promise.reject('no-match')
+}
+
+function fromNetwork(request, timeout) {
+  return new Promise((fulfill, reject) => {
+    const timeoutId = setTimeout(reject, timeout)
+    fetch(request).then((response) => {
+      clearTimeout(timeoutId)
+      fulfill(response)
+    }, reject)
+  })
+}
+
+async function update(request) {
+  try {
+    const open = await caches.open(CACHE)
+    const data = await fetch(request)
+    await open.put(request, data.clone())
+    return data
+  } catch (e) {
+    console.error(e)
+    return
+  }
+}
+
 self.addEventListener('install', (event) => {
   console.info('ServiceWorker installed')
 })
@@ -35,31 +63,3 @@ self.addEventListener('fetch', (event) => {
       })
   )
 })
-
-async function fromCache(request) {
-  const cache = await caches.open(CACHE)
-  const matching = await cache.match(request)
-  return matching || Promise.reject('no-match')
-}
-
-function fromNetwork(request, timeout) {
-  return new Promise((fulfill, reject) => {
-    const timeoutId = setTimeout(reject, timeout)
-    fetch(request).then((response) => {
-      clearTimeout(timeoutId)
-      fulfill(response)
-    }, reject)
-  })
-}
-
-async function update(request) {
-  try {
-    const open = await caches.open(CACHE)
-    const data = await fetch(request)
-    await open.put(request, data.clone())
-    return data
-  } catch (e) {
-    console.error(e)
-    return
-  }
-}
