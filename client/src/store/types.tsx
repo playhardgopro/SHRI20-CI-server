@@ -3,6 +3,7 @@ export const SAVE_BUILD_LIST = 'SAVE_BUILD_LIST'
 export const SAVE_BUILD_DETAILS = 'SAVE_BUILD_DETAILS'
 export const SAVE_ERROR = 'SAVE_ERROR'
 export const SAVE_LOGS = 'SAVE_LOGS'
+export const SAVE_LOCALE = 'SAVE_LOCALE'
 export const IS_LOADING = 'IS_LOADING'
 export const IS_CACHED = 'IS_CACHED'
 
@@ -48,3 +49,10 @@ interface SaveErrorsActionTypes {
 }
 
 export type ErrorActionTypes = SaveErrorsActionTypes
+
+interface SaveLocaleActionTypes {
+  type: typeof SAVE_LOCALE
+  payload: 'ru' | 'en'
+}
+
+export type LocaleActionTypes = SaveLocaleActionTypes
