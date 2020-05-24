@@ -1,7 +1,8 @@
 {
   "Build": {
     "Button": {
-      "RunBuild": "Запустить сборку"
+      "RunBuild": "Запустить сборку",
+      "ShowMore": "Показать больше"
     }
   },
   "BuildDetails": {
@@ -10,16 +11,24 @@
     }
   },
   "Footer": {
-    "Locale": "English version"
+    "Locale": "English version",
+    "Copyright": "© 2020 Даниил Егорцев",
+    "Learning": "Обучение",
+    "Support": "Служба поддержки"
   },
   "PopUp": {
     "Form": {
-      "descripton": "Введите хеш коммита, который вы хотите собрать."
+      "descripton": "Введите хеш коммита, который вы хотите собрать.",
+      "header": "Новая сборка"
     },
     "Input": {
       "commitHash": {
         "placeholder": "Хэш коммита"
       }
+    },
+    "Button": {
+      "Cancel": "Отмена",
+      "RunBuild": "Запустить сборку"
     }
   },
   "Settings": {
@@ -29,7 +38,8 @@
     },
     "Input": {
       "buildCommand": {
-        "head": "Команда запуска сборки"
+        "head": "Команда запуска сборки",
+        "placeholder": "npm run build"
       },
       "mainBranch": {
         "head": "Основная ветка",
@@ -39,17 +49,28 @@
         "head": {
           "one": "Синхронизировать каждые",
           "other": "Синхронизировать каждые"
-        }
+        },
+        "placeholder": "10"
       },
       "repoName": {
         "head": "GitHub репозиторий",
         "placeholder": "username/reponame"
       }
+    },
+    "Button": {
+      "Cancel": "Отмена",
+      "Save": "Сохранить"
     }
   },
   "StartScreen": {
     "Button": {
       "Settings": "Настройки"
     }
+  },
+  "Logo": {
+    "Button": {
+      "OpenSettings": "Открыть настройки"
+    },
+    "Text": "Настроить соединение с репозиторием и параметры синхронизации"
   }
 }
