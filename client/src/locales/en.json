@@ -8,6 +8,9 @@
   "BuildDetails": {
     "Button": {
       "Rebuild": "Rebuild"
+    },
+    "Logs": {
+      "WaitUntilLoading": "Please, wait, until build process ends..."
     }
   },
   "Footer": {

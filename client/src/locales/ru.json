@@ -8,6 +8,9 @@
   "BuildDetails": {
     "Button": {
       "Rebuild": "Пересобрать"
+    },
+    "Logs": {
+      "WaitUntilLoading": "Пожалуйста, подождите, сборка выполняется..."
     }
   },
   "Footer": {
