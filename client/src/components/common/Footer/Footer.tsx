@@ -13,6 +13,7 @@ const Footer: React.FC = () => {
   const cnText = cn('text')
   const dispatch = useDispatch()
   const currentLocale = useSelector((state: RootState) => state.locale)
+  const { locale } = window
 
   const onChangeLocale = useCallback(
     (e: SyntheticEvent) => {
@@ -31,7 +32,6 @@ const Footer: React.FC = () => {
     [currentLocale]
   )
 
-  const { locale } = window
   return (
     <div className={cnFooter()}>
       <div className={cnFooter('content')}>
