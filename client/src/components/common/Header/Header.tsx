@@ -33,7 +33,6 @@ const Header: React.FC<Props> = ({ children, runBuild, className }) => {
   const match = useRouteMatch()
   const history = useHistory()
 
-  const currentLocale = useSelector((state: RootState) => state.locale)
   const { locale } = window
 
   switch (match.path) {
