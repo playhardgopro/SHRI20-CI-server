@@ -1,0 +1,55 @@
+{
+  "Build": {
+    "Button": {
+      "RunBuild": "Запустить сборку"
+    }
+  },
+  "BuildDetails": {
+    "Button": {
+      "Rebuild": "Пересобрать"
+    }
+  },
+  "Footer": {
+    "Locale": "English version"
+  },
+  "PopUp": {
+    "Form": {
+      "descripton": "Введите хеш коммита, который вы хотите собрать."
+    },
+    "Input": {
+      "commitHash": {
+        "placeholder": "Хэш коммита"
+      }
+    }
+  },
+  "Settings": {
+    "Form": {
+      "descripton": "Настроить соединение с репозиторием и параметры синхронизации.",
+      "header": "Настройки"
+    },
+    "Input": {
+      "buildCommand": {
+        "head": "Команда запуска сборки"
+      },
+      "mainBranch": {
+        "head": "Основная ветка",
+        "placeholder": "master"
+      },
+      "period": {
+        "head": {
+          "one": "Синхронизировать каждые",
+          "other": "Синхронизировать каждые"
+        }
+      },
+      "repoName": {
+        "head": "GitHub репозиторий",
+        "placeholder": "username/reponame"
+      }
+    }
+  },
+  "StartScreen": {
+    "Button": {
+      "Settings": "Настройки"
+    }
+  }
+}
