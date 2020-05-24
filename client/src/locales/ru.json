@@ -14,12 +14,22 @@
     }
   },
   "Footer": {
-    "Locale": "English version",
     "Copyright": "© 2020 Даниил Егорцев",
     "Learning": "Обучение",
+    "Locale": "English version",
     "Support": "Служба поддержки"
   },
+  "Logo": {
+    "Button": {
+      "OpenSettings": "Открыть настройки"
+    },
+    "Text": "Настроить соединение с репозиторием и параметры синхронизации"
+  },
   "Modal": {
+    "Button": {
+      "Cancel": "Отмена",
+      "RunBuild": "Запустить сборку"
+    },
     "Form": {
       "description": "Введите хеш коммита, который вы хотите собрать.",
       "header": "Новая сборка"
@@ -28,13 +38,13 @@
       "commitHash": {
         "placeholder": "Хэш коммита"
       }
-    },
-    "Button": {
-      "Cancel": "Отмена",
-      "RunBuild": "Запустить сборку"
     }
   },
   "Settings": {
+    "Button": {
+      "Cancel": "Отмена",
+      "Save": "Сохранить"
+    },
     "Form": {
       "description": "Настроить соединение с репозиторием и параметры синхронизации.",
       "header": "Настройки"
@@ -59,21 +69,11 @@
         "head": "GitHub репозиторий",
         "placeholder": "username/reponame"
       }
-    },
-    "Button": {
-      "Cancel": "Отмена",
-      "Save": "Сохранить"
     }
   },
   "StartScreen": {
     "Button": {
       "Settings": "Настройки"
     }
-  },
-  "Logo": {
-    "Button": {
-      "OpenSettings": "Открыть настройки"
-    },
-    "Text": "Настроить соединение с репозиторием и параметры синхронизации"
   }
 }
