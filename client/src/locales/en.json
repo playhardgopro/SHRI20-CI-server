@@ -22,13 +22,13 @@
     },
     "Text": "Configure repository connection and synchronization settings"
   },
-  "PopUp": {
+  "Modal": {
     "Button": {
       "Cancel": "Cancel",
       "RunBuild": "Run build"
     },
     "Form": {
-      "descripton": "Enter the commit hash which you want to build.",
+      "description": "Enter the commit hash which you want to build.",
       "header": "New Build"
     },
     "Input": {
@@ -43,7 +43,7 @@
       "Save": "Save"
     },
     "Form": {
-      "descripton": "Configure repository connection and synchronization settings.",
+      "description": "Configure repository connection and synchronization settings.",
       "header": "Settings"
     },
     "Input": {
