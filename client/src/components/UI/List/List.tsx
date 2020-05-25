@@ -22,6 +22,7 @@ const List: React.FC<Props> = ({ getBuildList }) => {
   const history = useHistory()
   const buildList = useSelector((state: RootState) => state.history.buildList)
   const [showButton, setShowButton] = useState(true)
+  const { locale } = window
 
   function handleClick(event: React.MouseEvent, { buildNumber, buildId }: { buildNumber: number; buildId: string }) {
     // getDetailsByBuildId(buildId)
@@ -52,7 +53,7 @@ const List: React.FC<Props> = ({ getBuildList }) => {
       <div className={cnList('controls')}>
         {showButton && (
           <Button className={{ size: 'm', view: 'control' }} onClick={handleShowMore}>
-            Show more
+            {locale.Build.Button.ShowMore}
           </Button>
         )}
       </div>

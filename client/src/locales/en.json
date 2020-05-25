@@ -1,0 +1,80 @@
+{
+  "Build": {
+    "Button": {
+      "RunBuild": "Run build",
+      "ShowMore": "Show more"
+    }
+  },
+  "BuildDetails": {
+    "Button": {
+      "Rebuild": "Rebuild"
+    },
+    "Logs": {
+      "WaitUntilLoading": "Please, wait, until build process ends..."
+    }
+  },
+  "Footer": {
+    "Copyright": "© 2020 Daniel Egortsev",
+    "Learning": "Learning",
+    "Locale": "Русская версия",
+    "Support": "Support"
+  },
+  "Logo": {
+    "Button": {
+      "OpenSettings": "Open Settings"
+    },
+    "Text": "Configure repository connection and synchronization settings"
+  },
+  "Modal": {
+    "Button": {
+      "Cancel": "Cancel",
+      "RunBuild": "Run build"
+    },
+    "Form": {
+      "description": "Enter the commit hash which you want to build.",
+      "header": "New Build"
+    },
+    "Input": {
+      "commitHash": {
+        "placeholder": "Commit Hash"
+      }
+    }
+  },
+  "Settings": {
+    "Button": {
+      "Cancel": "Cancel",
+      "Save": "Save"
+    },
+    "Form": {
+      "description": "Configure repository connection and synchronization settings.",
+      "header": "Settings"
+    },
+    "Input": {
+      "buildCommand": {
+        "head": "Build command",
+        "placeholder": "npm run build"
+      },
+      "mainBranch": {
+        "head": "Main branch",
+        "placeholder": "master"
+      },
+      "period": {
+        "head": {
+          "one": "Synchronize every",
+          "other": "Synchronize every"
+        },
+        "placeholder": "10",
+        "metrics": "minutes"
+      },
+      "repoName": {
+        "head": "GitHub repository",
+        "placeholder": "username/reponame"
+      }
+    }
+  },
+  "StartScreen": {
+    "Button": {
+      "Settings": "Settings"
+    }
+  }
+}

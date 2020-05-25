@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { withNaming } from '@bem-react/classname'
 import { useHistory } from 'react-router'
 import { Text, Button } from '../../index'
@@ -10,6 +10,8 @@ interface RepConnectionProps {}
 const RepConnection: React.FC<RepConnectionProps> = () => {
   const history = useHistory()
   const cnRep = cn('rep-connection')
+
+  const { locale } = window
   return (
     <div className={cnRep()}>
       <div className={cnRep('logo')}>
@@ -22,9 +24,7 @@ const RepConnection: React.FC<RepConnectionProps> = () => {
         </svg>
       </div>
       <div className={cnRep('message')}>
-        <Text className={{ size: '13-16', center: true }}>
-          Configure repository connection and synchronization settings
-        </Text>
+        <Text className={{ size: '13-16', center: true }}>{locale.Logo.Text}</Text>
       </div>
       <div className={cnRep('controls')}>
         <Button
@@ -33,7 +33,7 @@ const RepConnection: React.FC<RepConnectionProps> = () => {
           }}
           className={{ size: 'm', view: 'action' }}
         >
-          Open settings
+          {locale.Logo.Button.OpenSettings}
         </Button>
       </div>
     </div>

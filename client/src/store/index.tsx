@@ -8,10 +8,12 @@ import {
   SAVE_BUILD_DETAILS,
   SAVE_ERROR,
   SAVE_LOGS,
+  SAVE_LOCALE,
   SettingsActionTypes,
   BuildListActionTypes,
   BuildListDetailsActionTypes,
   ErrorActionTypes,
+  LocaleActionTypes,
 } from './types'
 
 const initialState = {
@@ -61,16 +63,27 @@ function errorsReducer(state = initialState, action: ErrorActionTypes) {
   }
 }
 
+function localeReducer(state = 'en', action: LocaleActionTypes) {
+  switch (action.type) {
+    case SAVE_LOCALE:
+      return action.payload
+    default:
+      return state
+  }
+}
+
 const reducers = combineReducers({
   settings: settingsReducer,
   history: historyReducer,
   build: buildReducer,
   errors: errorsReducer,
+  locale: localeReducer,
 })
 
 declare global {
   interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose
+    locale: any
   }
 }
 

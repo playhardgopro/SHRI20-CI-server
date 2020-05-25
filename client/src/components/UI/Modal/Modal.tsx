@@ -17,6 +17,7 @@ const Modal: React.FC<ModalProps> = ({ onSubmit, onCancel }) => {
   const cnInput = cn('input')
   const textStyle = { size: '13-18', type: 'h2' }
   const { register, handleSubmit, errors, setValue } = useForm<any>()
+  const { locale } = window
 
   type name = 'commitHashBuild'
 
@@ -35,15 +36,17 @@ const Modal: React.FC<ModalProps> = ({ onSubmit, onCancel }) => {
     <div className={cnModal()}>
       <div className={cnModal('content')}>
         <div className={cnModal('title')}>
-          <div className={`${cnModal('header')} ${cnText({ type: 'h2', size: '18-22' })}`}>New build</div>
+          <div className={`${cnModal('header')} ${cnText({ type: 'h2', size: '18-22' })}`}>
+            {locale.Modal.Form.header}
+          </div>
         </div>
         <div className={cnInput('group', { vertical: true })}>
           <label className={cnInput('label', { required: true })} htmlFor="commitHashBuild">
-            <Text className={textStyle}>Enter the commit hash which you want to build.</Text>
+            <Text className={textStyle}>{locale.Modal.Form.description}</Text>
           </label>
           <Input
             id="commitHashBuild"
-            placeholder="Commit hash"
+            placeholder={locale.Modal.Input.commitHash.placeholder}
             onClear={handleClear}
             inputRef={register(getValidators(['required']))}
             status={errors.commitHashBuild && 'invalid'}
@@ -58,10 +61,10 @@ const Modal: React.FC<ModalProps> = ({ onSubmit, onCancel }) => {
         </div>
         <div className={cnModal('controls')}>
           <Button className={{ size: 'm', view: 'action' }} onClick={handleSubmit(onSubmit)}>
-            Run build
+            {locale.Modal.Button.RunBuild}
           </Button>
           <Button className={{ size: 'm', view: 'control' }} onClick={onCancel}>
-            Cancel
+            {locale.Modal.Button.Cancel}
           </Button>
         </div>
       </div>

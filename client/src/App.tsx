@@ -3,9 +3,16 @@ import { Switch, Route, Redirect, useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Home, Settings, History, Details } from './components/index'
 
+// import en from './locale/en.json'
+
 const App = () => {
   const history = useHistory()
+  const currentLocale = useSelector((state: RootState) => state.locale)
   const settings: BuildSettings = useSelector((state: RootState) => state.settings)
+
+  if (process.env.NODE_ENV === 'development') {
+    window.locale = require(`./locales/${currentLocale}.json`)
+  }
 
   return (
     <Switch>

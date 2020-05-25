@@ -34,6 +34,7 @@ const Form: React.FC<Props> = ({ postSettings, saveSettings, getBuildList, isLoa
   const isLoadingState = useSelector((state: RootState) => state.settings.isLoading)
   const dispatch = useDispatch()
   const { register, handleSubmit, errors, setValue, reset } = useForm<BuildSettings>()
+  const { locale } = window
 
   useEffect(() => {
     reset(defaultValues)
@@ -71,20 +72,20 @@ const Form: React.FC<Props> = ({ postSettings, saveSettings, getBuildList, isLoa
   return (
     <form className={cnForm()}>
       <div className={cnForm('title')}>
-        <div className="form__header text text_type_h2 text_size_15-20">Settings</div>
+        <div className="form__header text text_type_h2 text_size_15-20">{locale.Settings.Form.header}</div>
         <div className="form__subheader text text_type_h3 text_size_13-18 text_view_ghost">
-          Configure repository connection and synchronization settings.
+          {locale.Settings.Form.description}
         </div>
       </div>
       <div className={cnForm('items')}>
         <div className={cnForm('item', { 'indent-t': 'xl' })}>
           <div className={cnInput('group', { vertical: true })}>
             <label className={cnInput('label', { required: true })} htmlFor="repository">
-              <Text className={textStyle}>Github repository</Text>
+              <Text className={textStyle}>{locale.Settings.Input.repoName.head}</Text>
             </label>
             <Input
               id="repoName"
-              placeholder="username/reponame"
+              placeholder={locale.Settings.Input.repoName.placeholder}
               onClear={handleClear}
               inputRef={register(getValidators(['required']))}
               status={errors.repoName && 'invalid'}
@@ -99,11 +100,11 @@ const Form: React.FC<Props> = ({ postSettings, saveSettings, getBuildList, isLoa
         <div className={cnForm('item', { 'indent-t': 'xl' })}>
           <div className={cnInput('group', { vertical: true })}>
             <label className={cnInput('label', { required: true })} htmlFor="repository">
-              <Text className={textStyle}>Build command</Text>
+              <Text className={textStyle}>{locale.Settings.Input.buildCommand.head}</Text>
             </label>
             <Input
               id="buildCommand"
-              placeholder="npm run build"
+              placeholder={locale.Settings.Input.buildCommand.placeholder}
               onClear={handleClear}
               inputRef={register(getValidators(['required']))}
               status={errors.buildCommand && 'invalid'}
@@ -120,11 +121,11 @@ const Form: React.FC<Props> = ({ postSettings, saveSettings, getBuildList, isLoa
         <div className={cnForm('item', { 'indent-t': 'xl' })}>
           <div className={cnInput('group', { vertical: true })}>
             <label className={cnInput('label', { required: true })} htmlFor="repository">
-              <Text className={textStyle}>Main branch</Text>
+              <Text className={textStyle}>{locale.Settings.Input.mainBranch.head}</Text>
             </label>
             <Input
               id="mainBranch"
-              placeholder="master"
+              placeholder={locale.Settings.Input.mainBranch.placeholder}
               onClear={handleClear}
               inputRef={register(getValidators(['required']))}
               status={errors.mainBranch && 'invalid'}
@@ -139,18 +140,18 @@ const Form: React.FC<Props> = ({ postSettings, saveSettings, getBuildList, isLoa
         <div className={cnForm('item', { 'indent-t': 'xl' })}>
           <div className={cnInput('group', { vertical: false })}>
             <label className={cnInput('label', { required: false })} htmlFor="period">
-              <Text className={textStyle}>Synchronize every</Text>
+              <Text className={textStyle}>{locale.Settings.Input.period.head.one}</Text>
             </label>
             <Input
               id="period"
-              placeholder="10"
+              placeholder={locale.Settings.Input.period.placeholder}
               onClear={handleClear}
               inputRef={register(getValidators(['required', 'pattern']))}
               status={errors.period && 'invalid'}
               name="period"
               size="m"
               width={52}
-              text="minutes"
+              text= {locale.Settings.Input.period.metrics}
             />
           </div>
           {errors.period && <Text className={{ ...textStyle, view: 'error' }}>{errors.period.message}</Text>}
@@ -158,10 +159,10 @@ const Form: React.FC<Props> = ({ postSettings, saveSettings, getBuildList, isLoa
       </div>
       <div className={cnForm('controls')}>
         <Button className={{ size: 'm', view: 'action' }} onClick={handleSubmit(handleSave)} disabled={isLoadingState}>
-          Save
+          {locale.Settings.Button.Save}
         </Button>
         <Button className={{ size: 'm', view: 'control' }} onClick={handleCancel} disabled={isLoadingState}>
-          Cancel
+          {locale.Settings.Button.Cancel}
         </Button>
       </div>
     </form>

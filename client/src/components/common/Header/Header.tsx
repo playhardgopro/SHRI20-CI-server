@@ -33,6 +33,8 @@ const Header: React.FC<Props> = ({ children, runBuild, className }) => {
   const match = useRouteMatch()
   const history = useHistory()
 
+  const { locale } = window
+
   switch (match.path) {
     case '/settings':
       header.style = { type: 'h1', size: '24-28', view: 'ghost' }
@@ -77,7 +79,7 @@ const Header: React.FC<Props> = ({ children, runBuild, className }) => {
             className={{ size: 's', distribute: 'center', view: 'control', hidden: hiddenBtn.rebuild }}
             hideText
           >
-            Rebuild
+            {locale.BuildDetails.Button.Rebuild}
           </Button>
           <Button
             icon={{ name: 'run', size: 's' }}
@@ -87,7 +89,7 @@ const Header: React.FC<Props> = ({ children, runBuild, className }) => {
             className={{ size: 's', distribute: 'center', view: 'control', hidden: hiddenBtn.runBuild }}
             hideText
           >
-            Run Build
+            {locale.Build.Button.RunBuild}
           </Button>
           <Button
             icon={{ name: 'settings', size: 's' }}
@@ -97,7 +99,7 @@ const Header: React.FC<Props> = ({ children, runBuild, className }) => {
             className={{ size: 's', distribute: 'center', view: 'control', hidden: hiddenBtn.settings }}
             hideText
           >
-            Settings
+            {locale.StartScreen.Button.Settings}
           </Button>
           {children}
         </div>

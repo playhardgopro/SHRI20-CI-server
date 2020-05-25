@@ -51,6 +51,7 @@ declare interface RootState {
   }
   build: BuildTask
   errors: string[]
+  locale: 'ru' | 'en'
 }
 
 interface Options {

@@ -21,7 +21,8 @@ interface LogProps {
 
 const Log: React.FC<LogProps> = () => {
   const cnLog = cn('log')
-  const logText = useSelector((state: RootState) => state.build.logs) || 'Please, wait, until build process ends'
+  const { locale } = window
+  const logText = useSelector((state: RootState) => state.build.logs) || locale.BuildDetails.Logs.WaitUntilLoading
 
   return (
     <div className={cnLog()}>
