@@ -1,9 +1,10 @@
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import { withNaming } from '@bem-react/classname'
 import { useRouteMatch } from 'react-router-dom'
 import Moment from 'react-moment'
 import { IconBox, Icon } from '../../index'
 import './Card.scss'
+import { useSelector } from 'react-redux'
 
 const prettyMilliseconds = require('pretty-ms')
 
@@ -20,6 +21,11 @@ interface CardMeta {
 }
 
 const CardMeta: React.FC<CardMeta> = ({ start, duration, status }) => {
+  const currentLocale = useSelector((state: RootState) => state.locale)
+  // useEffect(() => {
+  //   import(`moment/locale/${currentLocale}`)
+  // }, [currentLocale])
+  import(`moment/locale/${currentLocale}`)
   return (
     <div className="card__meta card__meta_m-hr_top meta meta_distribute_vertical meta_m-distribute_horizontal text text_size_13-16 text_view_ghost">
       <div className="meta__item meta__item_indent-b_8">
@@ -28,7 +34,7 @@ const CardMeta: React.FC<CardMeta> = ({ start, duration, status }) => {
             <Icon name="calendar" />
           </div>
           <div className="">
-            <Moment format="D MMM, HH:mm" local>
+            <Moment format="D MMM, HH:mm" local locale={currentLocale}>
               {start}
             </Moment>
           </div>
@@ -50,6 +56,11 @@ const CardMeta: React.FC<CardMeta> = ({ start, duration, status }) => {
 }
 
 const CardMeta2: React.FC<CardMeta> = ({ start, duration, status }) => {
+  const currentLocale = useSelector((state: RootState) => state.locale)
+  // useEffect(() => {
+  //   import(`moment/locale/${currentLocale}`)
+  // }, [currentLocale])
+  import(`moment/locale/${currentLocale}`)
   return (
     <div className="list__item meta meta_hr_top text text_size_13-16 text_view_ghost">
       <div className="meta__item meta__item_indent-b_8">
@@ -58,7 +69,7 @@ const CardMeta2: React.FC<CardMeta> = ({ start, duration, status }) => {
             <Icon name="calendar" />
           </div>
           <div className="icon-box__content">
-            <Moment format="D MMM, HH:mm" local>
+            <Moment format="D MMM, HH:mm" local locale={currentLocale}>
               {start}
             </Moment>
           </div>
