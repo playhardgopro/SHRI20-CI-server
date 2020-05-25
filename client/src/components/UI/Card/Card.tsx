@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react'
 import { withNaming } from '@bem-react/classname'
 import { useRouteMatch } from 'react-router-dom'
-import Moment from 'react-moment'
 import { IconBox, Icon } from '../../index'
 import './Card.scss'
 import { useSelector } from 'react-redux'
-
-const prettyMilliseconds = require('pretty-ms')
+import { getDuration, getDate } from '../../../helpers/time'
 
 const cn = withNaming({ n: '', e: '__', m: '_' })
 
@@ -15,17 +13,15 @@ interface CardProps {
   onClick?(event: React.MouseEvent, { buildNumber, buildId }: { buildNumber: number; buildId: string }): void
 }
 interface CardMeta {
-  start: string
-  duration: number
+  start?: string
+  duration?: number
+  formattedDuration: string
+  formattedDate: string
+  currentLocale: 'ru' | 'en'
   status: BuildStatus
 }
 
-const CardMeta: React.FC<CardMeta> = ({ start, duration, status }) => {
-  const currentLocale = useSelector((state: RootState) => state.locale)
-  // useEffect(() => {
-  //   import(`moment/locale/${currentLocale}`)
-  // }, [currentLocale])
-  import(`moment/locale/${currentLocale}`)
+const CardMeta: React.FC<CardMeta> = ({ formattedDuration, status, formattedDate }) => {
   return (
     <div className="card__meta card__meta_m-hr_top meta meta_distribute_vertical meta_m-distribute_horizontal text text_size_13-16 text_view_ghost">
       <div className="meta__item meta__item_indent-b_8">
@@ -33,11 +29,7 @@ const CardMeta: React.FC<CardMeta> = ({ start, duration, status }) => {
           <div className="icon-box__icon icon-box__icon_size_m icon-box__icon_indent-r_4">
             <Icon name="calendar" />
           </div>
-          <div className="">
-            <Moment format="D MMM, HH:mm" local locale={currentLocale}>
-              {start}
-            </Moment>
-          </div>
+          <div className="">{formattedDate}</div>
         </div>
       </div>
       <div className="meta__item meta__item_indent-b_8">
@@ -45,22 +37,14 @@ const CardMeta: React.FC<CardMeta> = ({ start, duration, status }) => {
           <div className="icon-box__icon icon-box__icon_size_m icon-box__icon_indent-r_4">
             <Icon name="clock" />
           </div>
-          <div className="text text_size_13-16 text_view_ghost">
-            {duration && prettyMilliseconds(duration, { compact: true })}
-            {!duration && status}
-          </div>
+          <div className="text text_size_13-16 text_view_ghost">{formattedDuration || status}</div>
         </div>
       </div>
     </div>
   )
 }
 
-const CardMeta2: React.FC<CardMeta> = ({ start, duration, status }) => {
-  const currentLocale = useSelector((state: RootState) => state.locale)
-  // useEffect(() => {
-  //   import(`moment/locale/${currentLocale}`)
-  // }, [currentLocale])
-  import(`moment/locale/${currentLocale}`)
+const CardMeta2: React.FC<CardMeta> = ({ formattedDuration, status, formattedDate }) => {
   return (
     <div className="list__item meta meta_hr_top text text_size_13-16 text_view_ghost">
       <div className="meta__item meta__item_indent-b_8">
@@ -68,11 +52,7 @@ const CardMeta2: React.FC<CardMeta> = ({ start, duration, status }) => {
           <div className="icon-box__icon icon-box__icon_size_m icon-box__icon_indent-r_4">
             <Icon name="calendar" />
           </div>
-          <div className="icon-box__content">
-            <Moment format="D MMM, HH:mm" local locale={currentLocale}>
-              {start}
-            </Moment>
-          </div>
+          <div className="icon-box__content">{formattedDate}</div>
         </div>
       </div>
       <div className="meta__item meta__item_indent-b_8">
@@ -80,10 +60,7 @@ const CardMeta2: React.FC<CardMeta> = ({ start, duration, status }) => {
           <div className="icon-box__icon icon-box__icon_size_m icon-box__icon_indent-r_4">
             <Icon name="clock" />
           </div>
-          <div className="text text_size_13-16 text_view_ghost">
-            {duration && prettyMilliseconds(duration, { compact: true })}
-            {!duration && status}
-          </div>
+          <div className="text text_size_13-16 text_view_ghost">{formattedDuration || status}</div>
         </div>
       </div>
     </div>
@@ -109,6 +86,11 @@ const Card: React.FC<CardProps> = ({ options, onClick }) => {
 
   const cnCard = cn('card')
   const cnText = cn('text')
+  const currentLocale = useSelector((state: RootState) => state.locale)
+
+  const formattedDuration = getDuration(duration, currentLocale)
+  const formattedDate = getDate(start, currentLocale)
+
   return (
     <div onClick={onClick && ((e) => onClick(e, { buildNumber, buildId: id }))} className="card">
       <div className={cnCard('token')}>
@@ -145,9 +127,9 @@ const Card: React.FC<CardProps> = ({ options, onClick }) => {
               </div>
             </div>
           </div>
-          {cardMetaUnder && CardMeta2({ duration, start, status })}
+          {cardMetaUnder && CardMeta2({ formattedDuration, formattedDate, status, currentLocale })}
         </div>
-        {!cardMetaUnder && CardMeta({ duration, start, status })}
+        {!cardMetaUnder && CardMeta({ formattedDuration, formattedDate, status, currentLocale })}
       </div>
     </div>
   )
