@@ -63,7 +63,8 @@
           "one": "Синхронизировать каждые",
           "other": "Синхронизировать каждые"
         },
-        "placeholder": "10"
+        "placeholder": "10",
+        "metrics": "минут"
       },
       "repoName": {
         "head": "GitHub репозиторий",

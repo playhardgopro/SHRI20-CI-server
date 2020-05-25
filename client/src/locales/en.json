@@ -63,7 +63,8 @@
           "one": "Synchronize every",
           "other": "Synchronize every"
         },
-        "placeholder": "10"
+        "placeholder": "10",
+        "metrics": "minutes"
       },
       "repoName": {
         "head": "GitHub repository",
