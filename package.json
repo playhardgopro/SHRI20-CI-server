@@ -57,7 +57,7 @@
     "@types/node": "^13.13.4",
     "@types/react-router-dom": "^5.1.5",
     "@types/react-redux": "^7.1.7",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
