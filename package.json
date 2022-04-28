@@ -62,7 +62,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "cors": "^2.8.5",
-    "cross-fetch": "^3.0.4",
+    "cross-fetch": "^3.1.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-json-validator-middleware": "^2.1.1",
